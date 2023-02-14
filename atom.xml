@@ -1,27 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>📚</title>
+  <title>San Huo</title>
   
   <subtitle>纤凝翠薇巅，扶光入苍渊，扶摇惊砂起，山弄望舒远</subtitle>
   <link href="http://cencuansen.github.com/atom.xml" rel="self"/>
   
   <link href="http://cencuansen.github.com/"/>
-  <updated>2023-02-13T14:31:29.657Z</updated>
+  <updated>2023-02-14T10:51:00.612Z</updated>
   <id>http://cencuansen.github.com/</id>
   
   <author>
-    <name>sanhuo</name>
+    <name>San Huo</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CSS 伪类和伪元素</title>
+    <link href="http://cencuansen.github.com/2023/02/14/CSS-pseudo-classes-and-pseudo-elements/"/>
+    <id>http://cencuansen.github.com/2023/02/14/CSS-pseudo-classes-and-pseudo-elements/</id>
+    <published>2023-02-14T09:35:15.000Z</published>
+    <updated>2023-02-14T10:51:00.612Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h1><p>功能和 class 有些类似，但它是基于文档之外的抽象，所以叫伪类。</p><p>:link、:visited、:hover、:active、:focus、:right、:left、:first、:lang、:first-child</p><h1 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h1><p>伪元素是 DOM 树没有定义的虚拟元素。</p><p>::before、::after、::selection</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;伪类&quot;&gt;&lt;a href=&quot;#伪类&quot; class=&quot;headerlink&quot; title=&quot;伪类&quot;&gt;&lt;/a&gt;伪类&lt;/h1&gt;&lt;p&gt;功能和 class 有些类似，但它是基于文档之外的抽象，所以叫伪类。&lt;/p&gt;
+&lt;p&gt;:link、:visited、:hover、:activ</summary>
+      
+    
+    
+    
+    <category term="CSS" scheme="http://cencuansen.github.com/categories/CSS/"/>
+    
+    
+    <category term="CSS" scheme="http://cencuansen.github.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS 选择第二个以及后续元素</title>
+    <link href="http://cencuansen.github.com/2023/02/14/CSS-select-children-between-2nd-and-last/"/>
+    <id>http://cencuansen.github.com/2023/02/14/CSS-select-children-between-2nd-and-last/</id>
+    <published>2023-02-14T09:28:47.000Z</published>
+    <updated>2023-02-14T10:51:00.612Z</updated>
+    
+    <content type="html"><![CDATA[<p>元素如下，希望除了第一个子 div 不选择，其他子 div 都选择。</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item item-1&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item item-2&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item item-3&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item item-4&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure><p>方式一</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-of-type</span>(n + <span class="number">2</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>方式二</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span><span class="selector-pseudo">:nth-child</span>(n + <span class="number">2</span>) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;元素如下，希望除了第一个子 div 不选择，其他子 div 都选择。&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="CSS" scheme="http://cencuansen.github.com/categories/CSS/"/>
+    
+    
+    <category term="CSS" scheme="http://cencuansen.github.com/tags/CSS/"/>
+    
+    <category term="Selector" scheme="http://cencuansen.github.com/tags/Selector/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS 1像素线</title>
+    <link href="http://cencuansen.github.com/2023/02/14/CSS-1px-line/"/>
+    <id>http://cencuansen.github.com/2023/02/14/CSS-1px-line/</id>
+    <published>2023-02-14T09:21:43.000Z</published>
+    <updated>2023-02-14T10:51:00.612Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>移动端开发线条的 1 像素线绘制。</p><h1 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h1><ul><li>用 0.5px</li><li>transform scale</li><li>box-shadow 模拟</li><li>图片</li></ul><h2 id="scale"><a href="#scale" class="headerlink" title="scale"></a>scale</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;场景&quot;&gt;&lt;a href=&quot;#场景&quot; class=&quot;headerlink&quot; title=&quot;场景&quot;&gt;&lt;/a&gt;场景&lt;/h1&gt;&lt;p&gt;移动端开发线条的 1 像素线绘制。&lt;/p&gt;
+&lt;h1 id=&quot;方式&quot;&gt;&lt;a href=&quot;#方式&quot; class=&quot;headerlink&quot; tit</summary>
+      
+    
+    
+    
+    <category term="CSS" scheme="http://cencuansen.github.com/categories/CSS/"/>
+    
+    
+    <category term="CSS" scheme="http://cencuansen.github.com/tags/CSS/"/>
+    
+    <category term="CSS Tricks" scheme="http://cencuansen.github.com/tags/CSS-Tricks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 深拷贝和浅拷贝</title>
+    <link href="http://cencuansen.github.com/2023/02/14/JavaScript-deep-clone-and-shallow-clone/"/>
+    <id>http://cencuansen.github.com/2023/02/14/JavaScript-deep-clone-and-shallow-clone/</id>
+    <published>2023-02-14T09:08:52.000Z</published>
+    <updated>2023-02-14T10:51:00.614Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>浅拷贝：复制一层数据，基本类型直接复制，对象类型复制引用。<br>深拷贝：会递归复制。</p><h1 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h1><ul><li>扩展运算符(<code>...</code>)</li><li>Object.assign</li></ul><h1 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h1><ul><li>JSON.parse(JSON.stringify())</li><li>遍历递归</li></ul><h2 id="JSON-化问题"><a href="#JSON-化问题" class="headerlink" title="JSON 化问题"></a>JSON 化问题</h2><ol><li>正则变成空对象(<code>&#123;&#125;</code>)；</li><li>函数直接丢；</li><li>日期变成时间字符串(无解)；</li><li>构造函数丢失，变成 Object；</li><li>循环引用无法正确处理；</li></ol><h2 id="遍历深拷贝"><a href="#遍历深拷贝" class="headerlink" title="遍历深拷贝"></a>遍历深拷贝</h2><p>版本一</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deepClone</span>(<span class="params">obj, hash = <span class="keyword">new</span> <span class="built_in">WeakMap</span>()</span>) &#123;</span><br><span class="line">  <span class="comment">// 处理null或者undefined</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span>) <span class="keyword">return</span> obj;</span><br><span class="line">  <span class="comment">// 处理日期类型</span></span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="title class_">Date</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Date</span>(obj);</span><br><span class="line">  <span class="comment">// 处理正则类型</span></span><br><span class="line">  <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="title class_">RegExp</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RegExp</span>(obj);</span><br><span class="line">  <span class="comment">// 普通值或函数不需要深拷贝</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&quot;object&quot;</span>) <span class="keyword">return</span> obj;</span><br><span class="line">  <span class="comment">// 对象进行深拷贝</span></span><br><span class="line">  <span class="keyword">if</span> (hash.<span class="title function_">get</span>(obj)) <span class="keyword">return</span> hash.<span class="title function_">get</span>(obj);</span><br><span class="line">  <span class="keyword">let</span> cloneObj = <span class="keyword">new</span> obj.<span class="title function_">constructor</span>(<span class="params"></span>);</span><br><span class="line">  <span class="comment">// 找到的是所属类原型上的constructor,而原型上的 constructor指向的是当前类本身</span></span><br><span class="line">  hash.<span class="title function_">set</span>(obj, cloneObj);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.<span class="title function_">hasOwnProperty</span>(key)) &#123;</span><br><span class="line">      <span class="comment">// 实现一个递归拷贝</span></span><br><span class="line">      cloneObj[key] = <span class="title function_">deepClone</span>(obj[key], hash);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cloneObj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>版本二</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">isComplexDataType</span> = obj =&gt; (<span class="keyword">typeof</span> obj === <span class="string">&#x27;object&#x27;</span> || <span class="keyword">typeof</span> obj === <span class="string">&#x27;function&#x27;</span>) &amp;&amp; (obj !== <span class="literal">null</span>)</span><br><span class="line"><span class="keyword">const</span> deepClone = <span class="keyword">function</span> (<span class="params">obj, hash = <span class="keyword">new</span> <span class="built_in">WeakMap</span>()</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (obj.<span class="property">constructor</span> === <span class="title class_">Date</span>) &#123;</span><br><span class="line">    <span class="comment">// 日期对象直接返回一个新的日期对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Date</span>(obj);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (obj.<span class="property">constructor</span> === <span class="title class_">RegExp</span>) &#123;</span><br><span class="line">    <span class="comment">// 正则对象直接返回一个新的正则对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RegExp</span>(obj);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (hash.<span class="title function_">has</span>(obj)) &#123;</span><br><span class="line">    <span class="comment">// 如果循环引用了就用 weakMap 来解决</span></span><br><span class="line">    <span class="keyword">return</span> hash.<span class="title function_">get</span>(obj);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> allDescriptors = <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptors</span>(obj);</span><br><span class="line">  <span class="comment">// 遍历传入参数所有键的特性</span></span><br><span class="line">  <span class="keyword">let</span> cloneObj = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(obj), allDescriptors);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 继承原型链</span></span><br><span class="line">  hash.<span class="title function_">set</span>(obj, cloneObj)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(obj)) &#123;</span><br><span class="line">    cloneObj[key] = (<span class="title function_">isComplexDataType</span>(obj[key]) &amp;&amp; <span class="keyword">typeof</span> obj[key] !== <span class="string">&#x27;function&#x27;</span>)</span><br><span class="line">      ? <span class="title function_">deepClone</span>(obj[key], hash)</span><br><span class="line">      : obj[key];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> cloneObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;浅拷贝：复制一层数据，基本类型直接复制，对象类型复制引用。&lt;br&gt;深拷贝：会递归复制。&lt;/p&gt;
+&lt;h1 id=&quot;浅拷贝&quot;&gt;&lt;a href=&quot;</summary>
+      
+    
+    
+    
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
+    
+    <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Deep Clone" scheme="http://cencuansen.github.com/tags/Deep-Clone/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 模块化</title>
+    <link href="http://cencuansen.github.com/2023/02/14/JavaScript-module/"/>
+    <id>http://cencuansen.github.com/2023/02/14/JavaScript-module/</id>
+    <published>2023-02-14T08:57:11.000Z</published>
+    <updated>2023-02-14T10:51:00.615Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="种类"><a href="#种类" class="headerlink" title="种类"></a>种类</h1><ul><li>AMD&#x2F;CMD</li><li>CommonJS(适用于服务端)</li><li>UMD</li><li>ESM(EcmaScript Module)</li></ul><h1 id="AMD-x2F-CMD"><a href="#AMD-x2F-CMD" class="headerlink" title="AMD&#x2F;CMD"></a>AMD&#x2F;CMD</h1><p>AMD：Asynchronous Module Definition，异步模块定义。<br>CMD：Common Module Definition，通用模块定义。<br>相对于 CommonJS，定义了适用于<code>浏览器端</code>的规范。<br>AMD 中有 requirejs，CMD 中有 seajs。<br>用 define 方法来定义一个模块，通过前置依赖列表导入外部模块数据。</p><h1 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h1><p>nodejs 模块化采用的是 CommonJS。<br>module.exports 或 exports 导出，require 导入。<br>CommonJS 规范一些特性：文件系统，同步加载等，不适用于浏览器端，适用于<code>服务端</code>。</p><h1 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h1><p>UMD：Universal Module Definition，通用模块定义<br>不属于一套模块规范，主要用来处理 CommonJS、AMD、CMD 的差异<code>兼容</code>，使模块代码能在前面不同的模块环境下都能正常运行。</p><h1 id="ESM"><a href="#ESM" class="headerlink" title="ESM"></a>ESM</h1><p>JavaScript 在 <code>ES6</code> 开始引入模块概念：ES Module。<br>export default 或 export 导出，import 导入。<br>动态导入 import() 返回 promise。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;种类&quot;&gt;&lt;a href=&quot;#种类&quot; class=&quot;headerlink&quot; title=&quot;种类&quot;&gt;&lt;/a&gt;种类&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;AMD&amp;#x2F;CMD&lt;/li&gt;
+&lt;li&gt;CommonJS(适用于服务端)&lt;/li&gt;
+&lt;li&gt;UMD&lt;/li&gt;
+&lt;li&gt;ESM</summary>
+      
+    
+    
+    
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
+    
+    <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Module" scheme="http://cencuansen.github.com/tags/Module/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript 继承</title>
+    <link href="http://cencuansen.github.com/2023/02/14/JavaScript-inherit/"/>
+    <id>http://cencuansen.github.com/2023/02/14/JavaScript-inherit/</id>
+    <published>2023-02-14T08:44:17.000Z</published>
+    <updated>2023-02-14T10:51:00.614Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ES6-继承"><a href="#ES6-继承" class="headerlink" title="ES6 继承"></a>ES6 继承</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Parent</span> &#123;  &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Child</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Parent</span> &#123;  &#125;</span><br></pre></td></tr></table></figure><h1 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">clone</span>(<span class="params">parent, child</span>) &#123;</span><br><span class="line">  <span class="comment">// 该操作将 Parent 原型中属性方法等带到 Child</span></span><br><span class="line">  child.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(parent.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line">  child.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = child;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;parent&quot;</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">play</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getName</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Child</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 该 call 操作会将 Parent 自身的属性字段带到 Child</span></span><br><span class="line">  <span class="title class_">Parent</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">friends</span> = <span class="string">&quot;child&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">clone</span>(<span class="title class_">Parent</span>, <span class="title class_">Child</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">getFriends</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">friends</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ES6-继承&quot;&gt;&lt;a href=&quot;#ES6-继承&quot; class=&quot;headerlink&quot; title=&quot;ES6 继承&quot;&gt;&lt;/a&gt;ES6 继承&lt;/h1&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class</summary>
+      
+    
+    
+    
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
+    
+    <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Inherit" scheme="http://cencuansen.github.com/tags/Inherit/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript 词法作用域和动态作用域</title>
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-lexical-scope-and-dynamic-scope/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-lexical-scope-and-dynamic-scope/</id>
     <published>2023-02-13T13:40:43.000Z</published>
-    <updated>2023-02-13T14:31:29.657Z</updated>
+    <updated>2023-02-14T10:51:00.615Z</updated>
     
     <content type="html"><![CDATA[<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>JavaScript 中，<code>变量</code>采用的是<code>词法作用域</code>。</p><h1 id="词法作用域-x2F-静态作用域"><a href="#词法作用域-x2F-静态作用域" class="headerlink" title="词法作用域&#x2F;静态作用域"></a>词法作用域&#x2F;静态作用域</h1><p>作用域在变量<code>定义时</code>就确定。</p><h1 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h1><p>作用域在变量<code>使用时</code>才确定。</p><h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> value = <span class="number">2</span>;</span><br><span class="line">  <span class="title function_">foo</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">bar</span>();</span><br></pre></td></tr></table></figure><p>这里 bar 中 foo 的 value 输出为 1，说明变量在函数定义时就确定了，属于词法作用域。<br>如果是动态作用域，bar 中 foo 的 value 值就应当等于 2。</p><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：this 是动态作用域吗？<br>答：不是。</p>]]></content>
     
@@ -34,8 +196,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Function" scheme="http://cencuansen.github.com/tags/Function/"/>
     
   </entry>
   
@@ -44,7 +210,7 @@
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-closure/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-closure/</id>
     <published>2023-02-13T13:15:30.000Z</published>
-    <updated>2023-02-13T14:54:06.668Z</updated>
+    <updated>2023-02-14T10:51:00.613Z</updated>
     
     <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>闭包是一个特殊的函数，能够记录自己<code>词法作用域</code>内变量的状态，可以读取该作用域内的变量，在函数或语句块结束后，变量仍然对引用它的函数有效。<br>在一个函数中<code>返回函数</code>或者<code>作为回调</code>，这样创建了闭包。当基于参数创建回调，参数必须在闭包中存储（比如：形参存储），否则就会创建一个闭包指向封闭环境中的变量，而这个变量可能会变。</p><h2 id="场景一，返回函数"><a href="#场景一，返回函数" class="headerlink" title="场景一，返回函数"></a>场景一，返回函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="keyword">return</span> counter += <span class="number">1</span>; &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="title function_">add</span>();</span><br></pre></td></tr></table></figure><h2 id="场景二，作为回调"><a href="#场景二，作为回调" class="headerlink" title="场景二，作为回调"></a>场景二，作为回调</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="keyword">function</span> <span class="title function_">clo</span>(<span class="params">ii</span>) &#123;</span><br><span class="line">    <span class="comment">// 形参 ii 对 i 进行了存储</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123; <span class="variable language_">console</span>.<span class="title function_">log</span>(ii); &#125;, <span class="number">20</span>);</span><br><span class="line">    &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>或者</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需要浏览器版本 &gt; IE9</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params">ii</span>) &#123;</span><br><span class="line">        <span class="comment">// 形参 ii 对 i 进行了存储</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(ii);</span><br><span class="line">        &#125;, <span class="number">20</span>, i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>封装变量：闭包可以隐藏内部变量，使得代码变得更加简洁；<br>模拟私有变量：闭包可以模拟私有变量，使得变量不被外部访问；<br>实现回调函数：闭包可以作为回调函数传递给其他函数，以实现延迟执行；<br>实现单例模式：闭包可以保证一个类型仅有一个实例；<br>构建命名空间：闭包可以构建命名空间，使得变量名不冲突；</p><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>参数未在闭包中存储，就会创建一个闭包指向封闭环境中的变量，这变量会变。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// 未对变量 i 进行存储</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;i is &#x27;</span> + i);</span><br><span class="line">    &#125;, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这里参数未在闭包中存储，运行中 i 会变，最终 i 变成 10，输出 10 次 <code>i is 10</code>。<br>类似的有 setTimeout、setInterval、eval() 等。</p><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：闭包一定需要 return 吗<br>答：不一定，上面所示的<code>场景二</code>也是闭包，就不涉及 return。</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://creeperyang.github.io/2015/01/JavaScript-dynamic-scope-vs-static-scope/">https://creeperyang.github.io/2015/01/JavaScript-dynamic-scope-vs-static-scope/</a></p>]]></content>
     
@@ -56,8 +222,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Closure" scheme="http://cencuansen.github.com/tags/Closure/"/>
     
   </entry>
   
@@ -66,7 +236,7 @@
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-apply-bind-call/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-apply-bind-call/</id>
     <published>2023-02-13T12:53:10.000Z</published>
-    <updated>2023-02-13T13:01:58.995Z</updated>
+    <updated>2023-02-14T10:51:00.613Z</updated>
     
     <content type="html"><![CDATA[<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>apply、bind、call 用来改变函数内 this 指向</p><h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func.<span class="title function_">apply</span>(<span class="variable language_">this</span>, [arg1, arg2 [,...]])</span><br><span class="line">func.<span class="title function_">bind</span>(<span class="variable language_">this</span>, arg1, arg2 [,...])</span><br><span class="line">func.<span class="title function_">call</span>(<span class="variable language_">this</span>, arg1, arg2 [,...])</span><br></pre></td></tr></table></figure><h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><table><thead><tr><th align="right">分类</th><th align="left">说明</th></tr></thead><tbody><tr><td align="right">apply</td><td align="left">参数数组形式传，并调用对应函数</td></tr><tr><td align="right">bind</td><td align="left">参数一个一个传，返回一个函数</td></tr><tr><td align="right">call</td><td align="left">参数一个一个传，并调用对应函数</td></tr></tbody></table><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：一个方法连续 bind 多次，结果如何？<br>答：只有第一次 bind 有效果。</p>]]></content>
     
@@ -79,8 +249,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Function" scheme="http://cencuansen.github.com/tags/Function/"/>
     
   </entry>
   
@@ -89,7 +263,7 @@
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-debouncing-and-throttling/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-debouncing-and-throttling/</id>
     <published>2023-02-13T12:35:59.000Z</published>
-    <updated>2023-02-13T12:46:12.796Z</updated>
+    <updated>2023-02-14T10:51:00.614Z</updated>
     
     <content type="html"><![CDATA[<h1 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h1><p>节流和防抖是 JavaScript 中常用的<code>性能优化</code>手段，用途主要是在<code>高频率</code>的事件触发时，如鼠标移动、滚动事件、输入事件等，避免因频繁调用而导致性能下降。</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>页面滚动时需要请求数据，可以使用<code>节流</code>限制请求频率。<br>验证用户输入是否合法，此时可以使用<code>防抖</code>避免频繁验证。</p><h1 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h1><p>节流（throttling）是指在一段时间内，只让一个函数有限次执行。它通常用来限制函数在一段时间内的<code>最大调用次数</code>，从而防止对性能造成过大的影响。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">throttle</span>(<span class="params">fn, interval</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!canRun) <span class="keyword">return</span>;</span><br><span class="line">    canRun = <span class="literal">false</span>;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">      canRun = <span class="literal">true</span>;</span><br><span class="line">    &#125;, interval);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h1><p>防抖（debouncing）是指在一段时间内，等待事件<code>停止触发</code>后才执行一次函数。它通常用来限制事件触发的频率，从而防止对性能造成过大的影响。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fn, interval</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> timeout;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>, <span class="variable language_">arguments</span>);</span><br><span class="line">    &#125;, interval);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -101,8 +275,14 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Closure" scheme="http://cencuansen.github.com/tags/Closure/"/>
+    
+    <category term="Performance Optimization" scheme="http://cencuansen.github.com/tags/Performance-Optimization/"/>
     
   </entry>
   
@@ -111,7 +291,7 @@
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-function/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-function/</id>
     <published>2023-02-13T12:00:45.000Z</published>
-    <updated>2023-02-13T12:25:40.509Z</updated>
+    <updated>2023-02-14T10:51:00.614Z</updated>
     
     <content type="html"><![CDATA[<h1 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h1><h2 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">functionName</span>(<span class="params">parameters</span>) &#123;  &#125;</span><br></pre></td></tr></table></figure><h2 id="表达式形式"><a href="#表达式形式" class="headerlink" title="表达式形式"></a>表达式形式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> functionName = <span class="keyword">function</span> (<span class="params">parameters</span>) &#123;  &#125;;</span><br></pre></td></tr></table></figure><h2 id="箭头函数形式"><a href="#箭头函数形式" class="headerlink" title="箭头函数形式"></a>箭头函数形式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(parameters) =&gt; &#123;  &#125;</span><br></pre></td></tr></table></figure><h1 id="提升（Hoisting）"><a href="#提升（Hoisting）" class="headerlink" title="提升（Hoisting）"></a>提升（Hoisting）</h1><p>提升特性让函数可以在声明之前调用，<strong>使用表达式定义函数时，无法提升。</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">myFunction</span>(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">myFunction</span>(<span class="params">y</span>) &#123; <span class="keyword">return</span> y * y; &#125;</span><br></pre></td></tr></table></figure><h1 id="自调用函数"><a href="#自调用函数" class="headerlink" title="自调用函数"></a>自调用函数</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>)&#123;  &#125;)();</span><br><span class="line">(<span class="function">()=&gt;</span>&#123;  &#125;)();</span><br></pre></td></tr></table></figure><h1 id="箭头函数特点"><a href="#箭头函数特点" class="headerlink" title="箭头函数特点"></a>箭头函数特点</h1><ul><li>不能做构造函数，不能 new</li><li>没有 arguments，可用剩余参数代替</li><li>没有自己的 this，this 取决于箭头函数所在上下文</li><li>apply、bind、call 无法影响 this 指向</li><li>没有原型属性</li><li>不能作为 Generator 函数，不能使用 yield</li></ul>]]></content>
     
@@ -123,8 +303,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Function" scheme="http://cencuansen.github.com/tags/Function/"/>
     
   </entry>
   
@@ -133,7 +317,7 @@
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-this/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-this/</id>
     <published>2023-02-13T11:54:25.000Z</published>
-    <updated>2023-02-13T11:59:06.576Z</updated>
+    <updated>2023-02-14T10:51:00.616Z</updated>
     
     <content type="html"><![CDATA[<h1 id="普通函数"><a href="#普通函数" class="headerlink" title="普通函数"></a>普通函数</h1><p>普通函数中的 this 是根据运行时上下文动态确定的，this 指向函数运行时所在上下文。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;san&quot;</span>,</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`name is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>); <span class="comment">// name is san</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h1 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h1><p>箭头函数的中 this 在非运行期间就确定了，箭头函数的 this 和外层函数的 this 一致。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;win&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;san&#x27;</span>,</span><br><span class="line">  <span class="attr">funcA</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    (<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`name is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>))(); <span class="comment">// name is san</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">funcB</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 这里箭头函数是 obj 下定义的，外层没有函数包裹，就会找到最外层的 window 对象上</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`name is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>`</span>); <span class="comment">// name is win</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -146,8 +330,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Function" scheme="http://cencuansen.github.com/tags/Function/"/>
     
   </entry>
   
@@ -156,9 +344,9 @@
     <link href="http://cencuansen.github.com/2023/02/13/JavaScript-event-loop/"/>
     <id>http://cencuansen.github.com/2023/02/13/JavaScript-event-loop/</id>
     <published>2023-02-13T08:30:17.000Z</published>
-    <updated>2023-02-13T11:50:17.099Z</updated>
+    <updated>2023-02-14T10:51:00.614Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h1><p>宏任务 &amp; 微任务</p><h1 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h1><p>让 JavaScript 在单线程环境中处理异步操作，不阻塞主线程，保证程序的流畅性，如：用户输入、网络请求、动画等。</p><h1 id="细分"><a href="#细分" class="headerlink" title="细分"></a>细分</h1><p>宏任务：IO、setTimeout、setInterval；<br>微任务：Promise、process.nextTick、MutationObserver；</p><h1 id="浏览器环境"><a href="#浏览器环境" class="headerlink" title="浏览器环境"></a>浏览器环境</h1><ol><li>同步代码</li><li>一个宏任务</li><li>全部微任务 + 新产生的微任务</li><li>一个宏任务</li><li>全部微任务 + 新产生的微任务</li><li>…</li></ol><h1 id="Node-js-环境"><a href="#Node-js-环境" class="headerlink" title="Node.js 环境"></a>Node.js 环境</h1><table><thead><tr><th align="right">阶段</th><th align="left">说明</th></tr></thead><tbody><tr><td align="right">timers 阶段</td><td align="left">这个阶段执行 timer(setTimeout、setInterval) 的回调</td></tr><tr><td align="right">I&#x2F;O callbacks 阶段</td><td align="left">处理一些上一轮循环中的少数未执行的 I&#x2F;O 回调</td></tr><tr><td align="right">idle, prepare 阶段</td><td align="left">仅 node 内部使用</td></tr><tr><td align="right">poll 阶段</td><td align="left">重要且复杂的阶段，几乎所有 I&#x2F;O 相关的回调，都在这个阶段执行</td></tr><tr><td align="right">check 阶段</td><td align="left">执行 setImmediate() 的回调</td></tr><tr><td align="right">close callbacks 阶段</td><td align="left">执行 socket 的 close 事件回调</td></tr></tbody></table><h1 id="环境差异"><a href="#环境差异" class="headerlink" title="环境差异"></a>环境差异</h1><ul><li>浏览器中，微任务在宏任务之后执行；</li><li>Node.js 中，微任务在各阶段之间执行：一个阶段执行完毕，就去执行微任务。</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h1><p>宏任务 &amp; 微任务</p><h1 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h1><p>让 JavaScript 在单线程环境中处理异步操作，不阻塞主线程，保证程序的流畅性，如：用户输入、网络请求、动画等。</p><h1 id="细分"><a href="#细分" class="headerlink" title="细分"></a>细分</h1><p>宏任务：IO、setTimeout、setInterval；<br>微任务：Promise、process.nextTick、MutationObserver；</p><h1 id="浏览器环境"><a href="#浏览器环境" class="headerlink" title="浏览器环境"></a>浏览器环境</h1><ol><li>同步代码</li><li>一个宏任务</li><li>全部微任务 + 新产生的微任务</li><li>一个宏任务</li><li>全部微任务 + 新产生的微任务</li><li>…</li></ol><h1 id="Node-js-环境"><a href="#Node-js-环境" class="headerlink" title="Node.js 环境"></a>Node.js 环境</h1><table><thead><tr><th align="left">阶段</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left">timers</td><td align="left">这个阶段执行 timer(setTimeout、setInterval) 的回调</td></tr><tr><td align="left">I&#x2F;O callbacks</td><td align="left">处理一些上一轮循环中的少数未执行的 I&#x2F;O 回调</td></tr><tr><td align="left">idle, prepare</td><td align="left">仅 node 内部使用</td></tr><tr><td align="left">poll</td><td align="left">重要且复杂的阶段，几乎所有 I&#x2F;O 相关的回调，都在这个阶段执行</td></tr><tr><td align="left">check</td><td align="left">执行 setImmediate() 的回调</td></tr><tr><td align="left">close callbacks</td><td align="left">执行 socket 的 close 事件回调</td></tr></tbody></table><h1 id="环境差异"><a href="#环境差异" class="headerlink" title="环境差异"></a>环境差异</h1><ul><li>浏览器中，微任务在宏任务之后执行；</li><li>Node.js 中，微任务在各阶段之间执行：一个阶段执行完毕，就去执行微任务。</li></ul>]]></content>
     
     
       
@@ -169,8 +357,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Event Loop" scheme="http://cencuansen.github.com/tags/Event-Loop/"/>
     
   </entry>
   
@@ -179,7 +371,7 @@
     <link href="http://cencuansen.github.com/2023/02/13/ECMAScript-features/"/>
     <id>http://cencuansen.github.com/2023/02/13/ECMAScript-features/</id>
     <published>2023-02-13T06:44:00.000Z</published>
-    <updated>2023-02-13T11:25:11.786Z</updated>
+    <updated>2023-02-14T10:51:00.612Z</updated>
     
     <content type="html"><![CDATA[<h1 id="ES6-x2F-ES2015"><a href="#ES6-x2F-ES2015" class="headerlink" title="ES6&#x2F;ES2015"></a>ES6&#x2F;ES2015</h1><ul><li>类</li><li>Set</li><li>Map</li><li>Proxy</li><li>模块化</li><li>Promise</li><li>箭头函数</li><li>解构赋值</li><li>模板字符串</li><li>展开操作符</li><li>let 与 const</li><li>对象属性简写</li><li>函数参数默认值</li></ul><h1 id="ES7-x2F-ES2016"><a href="#ES7-x2F-ES2016" class="headerlink" title="ES7&#x2F;ES2016"></a>ES7&#x2F;ES2016</h1><ul><li>指数运算符(<code>**</code>)</li><li>Array.prototype.includes()</li></ul><h1 id="ES8-x2F-ES2017"><a href="#ES8-x2F-ES2017" class="headerlink" title="ES8&#x2F;ES2017"></a>ES8&#x2F;ES2017</h1><ul><li>async &amp; await</li><li>Object.values()</li><li>Object.entries()</li><li>padStart() &amp; padEnd()</li><li>函数参数列表结尾允许逗号</li><li>Object.getOwnPropertyDescriptors()</li><li>ShareArrayBuffer &amp; Atomics 共享内存读写</li></ul><h1 id="ES9-x2F-ES2018"><a href="#ES9-x2F-ES2018" class="headerlink" title="ES9&#x2F;ES2018"></a>ES9&#x2F;ES2018</h1><ul><li>异步迭代</li><li>Promise.finally()</li><li>Rest &amp; Spread 属性</li><li>正则表达式 dotAll 模式</li><li>正则表达式 Unicode 转义</li><li>非转义序列的模板字符串</li><li>正则表达式反向断言(lookbehind)</li><li>正则表达式命名捕获组(Regular ExpressionNamed Capture Groups)</li></ul><h1 id="ES10-x2F-ES2019"><a href="#ES10-x2F-ES2019" class="headerlink" title="ES10&#x2F;ES2019"></a>ES10&#x2F;ES2019</h1><ul><li>可选的 catch 参数</li><li>Object.fromEntries()</li><li>JSON.stringify() 优化</li><li>私有的实例方法和访问器</li><li>Symbol.prototype.description</li><li>Array.flat() &amp; Array.flatMap()</li><li>Array.Sort 中 QuickSort 换成 TimSort</li><li>String.trimStart() &amp; String.trimEnd()</li><li>Function.toString() 会保留空格、换行、注释等</li></ul><h1 id="ES11-x2F-ES2020"><a href="#ES11-x2F-ES2020" class="headerlink" title="ES11&#x2F;ES2020"></a>ES11&#x2F;ES2020</h1><ul><li>BigInt</li><li>import()</li><li>globalThis</li><li>nullish: <code>??</code></li><li>for-in 顺序标准化</li><li>String.matchAll()</li><li>optional chaining: <code>?</code></li></ul><h1 id="ES12-x2F-ES2021"><a href="#ES12-x2F-ES2021" class="headerlink" title="ES12&#x2F;ES2021"></a>ES12&#x2F;ES2021</h1><ul><li>WeakRef</li><li>数字分隔符</li><li>Promise.any()</li><li><code>??=</code>, <code>&amp;&amp;=</code>, <code>||=</code></li><li>AggregateError</li><li>String.replaceAll()</li><li>FinalizationRegistry</li><li>优化 Array.prototype.sort</li></ul><h1 id="ES13-x2F-ES2022"><a href="#ES13-x2F-ES2022" class="headerlink" title="ES13&#x2F;ES2022"></a>ES13&#x2F;ES2022</h1><ul><li>top-level await</li><li>Object.hasOwn</li><li>public &amp; private(<code>#fieldname</code>) 成员修饰符</li></ul>]]></content>
     
@@ -193,8 +385,14 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="ECMAScript" scheme="http://cencuansen.github.com/tags/ECMAScript/"/>
+    
+    <category term="Features" scheme="http://cencuansen.github.com/tags/Features/"/>
     
   </entry>
   
@@ -203,7 +401,7 @@
     <link href="http://cencuansen.github.com/2023/02/08/JavaScript-data-types/"/>
     <id>http://cencuansen.github.com/2023/02/08/JavaScript-data-types/</id>
     <published>2023-02-08T05:52:29.000Z</published>
-    <updated>2023-02-13T11:26:06.698Z</updated>
+    <updated>2023-02-14T10:51:00.613Z</updated>
     
     <content type="html"><![CDATA[<p>JavaScript 中：</p><ul><li>数据类型：<code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code>、<code>bigint</code>、<code>object</code></li><li>基本数据类型：<code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code>、<code>symbol</code>、<code>bigint</code></li><li>引用数据类型：<code>object</code></li></ul><p>基本数据类型的特性是值无法修改，比如：修改字符串会得到一个新的字符串。</p>]]></content>
     
@@ -217,8 +415,12 @@
     
     
     
+    <category term="JavaScript" scheme="http://cencuansen.github.com/categories/JavaScript/"/>
+    
     
     <category term="JavaScript" scheme="http://cencuansen.github.com/tags/JavaScript/"/>
+    
+    <category term="Data Types" scheme="http://cencuansen.github.com/tags/Data-Types/"/>
     
   </entry>
   
