@@ -602,6 +602,9 @@ header label {
   transform: translateY(-0.75em);
   cursor: pointer;
 }
+.intro .description {
+  text-shadow: 0 0 25px #fff;
+}
 .intro .links {
   display: flex;
   flex-direction: column;
@@ -618,6 +621,46 @@ header label {
 }
 .links .iconfont {
   font-size: 2em;
+}
+@-moz-keyframes ani1 {
+  0% {
+    top: 0;
+    right: 10%;
+  }
+  100% {
+    top: 30px;
+    right: 15%;
+  }
+}
+@-webkit-keyframes ani1 {
+  0% {
+    top: 0;
+    right: 10%;
+  }
+  100% {
+    top: 30px;
+    right: 15%;
+  }
+}
+@-o-keyframes ani1 {
+  0% {
+    top: 0;
+    right: 10%;
+  }
+  100% {
+    top: 30px;
+    right: 15%;
+  }
+}
+@keyframes ani1 {
+  0% {
+    top: 0;
+    right: 10%;
+  }
+  100% {
+    top: 30px;
+    right: 15%;
+  }
 }
 .post-wrap {
   position: relative;
