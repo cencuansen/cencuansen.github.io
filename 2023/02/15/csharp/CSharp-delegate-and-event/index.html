@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="San Huo">
+
+
+<meta name="subtitle" content="纤凝翠薇巅，扶光入沧渊，扶摇惊砂起，山弄望舒远">
+
+
+
+
+<title>
+  San Huo
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codecopy.css">
+
+<link rel="stylesheet" href="/css/foldcode.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codecopy.js"></script>
+
+<script src="/js/foldcode.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="San Huo" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 0,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        CSharp 委托和事件
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;9:29:35 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/CSharp/">CSharp</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/CSharp/"># CSharp</a>
+            
+            <a href="/tags/Delegate/"># Delegate</a>
+            
+            <a href="/tags/Event/"># Event</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h1><p>委托约定<code>方法签名</code>，引用一个或多个方法，调用委托就是调用委托引用的全部方法。</p>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p>类或对象通过事件向其他类或对象<code>通知</code>发生的相关事情。<br>事件只能在定义的类内部调用；</p>
+<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">SimpleTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Publisher publisher = <span class="keyword">new</span> Publisher();</span><br><span class="line">            Subscriber subscriber = <span class="keyword">new</span> Subscriber(publisher);</span><br><span class="line">            <span class="comment">// 触发事件</span></span><br><span class="line">            publisher.Trigger();</span><br><span class="line">            Console.ReadLine();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 发布者</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Publisher</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="keyword">void</span> <span class="title">NoticeHandler</span>(<span class="params"><span class="built_in">string</span> message</span>)</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> NoticeHandler OnNotice;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Trigger</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 传递事件及参数</span></span><br><span class="line">            OnNotice?.Invoke(<span class="string">&quot;警告！警告！警告！警告&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 订阅者</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Subscriber</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Subscriber</span>(<span class="params">Publisher pub</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//订阅事件</span></span><br><span class="line">              pub.OnNotice += NoticeHandler;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> 订阅事件后的响应函数</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;message&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">NoticeHandler</span>(<span class="params"><span class="built_in">string</span> message</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">$&quot;Notice Handler Got Message: <span class="subst">&#123;message&#125;</span>&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">MyConsole</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="built_in">delegate</span> <span class="built_in">string</span> <span class="title">DelegateFun</span>(<span class="params"><span class="built_in">string</span> word</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Test</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> DelegateFun EventSay;</span><br><span class="line">        <span class="keyword">public</span> DelegateFun DelegateSay;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoEventSay</span>(<span class="params"><span class="built_in">string</span> str</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (EventSay != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                EventSay(str);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Test t = <span class="keyword">new</span> Test();</span><br><span class="line">            t.EventSay += Say1;</span><br><span class="line">            t.DelegateSay += Say1;</span><br><span class="line">            t.DelegateSay += Say2;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 错误 事件不能在外部直接调用</span></span><br><span class="line">            <span class="comment">// t.eventSay(&quot;eventSay&quot;);</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 正确 事件只能在声明的类内部调用</span></span><br><span class="line">            t.DoEventSay(<span class="string">&quot;eventSay&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 正确。委托可以在外部直接调用，内部调用也行，还能有返回值，返回最后一个注册的方法的返回值</span></span><br><span class="line">            <span class="built_in">string</span> str = t.DelegateSay(<span class="string">&quot;deleSay&quot;</span>);</span><br><span class="line"></span><br><span class="line">            Console.Read();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">Say1</span>(<span class="params"><span class="built_in">string</span> word</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(word);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;return &quot;</span> + word;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">Say2</span>(<span class="params"><span class="built_in">string</span> word</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(word);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;return &quot;</span> + word + <span class="string">&quot; 2&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" rel="prev" href="/2023/02/15/csharp/CSharp-asynchronous/">CSharp 异步</a>
+      
+      
+      <a class="next" rel="next" href="/2023/02/14/csharp/CSharp-dispose/">CSharp dispose</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© San Huo | <a href="https://hexo.io" target="_blank">Hexo</a> & <a
+                    href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+  </div>
+</body>
+
+</html>

@@ -1293,7 +1293,7 @@ header label {
   }
 }
 .post-content figure.highlight {
-  margin: 2em 0;
+  margin: 0.5rem 0;
   background: #f7f7f7;
   color: #4d4d4c;
   font-size: 12px;
@@ -1302,11 +1302,19 @@ header label {
   overflow-x: auto;
 }
 .post-content figure.highlight .gutter {
+  user-select: none;
   color: $hight-gutter;
 }
 .post-content figure.highlight pre {
   background: #f7f7f7;
   margin: 0;
+}
+.post-content figure.highlight table.foldcode td.gutter {
+  display: none;
+}
+.post-content figure.highlight table.foldcode td.code span,
+.post-content figure.highlight table.foldcode br:nth-of-type(n+2) {
+  display: none;
 }
 .post-content code {
   padding: 2px 4px;
