@@ -1,4 +1,5 @@
 .codecopy-btn {
+  user-select: none;
   cursor: pointer;
   position: absolute;
   right: 10px;
