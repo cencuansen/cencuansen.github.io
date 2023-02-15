@@ -1309,11 +1309,11 @@ header label {
   background: #f7f7f7;
   margin: 0;
 }
-.post-content figure.highlight table.foldcode td.gutter {
+.post-content figure.highlight.foldcode td.gutter {
   display: none;
 }
-.post-content figure.highlight table.foldcode td.code span,
-.post-content figure.highlight table.foldcode br:nth-of-type(n+2) {
+.post-content figure.highlight.foldcode td.code span,
+.post-content figure.highlight.foldcode br:nth-of-type(n+2) {
   display: none;
 }
 .post-content code {
