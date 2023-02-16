@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="SanHuo">
+
+
+<meta name="subtitle" content="纤凝翠薇巅，扶光入沧渊，扶摇惊砂起，山弄望舒远">
+
+
+<meta name="description" content="SanHuo的全栈藏经阁">
+
+
+<meta name="keywords" content="JavaScript,csharp,c#,.NET,.NET Core,MySQL">
+
+
+<title>
+  SanHuo
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codeOps.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codeOps.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SanHuo" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 0,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        JavaScript 词法作用域和动态作用域
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;21:40:43 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/JavaScript/">JavaScript</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/JavaScript/"># JavaScript</a>
+            
+            <a href="/tags/Function/"># Function</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>JavaScript 中，<code>变量</code>采用的是<code>词法作用域</code>。</p>
+<h1 id="词法作用域-x2F-静态作用域"><a href="#词法作用域-x2F-静态作用域" class="headerlink" title="词法作用域&#x2F;静态作用域"></a>词法作用域&#x2F;静态作用域</h1><p>作用域在变量<code>定义时</code>就确定。</p>
+<h1 id="动态作用域"><a href="#动态作用域" class="headerlink" title="动态作用域"></a>动态作用域</h1><p>作用域在变量<code>使用时</code>才确定。</p>
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> value = <span class="number">2</span>;</span><br><span class="line">  <span class="title function_">foo</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">bar</span>();</span><br></pre></td></tr></table></figure>
+
+<p>这里 bar 中 foo 的 value 输出为 1，说明变量在函数定义时就确定了，属于词法作用域。<br>如果是动态作用域，bar 中 foo 的 value 值就应当等于 2。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：this 是动态作用域吗？<br>答：不是。</p>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" rel="prev" href="/web/javascript/JavaScript-inherit">JavaScript 继承</a>
+      
+      
+      <a class="next" rel="next" href="/web/javascript/JavaScript-closure">JavaScript 闭包</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SanHuo | <a href="https://hexo.io" target="_blank">Hexo</a> & <a
+                    href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+  </div>
+</body>
+
+</html>

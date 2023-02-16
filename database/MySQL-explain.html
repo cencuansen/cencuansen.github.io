@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="SanHuo">
+
+
+<meta name="subtitle" content="纤凝翠薇巅，扶光入沧渊，扶摇惊砂起，山弄望舒远">
+
+
+<meta name="description" content="SanHuo的全栈藏经阁">
+
+
+<meta name="keywords" content="JavaScript,csharp,c#,.NET,.NET Core,MySQL">
+
+
+<title>
+  SanHuo
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codeOps.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codeOps.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SanHuo" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 0,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        MySQL 执行计划
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;16:45:55 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/MySQL/">MySQL</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/MySQL/"># MySQL</a>
+            
+            <a href="/tags/Explain/"># Explain</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>explain &lt;sql 语句&gt;，模拟 MySQL 优化器执行 SQL，用来分析 SELECT 语句执行效率。</p>
+<h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id | select_type | table | partitions | type | possible_keys | key | key_len | ref | rows | filtered | extra</span><br></pre></td></tr></table></figure>
+
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
+<li><p>id：从大到小顺序执行，相等值的从上到下顺序执行，null 值的最后执行。</p>
+</li>
+<li><p>select_type：</p>
+<ul>
+<li>simple：表示不需要 union 操作或者不包含子查询的简单 select 查询。有连接查询时，外层的查询为 simple，且只有一个。</li>
+<li>primary：一个需要 union 操作或者含有子查询的 select，位于最外层的单位查询的 select_type 即为 primary。且只有一个。</li>
+<li>union：union 连接的两个 select 查询，第一个查询是 dervied 派生表，除了第一个表外，第二个以后的表 select_type 都是 union。</li>
+<li>dependent union：与 union 一样，出现在 union 或 union all 语句中，但是这个查询要受到外部查询的影响。</li>
+<li>union result：包含 union 的结果集，在 union 和 union all 语句中，因为它不需要参与查询，所以 id 字段为 null。</li>
+<li>subquery：除了 from 字句中包含的子查询外，其他地方出现的子查询都可能是 subquery。</li>
+<li>dependent subquery：与 dependent union 类似，表示这个 subquery 的查询要受到外部表查询的影响。</li>
+<li>derived：from 字句中出现的子查询，也叫做派生表，其他数据库中可能叫做内联视图或嵌套 select。</li>
+</ul>
+</li>
+<li><p>type：null &gt; system &gt; const &gt; eq_ref &gt; ref &gt; ref_or_null &gt; index_merge &gt; range &gt; index &gt; all，一般来说，得保证查询至少达到 range 级别，最好能达到 ref。</p>
+<ul>
+<li>null MySQL 在优化阶段分解查询语句，在执行阶段不再需要访问表或索引</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="built_in">min</span>(id) <span class="keyword">from</span> <span class="operator">&lt;</span><span class="keyword">table</span> name<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>system 表中只有一行记录（等于系统表），const 类型的特例。</li>
+<li>const 通过索引一次命中，匹配一行数据，常见于主键索引或唯一索引。比如：where id&#x3D;1</li>
+<li>eq_ref 唯一索引扫描，对于每个索引键，表中只有一条记录匹配，常见于主键索引或唯一索引。</li>
+<li>ref 非唯一索引扫描，返回匹配的所有结果。</li>
+<li>range 检索给定范围的行。</li>
+<li>index 遍历索引树。</li>
+<li>all 全表扫描。</li>
+</ul>
+</li>
+<li><p>extra：using filesort，using index，using temporary，using where</p>
+<ul>
+<li>using filesort，mysql 对结果集合进行外部排序，说明没有通过索引顺序达到排序效果，需要优化。</li>
+<li>using index，覆盖索引，说明索引树中就能找到所需要的数据，避免了回表，性能不错。</li>
+<li>using temporary，使用了临时表，一般出现于排序，分组，多表 join 的情况下，需要优化。</li>
+<li>using where，使用了 where 过滤，性能较高。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" rel="prev" href="/database/MySQL-procedure">MySQL 存储过程</a>
+      
+      
+      <a class="next" rel="next" href="/database/MySQL-isolation-level">MySQL 隔离级别</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SanHuo | <a href="https://hexo.io" target="_blank">Hexo</a> & <a
+                    href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+  </div>
+</body>
+
+</html>

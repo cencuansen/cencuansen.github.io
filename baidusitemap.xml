@@ -1,131 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/javascript/JavaScript-module/</loc>
+    <loc>http://cencuansen.github.com//hello-world.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-procedure.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-slow-query-troubleshooting.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-transaction.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-explain.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-index.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-isolation-level.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-MVCC.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-database-engine.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//database/MySQL-binlog.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/NETCore-oauth-and-oidc.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/NETCore-request-flow.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/NETCore-request-pipeline.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/EntityFramework-raw-sql.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/NETCore-design-patten-in-NET.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/NETCore-IOC.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/NETCore-app-start-flow.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/EntityFramework-fluent-api.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/EntityFramework-entity-state.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/EntityFramework-interceptor.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/CSharp-usage.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/EntityFramework-ado-net-basic-concepts.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//csharp/EntityFramework-complex-query.html</loc>
+    <lastmod>2023-02-16</lastmod>
+  </url>
+  <url>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-module.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-this/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-this.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-function/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-function.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/javascript/JavaScript-inherit/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-inherit.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-lexical-scope-and-dynamic-scope/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-lexical-scope-and-dynamic-scope.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/javascript/JavaScript-deep-clone-and-shallow-clone/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-deep-clone-and-shallow-clone.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-event-loop/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-event-loop.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/08/web/javascript/JavaScript-data-types/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-closure.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-closure/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-data-types.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-debouncing-and-throttling/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-debouncing-and-throttling.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/ECMAScript-features/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/ECMAScript-features.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/13/web/javascript/JavaScript-apply-bind-call/</loc>
+    <loc>http://cencuansen.github.com//web/javascript/JavaScript-apply-bind-call.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/Web-dom-parsing-and-rendering/</loc>
+    <loc>http://cencuansen.github.com//web/Web-dom-parsing-and-rendering.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/Web-request-process-in-browser/</loc>
+    <loc>http://cencuansen.github.com//web/Web-request-process-in-browser.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/HTML-block-formatting-context/</loc>
+    <loc>http://cencuansen.github.com//web/HTML-block-formatting-context.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/web/HTML-src-and-href/</loc>
+    <loc>http://cencuansen.github.com//web/HTML-src-and-href.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/css/CSS-select-children-between-2nd-and-last/</loc>
+    <loc>http://cencuansen.github.com//css/CSS-pseudo-classes-and-pseudo-elements.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/css/CSS-pseudo-classes-and-pseudo-elements/</loc>
+    <loc>http://cencuansen.github.com//css/CSS-select-children-between-2nd-and-last.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/css/CSS-transform-transition-animation/</loc>
+    <loc>http://cencuansen.github.com//css/CSS-transform-transition-animation.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/csharp/CSharp-usage/</loc>
+    <loc>http://cencuansen.github.com//css/CSS-1px-line.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/css/CSS-1px-line/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-dispose.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CSharp-linq/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-dotnet-and-csharp.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CSharp-thread-synchronization/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-linq.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/csharp/CSharp-dotnet-and-csharp/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-thread-synchronization.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/csharp/CSharp-dispose/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-basic-concepts.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/14/csharp/CSharp-basic-concepts/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-delegate-and-event.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CSharp-delegate-and-event/</loc>
+    <loc>http://cencuansen.github.com//csharp/CLR-GC.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CLR-TOP-and-SBI/</loc>
+    <loc>http://cencuansen.github.com//csharp/CLR-TOP-and-SBI.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CLR-instance-by-new/</loc>
+    <loc>http://cencuansen.github.com//csharp/CLR-instance-by-new.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CLR-GC/</loc>
+    <loc>http://cencuansen.github.com//csharp/CLR-basic-concepts.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CLR-basic-concepts/</loc>
-    <lastmod>2023-02-15</lastmod>
-  </url>
-  <url>
-    <loc>http://cencuansen.github.com//2023/02/15/csharp/CSharp-asynchronous/</loc>
+    <loc>http://cencuansen.github.com//csharp/CSharp-asynchronous.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
 </urlset> 

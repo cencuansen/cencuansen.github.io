@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="SanHuo">
+
+
+<meta name="subtitle" content="纤凝翠薇巅，扶光入沧渊，扶摇惊砂起，山弄望舒远">
+
+
+<meta name="description" content="SanHuo的全栈藏经阁">
+
+
+<meta name="keywords" content="JavaScript,csharp,c#,.NET,.NET Core,MySQL">
+
+
+<title>
+  SanHuo
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codeOps.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codeOps.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SanHuo" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 0,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        MySQL 索引
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;16:28:02 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/MySQL/">MySQL</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/MySQL/"># MySQL</a>
+            
+            <a href="/tags/Database-Index/"># Database Index</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="B-树-amp-B-树"><a href="#B-树-amp-B-树" class="headerlink" title="B 树 &amp; B+树"></a>B 树 &amp; B+树</h1><p>B 树：平衡的多叉查找树，每个节点都包含数据，在任意节点匹配上就返回数据，找不到就返回空指针。</p>
+<p>B+树：</p>
+<ol>
+<li>关键字全部存储在叶子节点上，且叶子节点本身根据关键字自小而大顺序连接。</li>
+<li>非叶子节点可以看成索引部分，节点中仅含有其子树（根节点）中的最大（或最小）关键字。</li>
+<li>有 n 棵子树的节点含有 n 个关键字（也有认为是 n-1 个关键字）。<br>B+树的查找过程，在非叶子节点上的关键字等于给定值，并不终止，而是继续沿着指针直到叶子节点位置。因此在 B+树，不管查找成功与否，每次查找都是走了一条从根到叶子节点的路径。</li>
+</ol>
+<h1 id="B-树效率"><a href="#B-树效率" class="headerlink" title="B+树效率"></a>B+树效率</h1><p>InnoDB 引擎存储数据的时候以页为单位，一页就是一节点。<br>每个节点的默认大小是 16KB，一个指针的大小是 6 个字节，主键占用 8 个字节，<br>一个节点大概有 (16<em>1024)&#x2F;(6+8)&#x3D;1170 个指针，<br>当表中一条记录 1KB，单个叶子节点可以存储 16 条数据，<br>即树高度为 2 时能关联 1170</em>16&#x3D;18720 条数据，当高度为 3，能关联 1170<em>1170</em>16&#x3D;21902400 条数据。</p>
+<h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引是有结构的数据，这些数据结构以某种方式引用（指向）数据，MySQL 的索引使用 B+树的数据结构。</p>
+<h1 id="主键索引"><a href="#主键索引" class="headerlink" title="主键索引"></a>主键索引</h1><p>InnoDB 叶子节点存行数据；MyISAM 叶子节点是数据的地址指针。</p>
+<h1 id="普通索引"><a href="#普通索引" class="headerlink" title="普通索引"></a>普通索引</h1><p>InnoDB 叶子节点存主键值；MyISAM 叶子节点是数据的地址指针。普通索引查询到叶子节点主键值，用主键去主键索引查数据，这就是回表查询。</p>
+<h1 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h1><p>索引顺序和数据的顺序一致，如果索引相邻，对应数据也相邻存放。InnoDB 主键索引就是聚集索引，聚集索引将数据与索引放一起，索引结构的叶子结点保存了行数据，聚集索引有且仅有一个。</p>
+<ol>
+<li>有主键，主键索引就是聚集索引；</li>
+<li>无主键，第一个唯一索引（UNIQUE）为聚集索引；</li>
+<li>无主键、唯一键，InnoDB 会生成一个隐式主键（rowid）作为聚集索引列。<br>索引查询过程：<br>where id &#x3D; 14：主键索引树中找到对应叶子节点，获得行数据；<br>where Name &#x3D; ‘xx’：</li>
+<li>辅助索引树中检索 Name，到达其叶子节点获取对应的主键。</li>
+<li>再用主键在主键索引树找到对应叶子节点，获得行数据。</li>
+</ol>
+<h1 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h1><p>索引逻辑顺序和磁盘中数据的物理顺序不一致。</p>
+<h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h1><p>查数据时，select 的列刚好是复合索引中涉及的字段，这样能直接返回数据，避免回表，extra 中 Using Index 说明使用了覆盖索引。</p>
+<h1 id="最左匹配原则"><a href="#最左匹配原则" class="headerlink" title="最左匹配原则"></a>最左匹配原则</h1><p>覆盖索引要求查询字段的顺序与复合索引从左到右的顺序一致才行。</p>
+<h1 id="索引条件下推"><a href="#索引条件下推" class="headerlink" title="索引条件下推"></a>索引条件下推</h1><p>当存在索引列条件判断时，将条件判断从 MySQL 服务器向下传递给存储引擎，减少 IO 次数，extra 中 Using index condition 说明使用了索引条件下推。</p>
+<h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><p>普通索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将 user 表 user_name 列设为索引</span></span><br><span class="line"><span class="keyword">create</span> index idx_user_name <span class="keyword">on</span> <span class="keyword">user</span>(user_name);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建email列的索引，索引可以截取length长度，只使用这一列的前几个字符</span></span><br><span class="line"><span class="keyword">create</span> index idx_email <span class="keyword">on</span> <span class="keyword">user</span>(email(<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 该表方式创建索引</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">user</span> <span class="keyword">add</span> index idx_user_name(user_name);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 建表时创建索引</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span> (</span><br><span class="line">    id <span class="type">int</span>,</span><br><span class="line">    user_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">    gender <span class="type">varchar</span>(<span class="number">1</span>),</span><br><span class="line">    index idx_user_name (name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除索引</span></span><br><span class="line"><span class="keyword">drop</span> index idx_user_name <span class="keyword">on</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
+
+<p>唯一索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> index idx_user_name <span class="keyword">on</span> <span class="keyword">user</span>(user_name);</span><br></pre></td></tr></table></figure>
+
+<p>复合索引</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index idx_user_composite_index <span class="keyword">on</span> <span class="keyword">user</span>(user_name, email(<span class="number">7</span>));</span><br></pre></td></tr></table></figure>
+
+<h1 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h1><ol>
+<li>用 or 查询；</li>
+<li>违背最左匹配原则；</li>
+<li>like 以%开头；</li>
+<li>发生类型转换；</li>
+<li>where 中索引列有运算；</li>
+<li>where 中索引列使用了函数；</li>
+<li>如果 mysql 觉得全表扫描更快时（数据少）;</li>
+</ol>
+<h1 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h1><ol>
+<li>如果条件中有 or，只要其中一个条件没有索引，其他字段有索引也不会使用。</li>
+<li>如果条件中的字段都有索引，但是 OR 多个字段都需要全表扫描，因此还是会 走全表扫描 或者 全索引扫描；也就是说如果其他字段不符最左前缀原则，但是都是覆盖索引的值，因此走一次全索引扫描</li>
+</ol>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol>
+<li>where c1&#x3D;1 or c2&#x3D;2 改成 where c1&#x3D;1 UNION ALL where c2&#x3D;2</li>
+<li>where id&#x3D;1 or id&#x3D;2 改成 where id in (1,2)</li>
+</ol>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" rel="prev" href="/database/MySQL-transaction">MySQL 事务</a>
+      
+      
+      <a class="next" rel="next" href="/database/MySQL-database-engine">MySQL 数据库引擎</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© SanHuo | <a href="https://hexo.io" target="_blank">Hexo</a> & <a
+                    href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+  </div>
+</body>
+
+</html>

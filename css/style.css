@@ -1292,6 +1292,9 @@ header label {
     display: none;
   }
 }
+.post-content {
+  position: relative;
+}
 .post-content figure.highlight {
   margin: 0.5rem 0;
   background: #f7f7f7;
@@ -1308,13 +1311,6 @@ header label {
 .post-content figure.highlight pre {
   background: #f7f7f7;
   margin: 0;
-}
-.post-content figure.highlight.foldcode td.gutter {
-  display: none;
-}
-.post-content figure.highlight.foldcode td.code span,
-.post-content figure.highlight.foldcode br:nth-of-type(n+2) {
-  display: none;
 }
 .post-content code {
   padding: 2px 4px;

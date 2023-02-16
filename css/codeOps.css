@@ -1,0 +1,30 @@
+.code-ops {
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  margin-bottom: -10px;
+  flex-direction: row-reverse;
+}
+.code-op {
+  width: 60px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  user-select: none;
+  text-align: center;
+  box-sizing: border-box;
+}
+.code-op:hover {
+  color: #f00;
+}
+figure.highlight.code-fold td.gutter {
+  display: none;
+}
+figure.highlight.code-fold td.code span,
+figure.highlight.code-fold br:nth-of-type(n+2) {
+  display: none;
+}
+.copy-code-temp {
+  top: -9999px;
+  left: -9999px;
+  position: absolute;
+}
