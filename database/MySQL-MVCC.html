@@ -151,7 +151,7 @@
 </div>
 
 <script>
-  // tocbot: https://github.com/tscanlin/tocbot
+  // tocbot: https://github.com/tscanlin/tocbot`
   var tocbot_timer;
   var DEPTH_MAX = 6; // 为 6 时展开所有
   var tocbot_default_config = {
@@ -162,7 +162,7 @@
     // Which headings to grab inside of the contentSelector element.
     headingSelector: 'h1, h2, h3, h4, h5, h6',
     // 0: collapse them all; 6: expand all
-    collapseDepth: 0,
+    collapseDepth: 6,
     orderedList: false,
     scrollSmooth: true,
     isCollapsedClass: 'is-collapsed',
@@ -261,19 +261,22 @@
     </header>
 
     <div class="post-content">
-      <p>多版本并发控制(Multiversion Concurrency Control)，通过保存数据在某时刻的快照来实现并发控制，不管事务执行多长时间，事务内部看到的数据不受其它事务影响。InnoDB 用 Undo Log 保存数据的多个版本。</p>
-<p>普通锁，只能串行执行；<br>读写锁，可以实现读读并发；<br>多版本并发控制，可以实现读写并发。</p>
-<p>隔离级别要求：已提交读和可重复读。未提交读总是读取最新的数据行，串行化会对读取的行加锁。</p>
-<p>事务 ID：每开启一个事务，我们都会从数据库中获得一个事务 ID（事务版本号），这个事务 ID 是自增长的。</p>
+      <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>多版本并发控制(Multiversion Concurrency Control)，通过保存数据在某时刻的快照来实现并发控制，不管事务执行多长时间，事务内部看到的数据不受其它事务影响。InnoDB 用 Undo Log 保存数据的多个版本。</p>
+<h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><p>普通锁，只能串行执行；<br>读写锁，可以实现<code>读读并发</code>；<br>多版本并发控制，可以实现<code>读写并发</code>。</p>
+<h1 id="隔离级别要求"><a href="#隔离级别要求" class="headerlink" title="隔离级别要求"></a>隔离级别要求</h1><p>MVCC 要求是<code>已提交读</code>或<code>可重复读</code>。未提交读总是读取最新的数据行，串行化会对读取的行加锁。</p>
 <h1 id="隐藏列"><a href="#隐藏列" class="headerlink" title="隐藏列"></a>隐藏列</h1><ol>
 <li>DB_ROW_ID，隐藏的行 ID，用来生成默认聚簇索引；</li>
 <li>DB_TRX_ID，事务 ID；</li>
 <li>DB_ROLL_PTR，回滚指针，指向行数据的 Undo Log；</li>
 </ol>
-<h1 id="SELECT："><a href="#SELECT：" class="headerlink" title="SELECT："></a>SELECT：</h1><ol>
+<h1 id="事务-ID"><a href="#事务-ID" class="headerlink" title="事务 ID"></a>事务 ID</h1><p>每开启一个事务，我们都会从数据库中获得一个事务 ID（事务版本号），这个事务 ID 是自增长的。</p>
+<h2 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h2><ol>
 <li>事务 ID 早于当前事务 ID 的数据，确保数据已经存在或当前事务自身插入或者修改的；</li>
-<li>删除版本未定义或大于当前事务 ID，确保在事务开始之前未被删除。<br>INSERT：数据的事务 ID 列保存当前事务 ID。<br>DELETE：数据的删除标识更新为当前事务 ID，删除被视为更新，行中的一个特殊位用来标记。<br>UPDATE：插入新记录，数据的事务 ID 列保存当前事务 ID，原数据的删除标识更新为当前事务 ID。</li>
+<li>删除版本未定义或大于当前事务 ID，确保在事务开始之前未被删除。</li>
 </ol>
+<h2 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h2><p>数据的事务 ID 列保存当前事务 ID。</p>
+<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><p>数据的删除标识更新为当前事务 ID，删除被视为更新，行中的一个特殊位用来标记。</p>
+<h2 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h2><p>插入新记录，数据的事务 ID 列保存当前事务 ID，原数据的删除标识更新为当前事务 ID。</p>
 
     </div>
 

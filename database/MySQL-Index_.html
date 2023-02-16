@@ -151,7 +151,7 @@
 </div>
 
 <script>
-  // tocbot: https://github.com/tscanlin/tocbot
+  // tocbot: https://github.com/tscanlin/tocbot`
   var tocbot_timer;
   var DEPTH_MAX = 6; // 为 6 时展开所有
   var tocbot_default_config = {
@@ -162,7 +162,7 @@
     // Which headings to grab inside of the contentSelector element.
     headingSelector: 'h1, h2, h3, h4, h5, h6',
     // 0: collapse them all; 6: expand all
-    collapseDepth: 0,
+    collapseDepth: 6,
     orderedList: false,
     scrollSmooth: true,
     isCollapsedClass: 'is-collapsed',
@@ -276,10 +276,17 @@
 <ol>
 <li>有主键，主键索引就是聚集索引；</li>
 <li>无主键，第一个唯一索引（UNIQUE）为聚集索引；</li>
-<li>无主键、唯一键，InnoDB 会生成一个隐式主键（rowid）作为聚集索引列。<br>索引查询过程：<br>where id &#x3D; 14：主键索引树中找到对应叶子节点，获得行数据；<br>where Name &#x3D; ‘xx’：</li>
+<li>无主键、唯一键，InnoDB 会生成一个隐式主键（rowid）作为聚集索引列。</li>
+</ol>
+<p>索引查询过程：</p>
+<ul>
+<li>where id &#x3D; 14：主键索引树中找到对应叶子节点，获得行数据；</li>
+<li>where Name &#x3D; ‘xx’：<ul>
 <li>辅助索引树中检索 Name，到达其叶子节点获取对应的主键。</li>
 <li>再用主键在主键索引树找到对应叶子节点，获得行数据。</li>
-</ol>
+</ul>
+</li>
+</ul>
 <h1 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h1><p>索引逻辑顺序和磁盘中数据的物理顺序不一致。</p>
 <h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h1><p>查数据时，select 的列刚好是复合索引中涉及的字段，这样能直接返回数据，避免回表，extra 中 Using Index 说明使用了覆盖索引。</p>
 <h1 id="最左匹配原则"><a href="#最左匹配原则" class="headerlink" title="最左匹配原则"></a>最左匹配原则</h1><p>覆盖索引要求查询字段的顺序与复合索引从左到右的顺序一致才行。</p>
@@ -294,21 +301,21 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index idx_user_composite_index <span class="keyword">on</span> <span class="keyword">user</span>(user_name, email(<span class="number">7</span>));</span><br></pre></td></tr></table></figure>
 
 <h1 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h1><ol>
-<li>用 or 查询；</li>
+<li>用 OR 查询；</li>
 <li>违背最左匹配原则；</li>
-<li>like 以%开头；</li>
+<li>like 以 % 开头；</li>
 <li>发生类型转换；</li>
 <li>where 中索引列有运算；</li>
 <li>where 中索引列使用了函数；</li>
-<li>如果 mysql 觉得全表扫描更快时（数据少）;</li>
+<li>如果 MySQL 觉得全表扫描更快时（数据少）;</li>
 </ol>
 <h1 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h1><ol>
-<li>如果条件中有 or，只要其中一个条件没有索引，其他字段有索引也不会使用。</li>
+<li>如果条件中有 OR，只要其中一个条件没有索引，其他字段有索引也不会使用。</li>
 <li>如果条件中的字段都有索引，但是 OR 多个字段都需要全表扫描，因此还是会 走全表扫描 或者 全索引扫描；也就是说如果其他字段不符最左前缀原则，但是都是覆盖索引的值，因此走一次全索引扫描</li>
 </ol>
 <h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol>
-<li>where c1&#x3D;1 or c2&#x3D;2 改成 where c1&#x3D;1 UNION ALL where c2&#x3D;2</li>
-<li>where id&#x3D;1 or id&#x3D;2 改成 where id in (1,2)</li>
+<li>where c1&#x3D;1 OR c2&#x3D;2 改成 where c1&#x3D;1 UNION ALL where c2&#x3D;2</li>
+<li>where id&#x3D;1 OR id&#x3D;2 改成 where id in (1,2)</li>
 </ol>
 
     </div>
