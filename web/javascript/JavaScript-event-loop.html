@@ -281,11 +281,11 @@
 </thead>
 <tbody><tr>
 <td align="left">timers</td>
-<td align="left">这个阶段执行 timer(setTimeout、setInterval) 的回调</td>
+<td align="left">执行 setTimeout、setInterval 回调</td>
 </tr>
 <tr>
-<td align="left">I&#x2F;O callbacks</td>
-<td align="left">处理一些上一轮循环中的少数未执行的 I&#x2F;O 回调</td>
+<td align="left">pending callbacks</td>
+<td align="left">执行上一轮循环少数未执行的 I&#x2F;O 回调</td>
 </tr>
 <tr>
 <td align="left">idle, prepare</td>
@@ -293,15 +293,15 @@
 </tr>
 <tr>
 <td align="left">poll</td>
-<td align="left">重要且复杂的阶段，几乎所有 I&#x2F;O 相关的回调，都在这个阶段执行</td>
+<td align="left">执行 timers、setImmediate、close 之外的大部分回调，如网络连接</td>
 </tr>
 <tr>
 <td align="left">check</td>
-<td align="left">执行 setImmediate() 的回调</td>
+<td align="left">执行 setImmediate 回调</td>
 </tr>
 <tr>
 <td align="left">close callbacks</td>
-<td align="left">执行 socket 的 close 事件回调</td>
+<td align="left">执行 socket.close 回调</td>
 </tr>
 </tbody></table>
 <h1 id="环境差异"><a href="#环境差异" class="headerlink" title="环境差异"></a>环境差异</h1><ul>
