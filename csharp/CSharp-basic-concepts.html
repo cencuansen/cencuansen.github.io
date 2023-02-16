@@ -259,7 +259,7 @@
     </header>
 
     <div class="post-content">
-      <h1 id="string-Empty、-“”-、-null。"><a href="#string-Empty、-“”-、-null。" class="headerlink" title="string.Empty、 “” 、 null。"></a>string.Empty、 “” 、 null。</h1><p>Empty 是 string 类中的一个静态的只读字段。<br>string.Empty 和 “” 是一样的。<br>string str &#x3D; null 表示 str 未指向任何对象。</p>
+      <h1 id="string-Empty、-“”-、-null"><a href="#string-Empty、-“”-、-null" class="headerlink" title="string.Empty、 “” 、 null"></a>string.Empty、 “” 、 null</h1><p>Empty 是 string 类中的一个静态的只读字段。<br>string.Empty 和 “” 是一样的。<br>string str &#x3D; null 表示 str 未指向任何对象。</p>
 <h1 id="string-和-StringBuilder"><a href="#string-和-StringBuilder" class="headerlink" title="string 和 StringBuilder"></a>string 和 StringBuilder</h1><p>string 是不可变对象，string 是 String 的别名，string 是 c#中的类，String 是 Framework 的类，编译器会把 string 编译成 String。<br>StringBuilder 为动态字符串。StringBuilder 当达到容量时，将自动分配新的空间且容量翻倍。</p>
 <h1 id="扩展方法"><a href="#扩展方法" class="headerlink" title="扩展方法"></a>扩展方法</h1><p>向现有类型“添加”方法，无需派生、重新编译或修改原始类型。<br>扩展方法是一种静态类中的静态方法。<br>扩展方法第一个参数是 this 修饰的被扩展的类。</p>
 <h1 id="装箱和拆箱"><a href="#装箱和拆箱" class="headerlink" title="装箱和拆箱"></a>装箱和拆箱</h1><p>装箱：值类型 -&gt; 引用类型 。<br>拆箱：引用类型 -&gt; 值类型。<br>一次装箱要分配内存（托管堆）和拷贝数据（从栈到托管堆）。<br>拆箱就是装箱的相反操作。</p>
@@ -284,7 +284,7 @@
 <li>引用命名空间。</li>
 <li>using 一个非托管资源（IDisposiable），用来释放资源。</li>
 </ul>
-<h1 id="托管资源、非托管资源"><a href="#托管资源、非托管资源" class="headerlink" title="托管资源、非托管资源"></a>托管资源、非托管资源</h1><p>托管资源指的是.NET 可以自动进行回收的资源，主要是指托管堆上分配的内存资源。<br>非托管资源指的是.NET 不知道如何回收的资源，最常见的是包装操作系统资源的对象，例如文件，窗口，网络连接，数据库连接，画刷，图标等。<br>建议通过调用 IDisposable.Dispose()方法来回收非托管资源。</p>
+<h1 id="托管资源和非托管资源"><a href="#托管资源和非托管资源" class="headerlink" title="托管资源和非托管资源"></a>托管资源和非托管资源</h1><p>托管资源指的是.NET 可以自动进行回收的资源，主要是指托管堆上分配的内存资源。<br>非托管资源指的是.NET 不知道如何回收的资源，最常见的是包装操作系统资源的对象，例如文件，窗口，网络连接，数据库连接，画刷，图标等。<br>建议通过调用 IDisposable.Dispose()方法来回收非托管资源。</p>
 <h1 id="ref、out、in"><a href="#ref、out、in" class="headerlink" title="ref、out、in"></a>ref、out、in</h1><p>相同：都是按引用传递，形参成为实参的别名；<br>不同：ref 在方法外需初始化；out 需在方法内赋值；in 在方法内是只读的。</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//初始化</span></span><br><span class="line">  <span class="built_in">int</span> number = <span class="number">50</span>;</span><br><span class="line">  Console.WriteLine(<span class="string">&quot;调用方法前 number 值：&quot;</span> + number);</span><br><span class="line">  RefFunction(<span class="keyword">ref</span> number);</span><br><span class="line">  Console.WriteLine(<span class="string">&quot;调用方法后 number 值：&quot;</span> + number);</span><br><span class="line">  Console.Read();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入的参数值是 50 ，方法中使用的 num 值也是 50</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">RefFunction</span>(<span class="params"><span class="keyword">ref</span> <span class="built_in">int</span> num</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  num = num / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -293,11 +293,38 @@
 <h1 id="in-的意义"><a href="#in-的意义" class="headerlink" title="in 的意义"></a>in 的意义</h1><p>结构体实例数据分配在栈上，当需要将大数据量的结构体作为方法参数时，会复制一份该大结构体，成本有点高，使用 in 来按引用传递该大结构体，就能避免复制问题。</p>
 <h1 id="ref、out、in-使用限制"><a href="#ref、out、in-使用限制" class="headerlink" title="ref、out、in 使用限制"></a>ref、out、in 使用限制</h1><p>async 修饰的异步方法中无法使用；<br>迭代器方法（含有 yield return 或 yield break 的方法）中无法使用；<br>扩展方法的第一个参数不能有 in 修饰符，除非该参数是结构体；<br>扩展方法的第一个参数，其中该参数是泛型类型（即使该类型被约束为结构体）；</p>
 <h1 id="Equals-和-x3D-x3D"><a href="#Equals-和-x3D-x3D" class="headerlink" title="Equals 和 &#x3D;&#x3D;"></a>Equals 和 &#x3D;&#x3D;</h1><p>&#x3D;&#x3D; 值类型数据比较的是值，引用类型比较的是引用地址。<br>Equals 引用类型比较的是最终数据。</p>
-<h1 id="as-和-is"><a href="#as-和-is" class="headerlink" title="as 和 is"></a>as 和 is</h1><p>is 判断对象是否兼容于某类型，返回 bool 值，永远不会抛出异常。<br>as 用于在兼容的引用类型之间执行转换。无法转换则为 null。<br>is 需要做两次对象的类型检查，而 as 需要做一次对象类型检查。</p>
+<h1 id="as、is、IsAssignableFrom"><a href="#as、is、IsAssignableFrom" class="headerlink" title="as、is、IsAssignableFrom"></a>as、is、IsAssignableFrom</h1><p>as 用于在兼容的引用类型之间执行<code>类型转换</code>，无法转换则为 null；<br>is 兼容性判断，返回 <code>bool 值</code>，不会抛出异常，语法：<code>实例对象 is 类型</code>；<br>IsAssignableFrom 兼容性判断，返回 <code>bool 值</code>，不会抛出异常，语法：<code>类型.IsAssignableFrom(类型)</code>。</p>
 <h1 id="访问修饰符"><a href="#访问修饰符" class="headerlink" title="访问修饰符"></a>访问修饰符</h1><p>public：共有的，访问不受限制；<br>private：私有的，只能在当前类中访问；<br>internal：内部的，只能在当前程序集中访问；<br>protected：受保护的，只能在当前类或其派生类中访问；<br>file：当前文件范围，C# 11 新增；<br>protected internal：受保护的内部成员，当前程序集或派生自包含类的类型可访问；<br>private protected：私有受保护的成员，当前程序集中的包含类或从包含类派生的类型可访问；<br>class 默认 internal，class member 默认 private。</p>
-<h1 id="class-成员、interface-成员"><a href="#class-成员、interface-成员" class="headerlink" title="class 成员、interface 成员"></a>class 成员、interface 成员</h1><p>class 成员：字段、常量、属性、方法、事件、运算符、索引器、构造函数、终结器、嵌套类型。<br>interface 成员：方法、属性、索引器和事件</p>
+<h1 id="class、interface-成员"><a href="#class、interface-成员" class="headerlink" title="class、interface 成员"></a>class、interface 成员</h1><p>class 成员：字段、常量、属性、方法、事件、运算符、索引器、构造函数、终结器、嵌套类型。<br>interface 成员：方法、属性、索引器和事件</p>
 <h1 id="类的执行顺序"><a href="#类的执行顺序" class="headerlink" title="类的执行顺序"></a>类的执行顺序</h1><p>父类，子类，静态块，静态字段，非静态块，非静态字段，构造器，方法</p>
-<h1 id="数据类型和内存占用"><a href="#数据类型和内存占用" class="headerlink" title="数据类型和内存占用"></a>数据类型和内存占用</h1><p>1 byte bool、byte<br>2 byte char、short<br>4 byte int、float<br>8 byte long、double<br>16 byte decimal</p>
+<h1 id="数据类型和内存占用"><a href="#数据类型和内存占用" class="headerlink" title="数据类型和内存占用"></a>数据类型和内存占用</h1><table>
+<thead>
+<tr>
+<th align="right">大小</th>
+<th>成员</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">1 byte</td>
+<td>bool、byte</td>
+</tr>
+<tr>
+<td align="right">2 byte</td>
+<td>char、short</td>
+</tr>
+<tr>
+<td align="right">4 byte</td>
+<td>int、float</td>
+</tr>
+<tr>
+<td align="right">8 byte</td>
+<td>long、double</td>
+</tr>
+<tr>
+<td align="right">16 byte</td>
+<td>decimal</td>
+</tr>
+</tbody></table>
 <h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>编译时多态和运行时多态。</p>
 <h2 id="编译时多态"><a href="#编译时多态" class="headerlink" title="编译时多态"></a>编译时多态</h2><p>重载编译时多态。根据签名不同分为不同的方法，编译后就成两个不同名函数。</p>
 <h2 id="运行时多态"><a href="#运行时多态" class="headerlink" title="运行时多态"></a>运行时多态</h2><p>虚方法是运行时多态，父类中有虚方法，子类覆盖实现虚方法。</p>
