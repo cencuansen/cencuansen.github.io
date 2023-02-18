@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        NETCore 请求流程
+        NETCore 接口优化
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;14:55:17 -->
+            <!-- &nbsp;&nbsp;11:36:31 -->
           </a>
         </span>
         
@@ -259,9 +259,12 @@
     </header>
 
     <div class="post-content">
-      <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>反向代理 -&gt; kestrel -&gt; middleware 管道 -&gt; 业务处理 -&gt; response 返回数据。</p>
-<p><img src="/images/netcore-request-flow.png" alt="&quot;请求流程&quot;"></p>
-<p>补充：<br>程序启动的时候会把所有的 Controller 中的 Action 映射存储到 routeOptions 集合中，Action 映射成 Endpoint 端点的 RequestDelegate 委托属性，最后通过 UseEndPoints 添加 EndpointMiddleware 中间件进行执行，同时这个中间件中的 Endpoint 路由已经是通过 Routing 匹配后的路由。</p>
+      <h1 id="增加缓存"><a href="#增加缓存" class="headerlink" title="增加缓存"></a>增加缓存</h1><p>如果接口返回的数据可以被缓存，可以使用缓存机制来减少接口访问的次数。可以使用本地缓存、分布式缓存或者 CDN 等不同的缓存方式，根据具体情况选择合适的方式进行优化。</p>
+<h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><p>如果接口需要从数据库中查询数据，可以对数据库进行优化，例如增加索引、优化 SQL 查询语句、使用缓存等方式，减少数据库的查询次数，从而提高接口访问的性能。</p>
+<h1 id="网络传输优化"><a href="#网络传输优化" class="headerlink" title="网络传输优化"></a>网络传输优化</h1><p>可以使用压缩技术来减少网络传输的数据量，减少接口访问的时间。也可以使用 CDN 等技术来加速数据传输，提高接口访问的速度。</p>
+<h1 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h1><p>如果接口需要执行耗时的操作，可以使用异步处理来提高接口的响应速度。使用异步操作可以将耗时的操作放在后台进行，不影响接口的响应速度。</p>
+<h1 id="使用缓存技术"><a href="#使用缓存技术" class="headerlink" title="使用缓存技术"></a>使用缓存技术</h1><p>对于经常被访问的数据，可以使用缓存技术来避免每次都从数据库中查询。可以使用内存缓存、Redis 缓存、分布式缓存等技术。</p>
+<h1 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h1><p>可以对接口的代码进行优化，减少不必要的计算和数据传输，从而提高接口的性能。例如，减少使用循环和嵌套循环、尽量避免在循环中执行数据库查询等。</p>
 
     </div>
 
@@ -269,10 +272,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/NETCore-app-start-flow">NETCore 程序启动流程</a>
+      <a class="prev" href="javascript:void(0)">无</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-GC">CLR GC</a>
+      <a class="next" rel="next" href="/csharp/CLR-reflection">CLR 反射</a>
       
     </section>
   </article>

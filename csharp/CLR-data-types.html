@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        NETCore 请求流程
+        CLR 数据类型
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;14:55:17 -->
+            <!-- &nbsp;&nbsp;10:52:08 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/NETCore/">NETCore</a>
+          <a href="/categories/CLR/">CLR</a>
           
         </span>
         
@@ -243,9 +243,11 @@
           <span class="tag" style>
             
             
+            <a href="/tags/CLR/"># CLR</a>
+            
             <a href="/tags/CSharp/"># CSharp</a>
             
-            <a href="/tags/NETCore/"># NETCore</a>
+            <a href="/tags/Data-Types/"># Data Types</a>
             
             
           </span>
@@ -259,9 +261,15 @@
     </header>
 
     <div class="post-content">
-      <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>反向代理 -&gt; kestrel -&gt; middleware 管道 -&gt; 业务处理 -&gt; response 返回数据。</p>
-<p><img src="/images/netcore-request-flow.png" alt="&quot;请求流程&quot;"></p>
-<p>补充：<br>程序启动的时候会把所有的 Controller 中的 Action 映射存储到 routeOptions 集合中，Action 映射成 Endpoint 端点的 RequestDelegate 委托属性，最后通过 UseEndPoints 添加 EndpointMiddleware 中间件进行执行，同时这个中间件中的 Endpoint 路由已经是通过 Routing 匹配后的路由。</p>
+      <h1 id="C-基元类型"><a href="#C-基元类型" class="headerlink" title="C# 基元类型"></a>C# 基元类型</h1><p>指的是<code>不使用类</code>而直接定义的内置数据类型，由 C# 语言规范定义，属于语言层面，具有特定的语义和行为。</p>
+<p>整数类型：sbyte、byte、short、ushort、int、uint、long 和 ulong<br>浮点类型：float 和 double<br>十进制类型：decimal<br>布尔类型：bool<br>字符类型：char<br>指针类型：指向其他类型的指针类型<br>空类型：void</p>
+<h1 id="C-复杂类型"><a href="#C-复杂类型" class="headerlink" title="C# 复杂类型"></a>C# 复杂类型</h1><p>结构体、枚举和类，是由基元类型组成的。</p>
+<h1 id="CLR-内置类型"><a href="#CLR-内置类型" class="headerlink" title="CLR 内置类型"></a>CLR 内置类型</h1><p>内置类型就是 .NET Framework System 命名空间中写好的类型。</p>
+<h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>bool、byte、char、decimal、double、enum、float、int、long、sbyte、short、struct、uint、ulong、ushort。</p>
+<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p>object、string、dynamic。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>值类型是直接存储在<code>栈</code>中的，引用类型则是存储在<code>堆</code>中，而栈中存储的仅是指向堆中对象的引用。<br>值类型的内存管理由 CLR 自动处理，不需要手动释放，而引用类型则需要手动释放。</p>
+<h2 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h2><p>类、结构体、接口、委托。<br>自定义类型也称为“用户定义类型”或 “托管类型”。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：对比 object 和 dynamic<br>dynamic：派生自 object，在运行时动态解释，具有更多的<code>灵活性</code>和<code>动态性</code>，在运行时，编译器会根据实际类型执行<code>动态绑定</code>操作。<br>object：是静态类型。</p>
 
     </div>
 
@@ -269,10 +277,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/NETCore-app-start-flow">NETCore 程序启动流程</a>
+      <a class="prev" rel="prev" href="/csharp/CLR-app-domain">CLR AppDomain</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-GC">CLR GC</a>
+      <a class="next" rel="next" href="/csharp/CLR-string">CLR 字符串</a>
       
     </section>
   </article>

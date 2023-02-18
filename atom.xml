@@ -6,7 +6,7 @@
   <link href="https://chengshen.me/atom.xml" rel="self"/>
   
   <link href="https://chengshen.me/"/>
-  <updated>2023-02-16T11:26:27.668Z</updated>
+  <updated>2023-02-18T03:45:43.745Z</updated>
   <id>https://chengshen.me/</id>
   
   <author>
@@ -15,6 +15,169 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NETCore 接口优化</title>
+    <link href="https://chengshen.me/csharp/NETCore-api-optimization"/>
+    <id>https://chengshen.me/csharp/NETCore-api-optimization</id>
+    <published>2023-02-18T03:36:31.000Z</published>
+    <updated>2023-02-18T03:45:43.745Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="增加缓存"><a href="#增加缓存" class="headerlink" title="增加缓存"></a>增加缓存</h1><p>如果接口返回的数据可以被缓存，可以使用缓存机制来减少接口访问的次数。可以使用本地缓存、分布式缓存或者 CDN 等不同的缓存方式，根据具体情况选择合适的方式进行优化。</p><h1 id="数据库优化"><a href="#数据库优化" class="headerlink" title="数据库优化"></a>数据库优化</h1><p>如果接口需要从数据库中查询数据，可以对数据库进行优化，例如增加索引、优化 SQL 查询语句、使用缓存等方式，减少数据库的查询次数，从而提高接口访问的性能。</p><h1 id="网络传输优化"><a href="#网络传输优化" class="headerlink" title="网络传输优化"></a>网络传输优化</h1><p>可以使用压缩技术来减少网络传输的数据量，减少接口访问的时间。也可以使用 CDN 等技术来加速数据传输，提高接口访问的速度。</p><h1 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h1><p>如果接口需要执行耗时的操作，可以使用异步处理来提高接口的响应速度。使用异步操作可以将耗时的操作放在后台进行，不影响接口的响应速度。</p><h1 id="使用缓存技术"><a href="#使用缓存技术" class="headerlink" title="使用缓存技术"></a>使用缓存技术</h1><p>对于经常被访问的数据，可以使用缓存技术来避免每次都从数据库中查询。可以使用内存缓存、Redis 缓存、分布式缓存等技术。</p><h1 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h1><p>可以对接口的代码进行优化，减少不必要的计算和数据传输，从而提高接口的性能。例如，减少使用循环和嵌套循环、尽量避免在循环中执行数据库查询等。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;增加缓存&quot;&gt;&lt;a href=&quot;#增加缓存&quot; class=&quot;headerlink&quot; title=&quot;增加缓存&quot;&gt;&lt;/a&gt;增加缓存&lt;/h1&gt;&lt;p&gt;如果接口返回的数据可以被缓存，可以使用缓存机制来减少接口访问的次数。可以使用本地缓存、分布式缓存或者 CDN 等不同的缓存方</summary>
+      
+    
+    
+    
+    <category term="NETCore" scheme="https://chengshen.me/categories/NETCore/"/>
+    
+    
+    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
+    
+    <category term="NETCore" scheme="https://chengshen.me/tags/NETCore/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CLR 反射</title>
+    <link href="https://chengshen.me/csharp/CLR-reflection"/>
+    <id>https://chengshen.me/csharp/CLR-reflection</id>
+    <published>2023-02-18T03:27:59.000Z</published>
+    <updated>2023-02-18T03:34:34.599Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对象的属性或字段，以及访问程序集中的元数据等。</p><h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><ul><li>对象关系映射(ORM)；</li><li>面向切面编程(AOP)；</li><li>代码生成</li><li>动态代理</li><li>插件系统：编辑器插件、浏览器插件</li></ul><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><h2 id="性能较差"><a href="#性能较差" class="headerlink" title="性能较差"></a>性能较差</h2><p>使用反射进行对象创建、属性赋值、方法调用等操作需要更多的时间和资源，因为这些操作需要在运行时动态计算和解析。相比于直接编写代码实现这些操作，使用反射会增加很多开销。</p><h2 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h2><p>反射可以绕过编译时的类型检查和访问权限检查，因此可能会带来安全性问题。如果恶意用户使用反射来访问不应该被访问的代码或数据，就可能会导致严重的安全漏洞。</p><h2 id="可读性较差"><a href="#可读性较差" class="headerlink" title="可读性较差"></a>可读性较差</h2><p>反射的代码通常比较难读懂，因为它涉及到很多动态计算和解析，可能会包含大量的复杂逻辑。相比于直接编写代码实现相同的功能，使用反射会增加代码的复杂度，降低代码的可读性。</p><h2 id="维护成本较高"><a href="#维护成本较高" class="headerlink" title="维护成本较高"></a>维护成本较高</h2><p>由于反射的代码比较难读懂和理解，因此维护成本也相对较高。如果使用反射编写的代码出现了问题，需要花费更多的时间和精力进行调试和修复。</p><h1 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h1><p>Activator.CreateInstance();<br>Activator.CreateInstanceFrom();<br>AppDomain.CreateDomain().CreateInstance();</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;p&gt;在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对</summary>
+      
+    
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/categories/CLR/"/>
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/tags/CLR/"/>
+    
+    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
+    
+    <category term="Reflection" scheme="https://chengshen.me/tags/Reflection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CLR AppDomain</title>
+    <link href="https://chengshen.me/csharp/CLR-app-domain"/>
+    <id>https://chengshen.me/csharp/CLR-app-domain</id>
+    <published>2023-02-18T03:25:29.000Z</published>
+    <updated>2023-02-18T03:26:35.576Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h1><p>代表一个应用程序的独立执行环境，在一个进程内可以存在多个 AppDomain。<br>这就允许不同的应用程序或组件运行在同一个进程中，但是它们相互隔离，不共享状态。<br>隔离不同的应用程序和组件，以保证程序的安全和稳定性，比如第三方不受信任的代码。</p><h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>两个 AppDomain 中对象无法直接相互访问；<br>AppDomain 可以卸载，程序集不行；<br>AppDomain 可以单独保护；<br>AppDomain 可以单独配置；</p><h1 id="跨-AppDomain"><a href="#跨-AppDomain" class="headerlink" title="跨 AppDomain"></a>跨 AppDomain</h1><p>按引用封送（Marshal-by-Reference）和按值封送（Marshal-by-Value）。</p><h1 id="Custom-Marshaling"><a href="#Custom-Marshaling" class="headerlink" title="Custom Marshaling"></a>Custom Marshaling</h1><p>封送是 Marsal 类提供的一组方法：</p><ul><li>分配非托管内存；</li><li>托管内存数据复制到非托管内存；</li><li>执行非托管函数；</li></ul><p>用于与非托管代码交互、调用从动态链接库（DLL）导出的函数或实现数据类型的自定义封送处理。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;含义&quot;&gt;&lt;a href=&quot;#含义&quot; class=&quot;headerlink&quot; title=&quot;含义&quot;&gt;&lt;/a&gt;含义&lt;/h1&gt;&lt;p&gt;代表一个应用程序的独立执行环境，在一个进程内可以存在多个 AppDomain。&lt;br&gt;这就允许不同的应用程序或组件运行在同一个进程中，但是它</summary>
+      
+    
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/categories/CLR/"/>
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/tags/CLR/"/>
+    
+    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CLR 数据类型</title>
+    <link href="https://chengshen.me/csharp/CLR-data-types"/>
+    <id>https://chengshen.me/csharp/CLR-data-types</id>
+    <published>2023-02-18T02:52:08.000Z</published>
+    <updated>2023-02-18T03:24:02.549Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="C-基元类型"><a href="#C-基元类型" class="headerlink" title="C# 基元类型"></a>C# 基元类型</h1><p>指的是<code>不使用类</code>而直接定义的内置数据类型，由 C# 语言规范定义，属于语言层面，具有特定的语义和行为。</p><p>整数类型：sbyte、byte、short、ushort、int、uint、long 和 ulong<br>浮点类型：float 和 double<br>十进制类型：decimal<br>布尔类型：bool<br>字符类型：char<br>指针类型：指向其他类型的指针类型<br>空类型：void</p><h1 id="C-复杂类型"><a href="#C-复杂类型" class="headerlink" title="C# 复杂类型"></a>C# 复杂类型</h1><p>结构体、枚举和类，是由基元类型组成的。</p><h1 id="CLR-内置类型"><a href="#CLR-内置类型" class="headerlink" title="CLR 内置类型"></a>CLR 内置类型</h1><p>内置类型就是 .NET Framework System 命名空间中写好的类型。</p><h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>bool、byte、char、decimal、double、enum、float、int、long、sbyte、short、struct、uint、ulong、ushort。</p><h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p>object、string、dynamic。</p><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>值类型是直接存储在<code>栈</code>中的，引用类型则是存储在<code>堆</code>中，而栈中存储的仅是指向堆中对象的引用。<br>值类型的内存管理由 CLR 自动处理，不需要手动释放，而引用类型则需要手动释放。</p><h2 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h2><p>类、结构体、接口、委托。<br>自定义类型也称为“用户定义类型”或 “托管类型”。</p><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：对比 object 和 dynamic<br>dynamic：派生自 object，在运行时动态解释，具有更多的<code>灵活性</code>和<code>动态性</code>，在运行时，编译器会根据实际类型执行<code>动态绑定</code>操作。<br>object：是静态类型。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;C-基元类型&quot;&gt;&lt;a href=&quot;#C-基元类型&quot; class=&quot;headerlink&quot; title=&quot;C# 基元类型&quot;&gt;&lt;/a&gt;C# 基元类型&lt;/h1&gt;&lt;p&gt;指的是&lt;code&gt;不使用类&lt;/code&gt;而直接定义的内置数据类型，由 C# 语言规范定义，属于语言层面，</summary>
+      
+    
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/categories/CLR/"/>
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/tags/CLR/"/>
+    
+    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
+    
+    <category term="Data Types" scheme="https://chengshen.me/tags/Data-Types/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CLR 字符串</title>
+    <link href="https://chengshen.me/csharp/CLR-string"/>
+    <id>https://chengshen.me/csharp/CLR-string</id>
+    <published>2023-02-18T02:46:05.000Z</published>
+    <updated>2023-02-18T02:51:05.271Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>字符串属于引用类型，具有不可变性。</p><h1 id="暂存池"><a href="#暂存池" class="headerlink" title="暂存池"></a>暂存池</h1><p>暂存池(intern) 是 CLR 维护的哈希表(字典)，键是字符串，值是对堆中该字符串对象的引用。</p><ol><li>暂存池由 CLR 维护，其中所有字符串的值都不同；</li><li>编译阶段字面量字符串会被添加到暂存池；</li><li>运行时期，用 string.Intern() 将动态创建的字符串添加到暂存池；</li></ol><h1 id="三种方式"><a href="#三种方式" class="headerlink" title="三种方式"></a>三种方式</h1><ol><li>用字面量；</li><li>用 string.Intern()；</li><li>用字面量 + 字面量拼接；</li></ol><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a，b，c 指向的是同一个堆内存地址</span></span><br><span class="line"><span class="built_in">string</span> a = <span class="string">&quot;this is string&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> b = <span class="built_in">string</span>.Intern(<span class="keyword">new</span> StingBuilder(<span class="string">&quot;this is string&quot;</span>));</span><br><span class="line"><span class="built_in">string</span> c = <span class="string">&quot;this&quot;</span> + <span class="string">&quot; is &quot;</span> + <span class="string">&quot;string&quot;</span>;</span><br></pre></td></tr></table></figure><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// str1 和 str2 字符串地址不同</span></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> str2 = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;abc&quot;</span>);</span><br></pre></td></tr></table></figure><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// str1 和 str2 字符串地址不同</span></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> str2 = <span class="keyword">new</span> StringBuilder(<span class="string">&quot;abc&quot;</span>).ToString();</span><br></pre></td></tr></table></figure><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// str1 和 str2 指向的是同一个堆内存地址</span></span><br><span class="line"><span class="keyword">var</span> charArr = <span class="keyword">new</span> <span class="built_in">char</span>[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> str1 = charArr.ToString();</span><br><span class="line"><span class="keyword">var</span> str2 = charArr.ToString();</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;特点&quot;&gt;&lt;a href=&quot;#特点&quot; class=&quot;headerlink&quot; title=&quot;特点&quot;&gt;&lt;/a&gt;特点&lt;/h1&gt;&lt;p&gt;字符串属于引用类型，具有不可变性。&lt;/p&gt;
+&lt;h1 id=&quot;暂存池&quot;&gt;&lt;a href=&quot;#暂存池&quot; class=&quot;headerlink&quot; t</summary>
+      
+    
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/categories/CLR/"/>
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/tags/CLR/"/>
+    
+    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CLR 终结器</title>
+    <link href="https://chengshen.me/csharp/CLR-finalize"/>
+    <id>https://chengshen.me/csharp/CLR-finalize</id>
+    <published>2023-02-18T02:42:52.000Z</published>
+    <updated>2023-02-18T02:45:19.370Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>终结器(Finalize)，就是<code>析构函数</code>，由波浪线(<code>~</code>)和类名组成，不能被访问修饰符修饰。</p><ol><li>new 一个实例对象后，如果该类定义了 Finalize 方法，实例构造函数被调用前，会将本对象实例的指针放到终结器队列中，终结器队列是由垃圾回收器控制的数据结构。</li><li>需要进行垃圾回收时，终结器列表中的不可达对象会被移动到 freachable 队列，对于没 Finalize 方法的对象会先被垃圾回收器处理掉。</li><li>会有个专门的线程去调用 freachable 队列中对象的 Finalize 方法，freachable 队列为空，该线程就会休眠，一旦队列有记录项时，线程就会被唤醒，将每一项从队列中移除并调用 Finalize 方法。</li><li>freachable 队列就像是一个根集合，让对象变得可达，在下一次 GC 时，freachable 队列不再引用该对象，对象内存会被回收，经历两次垃圾回收才释放它们占用的内存。</li><li>实际情况中，由于对象可能会进入老一代中，垃圾回收次数就不止是两次。</li></ol><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ol><li>不要在 Finalize 方法中访问线程的本地存储。</li><li>在只有一个终结器线程情况下，可能多个 CPU 分配可终结对象，但只有一个线程执行 Finalize 方法，可能导致线程调用跟不上分配的速度，导致性能和伸缩性问题。</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h1&gt;&lt;p&gt;终结器(Finalize)，就是&lt;code&gt;析构函数&lt;/code&gt;，由波浪线(&lt;code&gt;~&lt;/code&gt;)和类名组成，不能被访问修饰符修饰</summary>
+      
+    
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/categories/CLR/"/>
+    
+    
+    <category term="CLR" scheme="https://chengshen.me/tags/CLR/"/>
+    
+    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
+    
+    <category term="Finalize" scheme="https://chengshen.me/tags/Finalize/"/>
+    
+  </entry>
   
   <entry>
     <title>MySQL 慢查询排查</title>
@@ -410,178 +573,6 @@
     <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
     
     <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EntityFramework 实体状态</title>
-    <link href="https://chengshen.me/csharp/EntityFramework-entity-state"/>
-    <id>https://chengshen.me/csharp/EntityFramework-entity-state</id>
-    <published>2023-02-16T07:47:30.000Z</published>
-    <updated>2023-02-16T11:26:27.663Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="EntityState"><a href="#EntityState" class="headerlink" title="EntityState"></a>EntityState</h1><ol><li>Added，在上下文中，而且对象是需要添加的状态</li><li>Deleted，在上下文中，而且对象是需要删除的状态</li><li>Modified，在上下文中，而且对象是需要修改的状态</li><li>UnChanged，在上下文中，对象没有任何状态</li><li>Detached，没有在上下文中，和 ef 上下文没有关联的状态</li></ol><p>new 的新对象属于 Detached 状态；<br>查询出来的对象属于 UnChanged 状态；<br>new 的新对象调用 Attach 方法后对象属于 Unchanged 状态；<br>调用 Add 方法后对象属于 Added 状态；<br>Remove 方法将状态修改为 Deleted；</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;EntityState&quot;&gt;&lt;a href=&quot;#EntityState&quot; class=&quot;headerlink&quot; title=&quot;EntityState&quot;&gt;&lt;/a&gt;EntityState&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;Added，在上下文中，而且对象是需要添加的状态&lt;/li</summary>
-      
-    
-    
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/categories/EntityFramework/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NETCore .NET中的设计模式</title>
-    <link href="https://chengshen.me/csharp/NETCore-design-patten-in-NET"/>
-    <id>https://chengshen.me/csharp/NETCore-design-patten-in-NET</id>
-    <published>2023-02-16T07:31:11.000Z</published>
-    <updated>2023-02-16T11:26:27.664Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><p><code>中间件</code>的设计就是责任链模式的应用和变形。每个中间件根据需要处理请求，并且可以根据请求信息自己决定是否传递给下一个中间件。</p><h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>依赖注入的本质就是将对象的创建交给 <code>IOC 容器</code> 来处理，所以其实 IOC 容器本质就是一个工厂，从 IOC 中获取服务实例的过程就是工厂创建对象的过程，只是会根据服务的生命周期来决定是创建新对象还是返回已有对象。</p><h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><ul><li>Cache</li><li>DbContext</li><li>HttpClient</li><li>LoggerFactory</li><li>Configuration</li></ul><h1 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h1><p><code>字符串池</code>(string intern)</p><h1 id="观察者模式-x2F-发布订阅模式"><a href="#观察者模式-x2F-发布订阅模式" class="headerlink" title="观察者模式&#x2F;发布订阅模式"></a>观察者模式&#x2F;发布订阅模式</h1><p>使用<code>事件</code>(event)进行解耦，外部代码通过订阅事件来解耦，实现对内部状态的观察。</p><h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><p>ServiceProviderFactory, 使得 .NET Core 可以更方便的集成第三方的依赖注入框架，这里使用了适配器模式。</p><h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><h2 id="观察者模式-amp-发布订阅模式"><a href="#观察者模式-amp-发布订阅模式" class="headerlink" title="观察者模式 &amp; 发布订阅模式"></a>观察者模式 &amp; 发布订阅模式</h2><p>虽然这两种模式在很多情况下非常相似，但是它们还是有一些区别。<br>观察者模式通常用于更加简单的情况，而发布-订阅模式则更加通用，并且可以通过中间件来实现进程间<code>通信</code>。<br>在发布-订阅模式中，发布者和订阅者之间可以有多个中间件，可以将其视为事件的处理<code>管道</code>。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;责任链模式&quot;&gt;&lt;a href=&quot;#责任链模式&quot; class=&quot;headerlink&quot; title=&quot;责任链模式&quot;&gt;&lt;/a&gt;责任链模式&lt;/h1&gt;&lt;p&gt;&lt;code&gt;中间件&lt;/code&gt;的设计就是责任链模式的应用和变形。每个中间件根据需要处理请求，并且可以根据请求信息自</summary>
-      
-    
-    
-    
-    <category term="NETCore" scheme="https://chengshen.me/categories/NETCore/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="NETCore" scheme="https://chengshen.me/tags/NETCore/"/>
-    
-    <category term="Design Patten" scheme="https://chengshen.me/tags/Design-Patten/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NETCore 身份验证和授权</title>
-    <link href="https://chengshen.me/csharp/NETCore-oauth-and-oidc"/>
-    <id>https://chengshen.me/csharp/NETCore-oauth-and-oidc</id>
-    <published>2023-02-16T07:26:45.000Z</published>
-    <updated>2023-02-16T11:26:27.665Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>OAuth 是授权协议（Authorization），不支持身份认证。<br>OpenID Connect（OIDC）是基于 OAuth 的简单身份认证协议。</p><h1 id="OAuth-2-0-授权方式"><a href="#OAuth-2-0-授权方式" class="headerlink" title="OAuth 2.0 授权方式"></a>OAuth 2.0 授权方式</h1><ol><li>授权码</li><li>隐式</li><li>密码</li><li>客户端凭证</li></ol><h1 id="授权码"><a href="#授权码" class="headerlink" title="授权码"></a>授权码</h1><p>功能最完整、流程最严密，适合通用前后端服务，由客户端的后台服务向授权服务请求 token。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">用户正在访问网站 A ，A 支持用 QQ 登录。</span><br><span class="line">A 网站跳转 QQ 授权页（https://qq.com/oauth/authorize?response_type=code&amp;client_id=CLIENT_ID&amp;redirect_uri=http://a.com/callback&amp;scope=read）。</span><br><span class="line">QQ 提供登录页，用户用 QQ 登录，然后 QQ 跳转 A 网站（http://a.com/callback），并携带授权码（code）。</span><br><span class="line">A 网站使用授权码，向 QQ 请求 Token（https://qq.com/oauth/token?client_id=CLIENT_ID&amp;client_secret=CLIENT_SECRET&amp;grant_type=authorization_code&amp;code=AUTHORIZATION_CODE&amp;redirect_uri=http://a.com/callback）。</span><br><span class="line">QQ 收到请求，跳转 A 网站（http://a.com/callback），并携带 Token。</span><br></pre></td></tr></table></figure><h1 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h1><p>用户必须高度信任该网站。用户向客户端提供账号密码，客户端向授权服务请求 token。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">用户在 A 网站直接用 B 网站的账号密码进行登录。</span><br><span class="line">A 网站带上用户提供的 B 网站的账号密码向 B 网站发起登录请求（https://oauth.b.com/token?grant_type=password&amp;username=USERNAME&amp;password=PASSWORD&amp;client_id=CLIENT_ID）。</span><br><span class="line">在 B 网站验证账号密码成功后直接返回 Token，相当于直接响应。</span><br></pre></td></tr></table></figure><h1 id="凭证式"><a href="#凭证式" class="headerlink" title="凭证式"></a>凭证式</h1><p>客户端以自己的名义（不是以用户的名义），用 clientid 和 clientsecret 向授权服务请求 token。这会涉及客户端身份验证（clientid）。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A 服务使用 clientid 和 clientsecret 向授权服务申请 Token（https://oauth.b.com/token?grant_type=client_credentials&amp;client_id=CLIENT_ID&amp;client_secret=CLIENT_SECRET）。</span><br><span class="line">授权服务验证通过以后，直接返回 Token。</span><br></pre></td></tr></table></figure><h1 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h1><p>无后端的服务，如 swagger 服务。客户端用 clientid 直接向授权服务器请求 token，不涉及客户端身份验证。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swagger 访问授权服务（https://id4.com/oauth/authorize?response_type=token&amp;client_id=CLIENT_ID&amp;redirect_uri=CALLBACK_URL&amp;scope=read）。</span><br><span class="line">授权服务访问 CALLBACK_URL 并携带 token（CALLBACK_URL#TOKEN）。</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h1&gt;&lt;p&gt;OAuth 是授权协议（Authorization），不支持身份认证。&lt;br&gt;OpenID Connect（OIDC）是基于 OAuth 的</summary>
-      
-    
-    
-    
-    <category term="NETCore" scheme="https://chengshen.me/categories/NETCore/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="NETCore" scheme="https://chengshen.me/tags/NETCore/"/>
-    
-    <category term="OAuth" scheme="https://chengshen.me/tags/OAuth/"/>
-    
-    <category term="OIDC" scheme="https://chengshen.me/tags/OIDC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NETCore IOC</title>
-    <link href="https://chengshen.me/csharp/NETCore-IOC"/>
-    <id>https://chengshen.me/csharp/NETCore-IOC</id>
-    <published>2023-02-16T07:24:52.000Z</published>
-    <updated>2023-02-16T11:26:27.664Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>Singleton：实例化一次，然后在整个应用程序中重复使用；<br>Scoped：单个请求中会实例化一次实例，请求中可以重复使用；<br>Transient：每次使用时都会创建新实例；</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>缓存服务、Option 等配置服务注册成 Singleton；<br>一般服务（Service）注册成 Scoped；</p><h1 id="常见-IOC-容器"><a href="#常见-IOC-容器" class="headerlink" title="常见 IOC 容器"></a>常见 IOC 容器</h1><p>ServiceCollection、Autofac、Unity</p><h1 id="批量注册服务"><a href="#批量注册服务" class="headerlink" title="批量注册服务"></a>批量注册服务</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 根据前缀后缀注册服务</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;services&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;assembly&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;postfix&quot;&gt;</span>后缀<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;prefix&quot;&gt;</span>前缀<span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IServiceCollection <span class="title">AddBusinessServices</span>(<span class="params"><span class="keyword">this</span> IServiceCollection services, Assembly assembly, <span class="built_in">string</span> postfix, <span class="built_in">string</span> prefix = <span class="string">&quot;&quot;</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> types = assembly?.GetTypes().Where(type =&gt; type.IsClass &amp;&amp; !type.IsAbstract).ToList();</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrWhiteSpace(postfix))</span><br><span class="line">    &#123;</span><br><span class="line">        types = types?.Where(type =&gt; type.Name.EndsWith(postfix, StringComparison.OrdinalIgnoreCase)).ToList();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrWhiteSpace(prefix))</span><br><span class="line">    &#123;</span><br><span class="line">        types = types?.Where(type =&gt; type.Name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)).ToList();</span><br><span class="line">    &#125;</span><br><span class="line">    types?.ForEach(type =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> it <span class="keyword">in</span> type.GetInterfaces())</span><br><span class="line">        &#123;</span><br><span class="line">            services.AddScoped(it, type);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> services;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol><li>Singleton 中如何访问 Scoped？<br>通过 IServiceProvider.GetRequireService()。</li><li>GetService 和 GetRequiredService 区别？<br>a. GetService 如果服务未注册，则返回 null；<br>b. GetRequiredService 如果服务未注册，则抛出一个 Exception 异常；</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;生命周期&quot;&gt;&lt;a href=&quot;#生命周期&quot; class=&quot;headerlink&quot; title=&quot;生命周期&quot;&gt;&lt;/a&gt;生命周期&lt;/h1&gt;&lt;p&gt;Singleton：实例化一次，然后在整个应用程序中重复使用；&lt;br&gt;Scoped：单个请求中会实例化一次实例，请求中可以重</summary>
-      
-    
-    
-    
-    <category term="NETCore" scheme="https://chengshen.me/categories/NETCore/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="NETCore" scheme="https://chengshen.me/tags/NETCore/"/>
-    
-    <category term="IOC" scheme="https://chengshen.me/tags/IOC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NETCore 请求管道</title>
-    <link href="https://chengshen.me/csharp/NETCore-request-pipeline"/>
-    <id>https://chengshen.me/csharp/NETCore-request-pipeline</id>
-    <published>2023-02-16T07:12:47.000Z</published>
-    <updated>2023-02-16T11:26:27.665Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><h2 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h2><p>app.Use：use 中间件可以由 next。<br>app.Run：不能调用 next，用于断路或者管道末尾。<br>app.Map：map request，可用于匹配条件走对应的逻辑，搭配 Use。</p><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="app-Use"><a href="#app-Use" class="headerlink" title="app.Use"></a>app.Use</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.Use(<span class="keyword">async</span> (context, next) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">await</span> context.Response.WriteAsync(<span class="string">&quot;hello world&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> next.Invoke();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h3 id="app-Run"><a href="#app-Run" class="headerlink" title="app.Run"></a>app.Run</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.Run(<span class="keyword">async</span> context =&gt;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">await</span> context.Response.WriteAsync(<span class="string">&quot;hello world3&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h3 id="app-Map"><a href="#app-Map" class="headerlink" title="app.Map"></a>app.Map</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.Map(<span class="keyword">new</span> PathString(<span class="string">&quot;/test&quot;</span>), application =&gt;</span><br><span class="line">&#123;</span><br><span class="line">  application.Use(<span class="keyword">async</span> (context, next) =&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">await</span> context.Response.WriteAsync(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h2 id="常见中间件"><a href="#常见中间件" class="headerlink" title="常见中间件"></a>常见中间件</h2><p>UsingRouting、UsingEndpoint、UseAuthentication、UseAuthorization。</p><h3 id="UseRouting"><a href="#UseRouting" class="headerlink" title="UseRouting"></a>UseRouting</h3><p>注册路由，根据请求匹配路由；UseEndpoints 执行路由委托；<br>在 UseRouting 和 UseEndpoint 管道之间注册其自定义中间件，以实现业务逻辑；UseAuthorization 应该注册在 UseRouting 之后，UseEndpoint 之前。实现对 UseRouting 匹配到的路由进行拦截，做授权验证操作等，验证通过则执行下一个中间件。</p><h3 id="UseEndpoints"><a href="#UseEndpoints" class="headerlink" title="UseEndpoints"></a>UseEndpoints</h3><p>对于传统路由（控制器和视图）需要用 endpoints.MapControllerRoute，restful 属性路由（用属性修饰控制器和方法）需要用 endpoints.MapController。</p><h3 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h3><p>认证，表明用户身份的信息，你是谁；Authorization 授权，表明你有系统什么权限，管理员权限或普通用户权限等。例如：你要登机，你需要出示你的身份证和机票，身份证是为了证明你张三确实是你张三，这就是 authentication；而机票是为了证明你张三确实买了票可以上飞机，这就是 authorization。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IWebHostEnvironment env</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 路由匹配，用来匹配Controller中Action</span></span><br><span class="line">    app.UseRouting();</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// 其他处理，如鉴权、授权等</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对UseRouting匹配到的路由进行委托方法的执行</span></span><br><span class="line">    app.UseEndpoints(endpoints =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 配置默认首页是HomeController下的Index方法</span></span><br><span class="line">        endpoints.MapControllerRoute(name: <span class="string">&quot;default&quot;</span>, pattern: <span class="string">&quot;&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;&quot;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h1><p>过滤器(Filters)只能应用到 Action 或 Controller 方法上。</p><h2 id="常用过滤器"><a href="#常用过滤器" class="headerlink" title="常用过滤器"></a>常用过滤器</h2><ul><li>Authorization filters</li><li>Resource filters</li><li>Action filters</li><li>Exception filters</li><li>Result filters</li></ul><p><img src="/images/filter-pipeline-2.png" alt="过滤器示意图"></p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><ul><li>[TypeFilter(typeof(xxxxxx))]</li><li>[ServiceFilter(typeof(xxxxxx))]</li></ul><p>TypeFilter 不需要注册到服务容器就能直接使用；<br>ServiceFilter 需要注册到服务容器中才能使用，如：service.AddTransient<xxxFilterAttrbute>();</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;中间件&quot;&gt;&lt;a href=&quot;#中间件&quot; class=&quot;headerlink&quot; title=&quot;中间件&quot;&gt;&lt;/a&gt;中间件&lt;/h1&gt;&lt;h2 id=&quot;形式&quot;&gt;&lt;a href=&quot;#形式&quot; class=&quot;headerlink&quot; title=&quot;形式&quot;&gt;&lt;/a&gt;形式&lt;/h2&gt;&lt;p</summary>
-      
-    
-    
-    
-    <category term="NETCore" scheme="https://chengshen.me/categories/NETCore/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="NETCore" scheme="https://chengshen.me/tags/NETCore/"/>
-    
-    <category term="Pipeline" scheme="https://chengshen.me/tags/Pipeline/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>NETCore 程序启动流程</title>
-    <link href="https://chengshen.me/csharp/NETCore-app-start-flow"/>
-    <id>https://chengshen.me/csharp/NETCore-app-start-flow</id>
-    <published>2023-02-16T07:07:14.000Z</published>
-    <updated>2023-02-16T11:26:27.664Z</updated>
-    
-    <content type="html"><![CDATA[<p>Program.main</p><ol><li>创建主机(Host.CreateDefaultBuilder(args))；</li><li>配置主机(ConfigureWebHostDefaults())：<ul><li>使用 kestrel 主机</li><li>读取配置文件</li><li>配置 log 组件</li><li>注册默认 IOC 容器</li><li>使用 Startup</li></ul></li><li>Startup.ConfigureServices 对程序中涉及的相关服务进行注册；</li><li>Startup.Configure 配置请求管道。</li></ol><p>启动执行顺序</p><ol><li>ConfigureWebHostDefaults 注册组件，比如 Configuration 组件、IOC 容器组件等</li><li>ConfigureHostConfiguration 设置生成器自身的配置，比如配置监听的端口、URL 地址</li><li>ConfigureAppConfiguration 为应用程序设置其他配置，比如设置自定义配置文件</li><li>ConfigureServices、ConfigureLogging、Startup.ConfigureServices 服务注册</li><li>Startup.Configure 配置请求中间件</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Program.main&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;创建主机(Host.CreateDefaultBuilder(args))；&lt;/li&gt;
-&lt;li&gt;配置主机(ConfigureWebHostDefaults())：&lt;ul&gt;
-&lt;li&gt;使用 kestrel 主机&lt;/li&gt;
-&lt;l</summary>
-      
-    
-    
-    
-    <category term="NETCore" scheme="https://chengshen.me/categories/NETCore/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="NETCore" scheme="https://chengshen.me/tags/NETCore/"/>
     
   </entry>
   

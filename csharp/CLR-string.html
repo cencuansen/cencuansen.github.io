@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        NETCore 请求流程
+        CLR 字符串
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;14:55:17 -->
+            <!-- &nbsp;&nbsp;10:46:05 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/NETCore/">NETCore</a>
+          <a href="/categories/CLR/">CLR</a>
           
         </span>
         
@@ -243,9 +243,9 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CSharp/"># CSharp</a>
+            <a href="/tags/CLR/"># CLR</a>
             
-            <a href="/tags/NETCore/"># NETCore</a>
+            <a href="/tags/CSharp/"># CSharp</a>
             
             
           </span>
@@ -259,9 +259,25 @@
     </header>
 
     <div class="post-content">
-      <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>反向代理 -&gt; kestrel -&gt; middleware 管道 -&gt; 业务处理 -&gt; response 返回数据。</p>
-<p><img src="/images/netcore-request-flow.png" alt="&quot;请求流程&quot;"></p>
-<p>补充：<br>程序启动的时候会把所有的 Controller 中的 Action 映射存储到 routeOptions 集合中，Action 映射成 Endpoint 端点的 RequestDelegate 委托属性，最后通过 UseEndPoints 添加 EndpointMiddleware 中间件进行执行，同时这个中间件中的 Endpoint 路由已经是通过 Routing 匹配后的路由。</p>
+      <h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>字符串属于引用类型，具有不可变性。</p>
+<h1 id="暂存池"><a href="#暂存池" class="headerlink" title="暂存池"></a>暂存池</h1><p>暂存池(intern) 是 CLR 维护的哈希表(字典)，键是字符串，值是对堆中该字符串对象的引用。</p>
+<ol>
+<li>暂存池由 CLR 维护，其中所有字符串的值都不同；</li>
+<li>编译阶段字面量字符串会被添加到暂存池；</li>
+<li>运行时期，用 string.Intern() 将动态创建的字符串添加到暂存池；</li>
+</ol>
+<h1 id="三种方式"><a href="#三种方式" class="headerlink" title="三种方式"></a>三种方式</h1><ol>
+<li>用字面量；</li>
+<li>用 string.Intern()；</li>
+<li>用字面量 + 字面量拼接；</li>
+</ol>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a，b，c 指向的是同一个堆内存地址</span></span><br><span class="line"><span class="built_in">string</span> a = <span class="string">&quot;this is string&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> b = <span class="built_in">string</span>.Intern(<span class="keyword">new</span> StingBuilder(<span class="string">&quot;this is string&quot;</span>));</span><br><span class="line"><span class="built_in">string</span> c = <span class="string">&quot;this&quot;</span> + <span class="string">&quot; is &quot;</span> + <span class="string">&quot;string&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// str1 和 str2 字符串地址不同</span></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;abc&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> str2 = <span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">&quot;abc&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// str1 和 str2 字符串地址不同</span></span><br><span class="line"><span class="keyword">var</span> str1 = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> str2 = <span class="keyword">new</span> StringBuilder(<span class="string">&quot;abc&quot;</span>).ToString();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// str1 和 str2 指向的是同一个堆内存地址</span></span><br><span class="line"><span class="keyword">var</span> charArr = <span class="keyword">new</span> <span class="built_in">char</span>[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> str1 = charArr.ToString();</span><br><span class="line"><span class="keyword">var</span> str2 = charArr.ToString();</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -269,10 +285,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/NETCore-app-start-flow">NETCore 程序启动流程</a>
+      <a class="prev" rel="prev" href="/csharp/CLR-data-types">CLR 数据类型</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-GC">CLR GC</a>
+      <a class="next" rel="next" href="/csharp/CLR-finalize">CLR 终结器</a>
       
     </section>
   </article>
