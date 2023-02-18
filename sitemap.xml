@@ -2,7 +2,70 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://chengshen.me/csharp/NETCore-api-optimization</loc>
+    <loc>https://chengshen.me/database/Redis-bloon-filter</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/Redis-transaction</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/Redis-persistence</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/Redis-thread-model</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/Redis-cache</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/Redis-usecases</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/Redis-data-types</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/database/MySQL-summaries</loc>
     
     <lastmod>2023-02-18</lastmod>
     
@@ -12,6 +75,15 @@
   
   <url>
     <loc>https://chengshen.me/csharp/CLR-reflection</loc>
+    
+    <lastmod>2023-02-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/csharp/NETCore-api-optimization</loc>
     
     <lastmod>2023-02-18</lastmod>
     
@@ -254,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/csharp/EntityFramework-complex-query</loc>
+    <loc>https://chengshen.me/csharp/EntityFramework-ado-net-basic-concepts</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -263,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/csharp/EntityFramework-ado-net-basic-concepts</loc>
+    <loc>https://chengshen.me/csharp/EntityFramework-complex-query</loc>
     
     <lastmod>2023-02-16</lastmod>
     
@@ -299,7 +371,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/web/javascript/JavaScript-lexical-scope-and-dynamic-scope</loc>
+    <loc>https://chengshen.me/web/javascript/JavaScript-inherit</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -308,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/web/javascript/JavaScript-inherit</loc>
+    <loc>https://chengshen.me/web/javascript/JavaScript-lexical-scope-and-dynamic-scope</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -389,7 +461,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/web/HTML-src-and-href</loc>
+    <loc>https://chengshen.me/web/HTML-block-formatting-context</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -398,7 +470,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/web/HTML-block-formatting-context</loc>
+    <loc>https://chengshen.me/web/HTML-src-and-href</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -416,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/css/CSS-select-children-between-2nd-and-last</loc>
+    <loc>https://chengshen.me/css/CSS-transform-transition-animation</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -425,7 +497,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/css/CSS-transform-transition-animation</loc>
+    <loc>https://chengshen.me/css/CSS-select-children-between-2nd-and-last</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -443,15 +515,6 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/csharp/CSharp-dotnet-and-csharp</loc>
-    
-    <lastmod>2023-02-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://chengshen.me/csharp/CSharp-dispose</loc>
     
     <lastmod>2023-02-15</lastmod>
@@ -461,7 +524,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/csharp/CSharp-thread-synchronization</loc>
+    <loc>https://chengshen.me/csharp/CSharp-dotnet-and-csharp</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -479,6 +542,15 @@
   </url>
   
   <url>
+    <loc>https://chengshen.me/csharp/CSharp-thread-synchronization</loc>
+    
+    <lastmod>2023-02-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chengshen.me/csharp/CSharp-delegate-and-event</loc>
     
     <lastmod>2023-02-15</lastmod>
@@ -488,7 +560,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/csharp/CLR-TOP-and-SBI</loc>
+    <loc>https://chengshen.me/csharp/CLR-GC</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -497,7 +569,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/csharp/CLR-GC</loc>
+    <loc>https://chengshen.me/csharp/CLR-TOP-and-SBI</loc>
     
     <lastmod>2023-02-15</lastmod>
     
@@ -619,14 +691,14 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Finalize/</loc>
+    <loc>https://chengshen.me/tags/Data-Types/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Data-Types/</loc>
+    <loc>https://chengshen.me/tags/Finalize/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -682,6 +754,13 @@
   </url>
   
   <url>
+    <loc>https://chengshen.me/tags/Dispose/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://chengshen.me/tags/NET/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -696,7 +775,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Dispose/</loc>
+    <loc>https://chengshen.me/tags/LINQ/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -717,13 +796,6 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/LINQ/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://chengshen.me/tags/ADO-NET/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -738,14 +810,14 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/SQL/</loc>
+    <loc>https://chengshen.me/tags/Interceptor/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Interceptor/</loc>
+    <loc>https://chengshen.me/tags/SQL/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -766,13 +838,6 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Design-Patten/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://chengshen.me/tags/OAuth/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -781,6 +846,13 @@
   
   <url>
     <loc>https://chengshen.me/tags/OIDC/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Design-Patten/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -808,13 +880,6 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Selector/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://chengshen.me/tags/transform/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -836,49 +901,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Web/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://chengshen.me/tags/Dom/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://chengshen.me/tags/Dom-Parsing/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://chengshen.me/tags/Dom-Rendering/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://chengshen.me/tags/HTML/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://chengshen.me/tags/BFC/</loc>
-    <lastmod>2023-02-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://chengshen.me/tags/Request/</loc>
+    <loc>https://chengshen.me/tags/Selector/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -955,6 +978,76 @@
   </url>
   
   <url>
+    <loc>https://chengshen.me/tags/Redis/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Bloon-Filter/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Cache/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/HTML/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/BFC/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Web/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Dom/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Dom-Parsing/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Dom-Rendering/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/tags/Request/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://chengshen.me/tags/JavaScript/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
@@ -983,14 +1076,14 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Deep-Clone/</loc>
+    <loc>https://chengshen.me/tags/Performance-Optimization/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Performance-Optimization/</loc>
+    <loc>https://chengshen.me/tags/Deep-Clone/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1004,14 +1097,14 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Module/</loc>
+    <loc>https://chengshen.me/tags/Inherit/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://chengshen.me/tags/Inherit/</loc>
+    <loc>https://chengshen.me/tags/Module/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1055,7 +1148,14 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/categories/Web/</loc>
+    <loc>https://chengshen.me/categories/MySQL/</loc>
+    <lastmod>2023-02-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://chengshen.me/categories/Redis/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1069,7 +1169,7 @@
   </url>
   
   <url>
-    <loc>https://chengshen.me/categories/MySQL/</loc>
+    <loc>https://chengshen.me/categories/Web/</loc>
     <lastmod>2023-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

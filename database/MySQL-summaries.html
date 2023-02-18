@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="SanHuo">
+
+
+
+<meta name="description" content="All About C# and JavaScript">
+
+
+<meta name="keywords" content="JavaScript,csharp,c#,.NET,.NET Core,MySQL">
+
+
+<title>
+  SanHuo&#39;s Blog
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codeOps.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codeOps.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SanHuo's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot`
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        MySQL 综合
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;14:48:40 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/MySQL/">MySQL</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/MySQL/"># MySQL</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="group-concat"><a href="#group-concat" class="headerlink" title="group_concat"></a>group_concat</h1><p>把 name 相同的 code 拼接在一起</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name,group_concat(code) <span class="keyword">from</span> `students` <span class="keyword">group</span> <span class="keyword">by</span> name;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>group_concat(code)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>xiaosan</td>
+<td>001,002</td>
+</tr>
+<tr>
+<td>sanhuo</td>
+<td>004,008</td>
+</tr>
+</tbody></table>
+<h1 id="char-length"><a href="#char-length" class="headerlink" title="char_length"></a>char_length</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> students <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;%san%&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">char_length</span>(name);</span><br></pre></td></tr></table></figure>
+
+<p>根据字符长度排序：</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sanhuo</td>
+</tr>
+<tr>
+<td>xiaosan</td>
+</tr>
+</tbody></table>
+<h1 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h1><p>返回关键词在目标字段中的位置。</p>
+<h1 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h1><p>替换字段中的内容。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> students <span class="keyword">set</span> name<span class="operator">=</span>REPLACE(name,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>)  <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="now"><a href="#now" class="headerlink" title="now"></a>now</h1><p>获取当前时间，时间包含毫秒使用 now(3)。</p>
+<h1 id="insert-into-…-select"><a href="#insert-into-…-select" class="headerlink" title="insert into … select"></a>insert into … select</h1><p>从一个表中选数据插入到另一个表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `students`(`id`, `code`, `name`) <span class="keyword">select</span> <span class="keyword">null</span>,code,name <span class="keyword">from</span> `student_infos` <span class="keyword">where</span> code <span class="keyword">in</span> (<span class="string">&#x27;004&#x27;</span>,<span class="string">&#x27;005&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="insert-into-…-ignore"><a href="#insert-into-…-ignore" class="headerlink" title="insert into … ignore"></a>insert into … ignore</h1><p>根据主键索引或唯有索引，插入或忽略数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> ignore <span class="keyword">INTO</span> `students`(`id`, `code`, `name`) <span class="keyword">VALUES</span> (<span class="number">123</span>, <span class="string">&#x27;108&#x27;</span>, <span class="string">&#x27;苏三&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="select-…-for-update"><a href="#select-…-for-update" class="headerlink" title="select … for update"></a>select … for update</h1><p>行锁、悲观锁。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">12345</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="comment">-- 该条数据的修改处理</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="on-duplicate-key-update"><a href="#on-duplicate-key-update" class="headerlink" title="on duplicate key update"></a>on duplicate key update</h1><p>如果主键或唯一索引不存在，则插入数据；<br>如果主键或唯一索引存在，则更新数据。<br>高并发的场景下使用 on duplicate key update 语法，可能会存在死锁的问题</p>
+<h1 id="show-create-table"><a href="#show-create-table" class="headerlink" title="show create table"></a>show create table</h1><p>显示表创建语句。</p>
+<h1 id="create-table-…-select"><a href="#create-table-…-select" class="headerlink" title="create table … select"></a>create table … select</h1><p>创建表，并从某个表中选数据插入到创建的表中。<br>应用场景：快速备份表。</p>
+<h1 id="explain"><a href="#explain" class="headerlink" title="explain"></a>explain</h1><p>可以使用 explain 命令，查看 mysql 的执行计划，它会显示索引的使用情况。</p>
+<h1 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h1><p>查看数据库进程列表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> processlist</span><br></pre></td></tr></table></figure>
+
+<p>等价于</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.processlist limit <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h1><p>导出备份数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="operator">-</span>u root <span class="operator">-</span>p123456 dbname <span class="operator">&gt;</span> backup.sql</span><br></pre></td></tr></table></figure>
+
+<h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/_0umF8IBEzf9IHW2-e_LTQ">https://mp.weixin.qq.com/s/_0umF8IBEzf9IHW2-e_LTQ</a></p>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" rel="prev" href="/database/Redis-data-types">Redis 数据类型</a>
+      
+      
+      <a class="next" rel="next" href="/csharp/NETCore-api-optimization">NETCore 接口优化</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+  <div class="copyright">
+    <span><a href="javascript:void(0)">SanHuo</a> & <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | <a href="/sitemap.xml">Sitemap</a></span>
+  </div>
+</footer>
+  </div>
+</body>
+
+</html>

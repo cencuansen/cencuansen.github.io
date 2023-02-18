@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        CLR 反射
+        Redis 布隆过滤器
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;11:27:59 -->
+            <!-- &nbsp;&nbsp;15:51:41 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/CLR/">CLR</a>
+          <a href="/categories/Redis/">Redis</a>
           
         </span>
         
@@ -243,11 +243,9 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CLR/"># CLR</a>
+            <a href="/tags/Redis/"># Redis</a>
             
-            <a href="/tags/CSharp/"># CSharp</a>
-            
-            <a href="/tags/Reflection/"># Reflection</a>
+            <a href="/tags/Bloon-Filter/"># Bloon Filter</a>
             
             
           </span>
@@ -261,19 +259,15 @@
     </header>
 
     <div class="post-content">
-      <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对象的属性或字段，以及访问程序集中的元数据等。</p>
-<h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><ul>
-<li>对象关系映射(ORM)</li>
-<li>面向切面编程(AOP)</li>
-<li>代码生成</li>
-<li>动态代理</li>
-<li>插件系统：编辑器插件、浏览器插件</li>
+      <h1 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h1><p>一个很长的二进制向量（位数组）和一系列随机映射函数。<br>优点：空间效率和查询时间都比一般的算法要好的多；<br>缺点：有一定的误识别率和删除困难。<br>Redis 中的布隆过滤器底层是一个大型<code>位数组</code>（二进制数组）和多个<code>无偏散列函数</code>。<br>位数组越长，空间占用较大，错误率越低；无偏 hash 函数越多，计算耗时较长，错误率越低；</p>
+<h1 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h1><p>通过 k 个无偏 hash 函数计算得到 k 个 hash 值，依次取模数组长度，得到数组索引，将计算得到的数组索引下标位置数据修改为 1</p>
+<h1 id="匹配数据"><a href="#匹配数据" class="headerlink" title="匹配数据"></a>匹配数据</h1><p>通过 k 个无偏 hash 函数计算得到 k 个 hash 值，依次取模数组长度，得到数组索引，判断索引处的值是否全部为 1，如果全部为 1 则<code>可能存在</code>，如果存在一个 0 则<code>必定不存在</code>，1%误判率。</p>
+<h1 id="为什么是“可能存在”"><a href="#为什么是“可能存在”" class="headerlink" title="为什么是“可能存在”"></a>为什么是“可能存在”</h1><p>其实原因很简单，那些被置为 1 的位置也可能是由于其他元素的操作而改变的。<br>比如，元素 1 和 元素 2，这两个元素同时将一个位置变为了 1。<br>在这种情况下，我们就不能判定“元素 1”一定存在，这是布隆过滤器存在误判的根本原因。</p>
+<p>布隆过滤器牺牲了判断的准确率、删除的便利性 ，才做到在时间和空间上的效率比较高，是因为：</p>
+<ul>
+<li>存在误判，可能要查到的元素并没有在容器中，但是 hash 之后得到的 k 个位置上值都是 1。如果 bloom filter 中存储的是黑名单，那么可以通过建立一个白名单来存储可能会误判的元素。</li>
+<li>删除数据。一个放入容器的元素映射到 bit 数组的 k 个位置上是 1，删除的时候不能简单的直接置为 0，可能会影响其他元素的判断。可以考虑 Counting Bloom Filter</li>
 </ul>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><h2 id="性能较差"><a href="#性能较差" class="headerlink" title="性能较差"></a>性能较差</h2><p>使用反射进行对象创建、属性赋值、方法调用等操作需要更多的时间和资源，因为这些操作需要在运行时动态计算和解析。相比于直接编写代码实现这些操作，使用反射会增加很多开销。</p>
-<h2 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h2><p>反射可以绕过编译时的类型检查和访问权限检查，因此可能会带来安全性问题。如果恶意用户使用反射来访问不应该被访问的代码或数据，就可能会导致严重的安全漏洞。</p>
-<h2 id="可读性较差"><a href="#可读性较差" class="headerlink" title="可读性较差"></a>可读性较差</h2><p>反射的代码通常比较难读懂，因为它涉及到很多动态计算和解析，可能会包含大量的复杂逻辑。相比于直接编写代码实现相同的功能，使用反射会增加代码的复杂度，降低代码的可读性。</p>
-<h2 id="维护成本较高"><a href="#维护成本较高" class="headerlink" title="维护成本较高"></a>维护成本较高</h2><p>由于反射的代码比较难读懂和理解，因此维护成本也相对较高。如果使用反射编写的代码出现了问题，需要花费更多的时间和精力进行调试和修复。</p>
-<h1 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h1><p>Activator.CreateInstance();<br>Activator.CreateInstanceFrom();<br>AppDomain.CreateDomain().CreateInstance();</p>
 
     </div>
 
@@ -281,10 +275,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/NETCore-api-optimization">NETCore 接口优化</a>
+      <a class="prev" href="javascript:void(0)">无</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-app-domain">CLR AppDomain</a>
+      <a class="next" rel="next" href="/database/Redis-transaction">Redis 事务</a>
       
     </section>
   </article>

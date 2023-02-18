@@ -6,7 +6,7 @@
   <link href="https://chengshen.me/atom.xml" rel="self"/>
   
   <link href="https://chengshen.me/"/>
-  <updated>2023-02-18T03:45:43.745Z</updated>
+  <updated>2023-02-18T07:56:43.407Z</updated>
   <id>https://chengshen.me/</id>
   
   <author>
@@ -15,6 +15,225 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis 布隆过滤器</title>
+    <link href="https://chengshen.me/database/Redis-bloon-filter"/>
+    <id>https://chengshen.me/database/Redis-bloon-filter</id>
+    <published>2023-02-18T07:51:41.000Z</published>
+    <updated>2023-02-18T07:56:43.407Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h1><p>一个很长的二进制向量（位数组）和一系列随机映射函数。<br>优点：空间效率和查询时间都比一般的算法要好的多；<br>缺点：有一定的误识别率和删除困难。<br>Redis 中的布隆过滤器底层是一个大型<code>位数组</code>（二进制数组）和多个<code>无偏散列函数</code>。<br>位数组越长，空间占用较大，错误率越低；无偏 hash 函数越多，计算耗时较长，错误率越低；</p><h1 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h1><p>通过 k 个无偏 hash 函数计算得到 k 个 hash 值，依次取模数组长度，得到数组索引，将计算得到的数组索引下标位置数据修改为 1</p><h1 id="匹配数据"><a href="#匹配数据" class="headerlink" title="匹配数据"></a>匹配数据</h1><p>通过 k 个无偏 hash 函数计算得到 k 个 hash 值，依次取模数组长度，得到数组索引，判断索引处的值是否全部为 1，如果全部为 1 则<code>可能存在</code>，如果存在一个 0 则<code>必定不存在</code>，1%误判率。</p><h1 id="为什么是“可能存在”"><a href="#为什么是“可能存在”" class="headerlink" title="为什么是“可能存在”"></a>为什么是“可能存在”</h1><p>其实原因很简单，那些被置为 1 的位置也可能是由于其他元素的操作而改变的。<br>比如，元素 1 和 元素 2，这两个元素同时将一个位置变为了 1。<br>在这种情况下，我们就不能判定“元素 1”一定存在，这是布隆过滤器存在误判的根本原因。</p><p>布隆过滤器牺牲了判断的准确率、删除的便利性 ，才做到在时间和空间上的效率比较高，是因为：</p><ul><li>存在误判，可能要查到的元素并没有在容器中，但是 hash 之后得到的 k 个位置上值都是 1。如果 bloom filter 中存储的是黑名单，那么可以通过建立一个白名单来存储可能会误判的元素。</li><li>删除数据。一个放入容器的元素映射到 bit 数组的 k 个位置上是 1，删除的时候不能简单的直接置为 0，可能会影响其他元素的判断。可以考虑 Counting Bloom Filter</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;布隆过滤器&quot;&gt;&lt;a href=&quot;#布隆过滤器&quot; class=&quot;headerlink&quot; title=&quot;布隆过滤器&quot;&gt;&lt;/a&gt;布隆过滤器&lt;/h1&gt;&lt;p&gt;一个很长的二进制向量（位数组）和一系列随机映射函数。&lt;br&gt;优点：空间效率和查询时间都比一般的算法要好的多；&lt;br&gt;</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+    <category term="Bloon Filter" scheme="https://chengshen.me/tags/Bloon-Filter/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 事务</title>
+    <link href="https://chengshen.me/database/Redis-transaction"/>
+    <id>https://chengshen.me/database/Redis-transaction</id>
+    <published>2023-02-18T07:49:47.000Z</published>
+    <updated>2023-02-18T07:50:36.714Z</updated>
+    
+    <content type="html"><![CDATA[<p>MULTI 开启一个事务， 然后将多个命令入队到事务中， 最后由 EXEC 命令触发事务。<br>单个 Redis 命令的执行是原子性的，但 Redis 没有在事务上增加任何维持原子性的机制，所以 Redis 事务的执行并不是原子性的，中间某条指令的失败不会导致前面已做指令的回滚，也不会造成后续的指令不做。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MULTI</span><br><span class="line">SET book-name <span class="string">&quot;Mastering C++ in 21 days</span></span><br><span class="line"><span class="string">SADD tag &quot;</span>C++<span class="string">&quot; &quot;</span>Programming<span class="string">&quot; &quot;</span>Mastering Series<span class="string">&quot;</span></span><br><span class="line"><span class="string">EXEC</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;MULTI 开启一个事务， 然后将多个命令入队到事务中， 最后由 EXEC 命令触发事务。&lt;br&gt;单个 Redis 命令的执行是原子性的，但 Redis 没有在事务上增加任何维持原子性的机制，所以 Redis 事务的执行并不是原子性的，中间某条指令的失败不会导致前面已做指令</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Transaction" scheme="https://chengshen.me/tags/Transaction/"/>
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 持久化</title>
+    <link href="https://chengshen.me/database/Redis-persistence"/>
+    <id>https://chengshen.me/database/Redis-persistence</id>
+    <published>2023-02-18T07:47:34.000Z</published>
+    <updated>2023-02-18T07:49:07.718Z</updated>
+    
+    <content type="html"><![CDATA[<p>redis 持久化有 RDB 和 AOF 两种，redis 持久化是为了后期出现故障能恢复数据到内存。<br>如果 redis 同时使用 RDB 和 AOF 持久化，redis 会优先使用 AOF 进行恢复数据。</p><h1 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h1><p>RDB（Redis DataBase，快照持久化），就是完整记录某时刻全部数据。</p><ul><li>save，阻塞主线程；</li><li>bgsave，子进程去做持久化；</li><li>自动持久化：save m n，m 秒内发生 n 次变化时，会触发 bgsave。</li><li>数据恢复：redis 重启会自动从 dump.rdb 中恢复数据。</li></ul><h1 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h1><p>AOF（Append Only File，文件追加持久化），向日志文件中追加写操作，会忽略读操作，redis 启动之初会读取该文件重新构建数据。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;redis 持久化有 RDB 和 AOF 两种，redis 持久化是为了后期出现故障能恢复数据到内存。&lt;br&gt;如果 redis 同时使用 RDB 和 AOF 持久化，redis 会优先使用 AOF 进行恢复数据。&lt;/p&gt;
+&lt;h1 id=&quot;RDB&quot;&gt;&lt;a href=&quot;#RDB</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 线程模型</title>
+    <link href="https://chengshen.me/database/Redis-thread-model"/>
+    <id>https://chengshen.me/database/Redis-thread-model</id>
+    <published>2023-02-18T07:44:51.000Z</published>
+    <updated>2023-02-18T07:46:23.972Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据<code>增删改查</code>用单线程处理，线程安全。<br>Redis 6.0 中耗时的 Socket 读取、请求解析、单独用一个线程来处理，即：网络 IO 是多线程的。</p><h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><p>Redis3.0 中的 BIO 线程：文件关闭、AOF 缓冲数据刷新到磁盘，以及清理对象。</p><h1 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h1><p>BGSAVE 用于快照持久化，会 fork 出一个子进程去处理。</p><h1 id="为什么单线程"><a href="#为什么单线程" class="headerlink" title="为什么单线程"></a>为什么单线程</h1><p>因为 Redis 是内存操作，CPU 不是 Redis 的瓶颈；<br>单线程避免频繁多线程上下文切换的性能问题；<br>Redis 采用非阻塞的 io 多路复用机制；</p><h1 id="IO-多路复用"><a href="#IO-多路复用" class="headerlink" title="IO 多路复用"></a>IO 多路复用</h1><p>单线程或单进程同时监测多个文件描述符是否可以执行 IO 操作的能力。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;数据&lt;code&gt;增删改查&lt;/code&gt;用单线程处理，线程安全。&lt;br&gt;Redis 6.0 中耗时的 Socket 读取、请求解析、单独用一个线程来处理，即：网络 IO 是多线程的。&lt;/p&gt;
+&lt;h1 id=&quot;多线程&quot;&gt;&lt;a href=&quot;#多线程&quot; class=&quot;headerl</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 缓存</title>
+    <link href="https://chengshen.me/database/Redis-cache"/>
+    <id>https://chengshen.me/database/Redis-cache</id>
+    <published>2023-02-18T07:38:04.000Z</published>
+    <updated>2023-02-18T07:43:27.377Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>缓存穿透，缓存击穿，缓存雪崩</p><ul><li>缓存穿透(多次)：频繁查询数据库中不存在的数据。利用此进行攻击，可能压垮数据库；</li><li>缓存击穿(一次)：缓存过期时大量并发请求；</li><li>缓存雪崩：缓存服务重启或大量缓存集中失效，给后端系统(如 DB)带来很大压力；</li></ul><h1 id="应对"><a href="#应对" class="headerlink" title="应对"></a>应对</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><ul><li>缓存空数据；</li><li>布隆过滤器，过滤不存在的数据请求；</li></ul><h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><ul><li>互斥锁(redis.setnx)，拿锁后查数据库，再缓存；</li><li>热门数据不过期；</li></ul><h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><ul><li>对数据设置不同的过期时间；</li><li>互斥锁；</li></ul><h1 id="过期策略-过期时"><a href="#过期策略-过期时" class="headerlink" title="过期策略(过期时)"></a>过期策略(过期时)</h1><ul><li>定期删除，每个 100ms 随机抽取一些设置了过期时间的 key，如果过期就删除。</li><li>惰性删除，用的时候检查是否过期，如果过期就删除。</li></ul><h1 id="淘汰机制-内存满时"><a href="#淘汰机制-内存满时" class="headerlink" title="淘汰机制(内存满时)"></a>淘汰机制(内存满时)</h1><ul><li>noeviction：不淘汰数据，默认。内存使用达到阀值后，引起申请内存的命令都会报错。</li><li>volatile-ttl：淘汰将要过期的数据。</li><li>volatile-lru：淘汰最近最少使用（过期数据）。</li><li>volatile-lfu：淘汰低使用频率（过期数据）</li><li>volatile-random：随机淘汰（过期数据）。</li><li>allkeys-lru：淘汰最近最少使用（全部数据）。</li><li>allkeys-random：随机淘汰（全部数据）。</li><li>allkey-lfu：淘汰低使用频率（全部数据）。</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h1&gt;&lt;p&gt;缓存穿透，缓存击穿，缓存雪崩&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;缓存穿透(多次)：频繁查询数据库中不存在的数据。利用此进行攻击，可能压垮数据库；&lt;/</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+    <category term="Cache" scheme="https://chengshen.me/tags/Cache/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 使用场景</title>
+    <link href="https://chengshen.me/database/Redis-usecases"/>
+    <id>https://chengshen.me/database/Redis-usecases</id>
+    <published>2023-02-18T07:34:46.000Z</published>
+    <updated>2023-02-18T07:37:28.310Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h1 id="分布式数据共享"><a href="#分布式数据共享" class="headerlink" title="分布式数据共享"></a>分布式数据共享</h1><p>分布式 Session</p><h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><p>借助 string 的 set。</p><p>set 有如下参数：<br>EX：设置键的过期时间（单位为秒）；<br>PX：设置键的过期时间（单位为毫秒）；<br>NX：只在键不存在时，才对键进行设置操作，set key value NX 和 SETNX key value 等价；<br>XX：只在键已经存在时，才对键进行设置操作；</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> lock_key lock_value NX EX 1</span><br></pre></td></tr></table></figure><p>结果：<br>如果返回 false，说明 key 的添加不成功，也就是当前有人在占用这把锁；<br>如果返回 true，则说明得了锁，便可以继续进行操作；<br>并且在操作后通过 del 命令释放掉锁，而且设置了过期时间，该锁也会在 1 秒后自动释放。</p><h1 id="全局-ID"><a href="#全局-ID" class="headerlink" title="全局 ID"></a>全局 ID</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrby userid <span class="number">1</span></span><br></pre></td></tr></table></figure><h1 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h1><p>int 类型，incr 方法。</p><h1 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h1><p>int 类型，incr 方法，以访问者的 ip 和其他信息作为 key，访问一次增加一次计数，超过次数则返回 false。</p><h1 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h1><p>Redis 中 list 的数据结构实现是双向链表，所以可以非常便捷的应用于消息队列，lpush 将消息放入 list，消费者便可以通过 rpop 取出该消息。</p><h1 id="抽奖"><a href="#抽奖" class="headerlink" title="抽奖"></a>抽奖</h1><p>利用 set 结构的无序性，通过 spop 随机获得值。</p><h1 id="排行榜"><a href="#排行榜" class="headerlink" title="排行榜"></a>排行榜</h1><p>利用 sorted set</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;缓存&quot;&gt;&lt;a href=&quot;#缓存&quot; class=&quot;headerlink&quot; title=&quot;缓存&quot;&gt;&lt;/a&gt;缓存&lt;/h1&gt;&lt;h1 id=&quot;分布式数据共享&quot;&gt;&lt;a href=&quot;#分布式数据共享&quot; class=&quot;headerlink&quot; title=&quot;分布式数据共享&quot;&gt;&lt;/</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 数据类型</title>
+    <link href="https://chengshen.me/database/Redis-data-types"/>
+    <id>https://chengshen.me/database/Redis-data-types</id>
+    <published>2023-02-18T07:32:02.000Z</published>
+    <updated>2023-02-18T07:33:39.418Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th>类型</th><th>类型</th></tr></thead><tbody><tr><td>String</td><td>字符串</td></tr><tr><td>Hash</td><td>散列</td></tr><tr><td>List</td><td>列表</td></tr><tr><td>Set</td><td>集合</td></tr><tr><td>Sorted Set</td><td>有序集合</td></tr><tr><td>Bitmap</td><td>布隆过滤器</td></tr><tr><td>GeoHash</td><td>存储地理位置信息，并对存储的信息进行操作</td></tr><tr><td>HyperLogLog</td><td>用来做基数统计的算法</td></tr><tr><td>Streams</td><td>内存版 Kafka，消息订阅发布</td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;th&gt;类型&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hash&lt;/td&gt;
+&lt;td&gt;散列&lt;/td&gt;
+&lt;/</summary>
+      
+    
+    
+    
+    <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
+    
+    
+    <category term="Data Types" scheme="https://chengshen.me/tags/Data-Types/"/>
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL 综合</title>
+    <link href="https://chengshen.me/database/MySQL-summaries"/>
+    <id>https://chengshen.me/database/MySQL-summaries</id>
+    <published>2023-02-18T06:48:40.000Z</published>
+    <updated>2023-02-18T07:28:16.798Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="group-concat"><a href="#group-concat" class="headerlink" title="group_concat"></a>group_concat</h1><p>把 name 相同的 code 拼接在一起</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name,group_concat(code) <span class="keyword">from</span> `students` <span class="keyword">group</span> <span class="keyword">by</span> name;</span><br></pre></td></tr></table></figure><table><thead><tr><th>name</th><th>group_concat(code)</th></tr></thead><tbody><tr><td>xiaosan</td><td>001,002</td></tr><tr><td>sanhuo</td><td>004,008</td></tr></tbody></table><h1 id="char-length"><a href="#char-length" class="headerlink" title="char_length"></a>char_length</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> students <span class="keyword">where</span> name <span class="keyword">like</span> <span class="string">&#x27;%san%&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="keyword">char_length</span>(name);</span><br></pre></td></tr></table></figure><p>根据字符长度排序：</p><table><thead><tr><th>name</th></tr></thead><tbody><tr><td>sanhuo</td></tr><tr><td>xiaosan</td></tr></tbody></table><h1 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h1><p>返回关键词在目标字段中的位置。</p><h1 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h1><p>替换字段中的内容。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> students <span class="keyword">set</span> name<span class="operator">=</span>REPLACE(name,<span class="string">&#x27;A&#x27;</span>,<span class="string">&#x27;B&#x27;</span>)  <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure><h1 id="now"><a href="#now" class="headerlink" title="now"></a>now</h1><p>获取当前时间，时间包含毫秒使用 now(3)。</p><h1 id="insert-into-…-select"><a href="#insert-into-…-select" class="headerlink" title="insert into … select"></a>insert into … select</h1><p>从一个表中选数据插入到另一个表。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `students`(`id`, `code`, `name`) <span class="keyword">select</span> <span class="keyword">null</span>,code,name <span class="keyword">from</span> `student_infos` <span class="keyword">where</span> code <span class="keyword">in</span> (<span class="string">&#x27;004&#x27;</span>,<span class="string">&#x27;005&#x27;</span>);</span><br></pre></td></tr></table></figure><h1 id="insert-into-…-ignore"><a href="#insert-into-…-ignore" class="headerlink" title="insert into … ignore"></a>insert into … ignore</h1><p>根据主键索引或唯有索引，插入或忽略数据。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> ignore <span class="keyword">INTO</span> `students`(`id`, `code`, `name`) <span class="keyword">VALUES</span> (<span class="number">123</span>, <span class="string">&#x27;108&#x27;</span>, <span class="string">&#x27;苏三&#x27;</span>);</span><br></pre></td></tr></table></figure><h1 id="select-…-for-update"><a href="#select-…-for-update" class="headerlink" title="select … for update"></a>select … for update</h1><p>行锁、悲观锁。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">START</span> TRANSACTION;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">12345</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="comment">-- 该条数据的修改处理</span></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure><h1 id="on-duplicate-key-update"><a href="#on-duplicate-key-update" class="headerlink" title="on duplicate key update"></a>on duplicate key update</h1><p>如果主键或唯一索引不存在，则插入数据；<br>如果主键或唯一索引存在，则更新数据。<br>高并发的场景下使用 on duplicate key update 语法，可能会存在死锁的问题</p><h1 id="show-create-table"><a href="#show-create-table" class="headerlink" title="show create table"></a>show create table</h1><p>显示表创建语句。</p><h1 id="create-table-…-select"><a href="#create-table-…-select" class="headerlink" title="create table … select"></a>create table … select</h1><p>创建表，并从某个表中选数据插入到创建的表中。<br>应用场景：快速备份表。</p><h1 id="explain"><a href="#explain" class="headerlink" title="explain"></a>explain</h1><p>可以使用 explain 命令，查看 mysql 的执行计划，它会显示索引的使用情况。</p><h1 id="show-processlist"><a href="#show-processlist" class="headerlink" title="show processlist"></a>show processlist</h1><p>查看数据库进程列表。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> processlist</span><br></pre></td></tr></table></figure><p>等价于</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> information_schema.processlist limit <span class="number">10</span>;</span><br></pre></td></tr></table></figure><h1 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h1><p>导出备份数据。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>h <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="operator">-</span>u root <span class="operator">-</span>p123456 dbname <span class="operator">&gt;</span> backup.sql</span><br></pre></td></tr></table></figure><h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p><a href="https://mp.weixin.qq.com/s/_0umF8IBEzf9IHW2-e_LTQ">https://mp.weixin.qq.com/s/_0umF8IBEzf9IHW2-e_LTQ</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;group-concat&quot;&gt;&lt;a href=&quot;#group-concat&quot; class=&quot;headerlink&quot; title=&quot;group_concat&quot;&gt;&lt;/a&gt;group_concat&lt;/h1&gt;&lt;p&gt;把 name 相同的 code 拼接在一起&lt;/p&gt;
+&lt;fig</summary>
+      
+    
+    
+    
+    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
+    
+    
+    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>NETCore 接口优化</title>
@@ -47,9 +266,9 @@
     <link href="https://chengshen.me/csharp/CLR-reflection"/>
     <id>https://chengshen.me/csharp/CLR-reflection</id>
     <published>2023-02-18T03:27:59.000Z</published>
-    <updated>2023-02-18T03:34:34.599Z</updated>
+    <updated>2023-02-18T06:43:17.589Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对象的属性或字段，以及访问程序集中的元数据等。</p><h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><ul><li>对象关系映射(ORM)；</li><li>面向切面编程(AOP)；</li><li>代码生成</li><li>动态代理</li><li>插件系统：编辑器插件、浏览器插件</li></ul><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><h2 id="性能较差"><a href="#性能较差" class="headerlink" title="性能较差"></a>性能较差</h2><p>使用反射进行对象创建、属性赋值、方法调用等操作需要更多的时间和资源，因为这些操作需要在运行时动态计算和解析。相比于直接编写代码实现这些操作，使用反射会增加很多开销。</p><h2 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h2><p>反射可以绕过编译时的类型检查和访问权限检查，因此可能会带来安全性问题。如果恶意用户使用反射来访问不应该被访问的代码或数据，就可能会导致严重的安全漏洞。</p><h2 id="可读性较差"><a href="#可读性较差" class="headerlink" title="可读性较差"></a>可读性较差</h2><p>反射的代码通常比较难读懂，因为它涉及到很多动态计算和解析，可能会包含大量的复杂逻辑。相比于直接编写代码实现相同的功能，使用反射会增加代码的复杂度，降低代码的可读性。</p><h2 id="维护成本较高"><a href="#维护成本较高" class="headerlink" title="维护成本较高"></a>维护成本较高</h2><p>由于反射的代码比较难读懂和理解，因此维护成本也相对较高。如果使用反射编写的代码出现了问题，需要花费更多的时间和精力进行调试和修复。</p><h1 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h1><p>Activator.CreateInstance();<br>Activator.CreateInstanceFrom();<br>AppDomain.CreateDomain().CreateInstance();</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对象的属性或字段，以及访问程序集中的元数据等。</p><h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><ul><li>对象关系映射(ORM)</li><li>面向切面编程(AOP)</li><li>代码生成</li><li>动态代理</li><li>插件系统：编辑器插件、浏览器插件</li></ul><h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><h2 id="性能较差"><a href="#性能较差" class="headerlink" title="性能较差"></a>性能较差</h2><p>使用反射进行对象创建、属性赋值、方法调用等操作需要更多的时间和资源，因为这些操作需要在运行时动态计算和解析。相比于直接编写代码实现这些操作，使用反射会增加很多开销。</p><h2 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h2><p>反射可以绕过编译时的类型检查和访问权限检查，因此可能会带来安全性问题。如果恶意用户使用反射来访问不应该被访问的代码或数据，就可能会导致严重的安全漏洞。</p><h2 id="可读性较差"><a href="#可读性较差" class="headerlink" title="可读性较差"></a>可读性较差</h2><p>反射的代码通常比较难读懂，因为它涉及到很多动态计算和解析，可能会包含大量的复杂逻辑。相比于直接编写代码实现相同的功能，使用反射会增加代码的复杂度，降低代码的可读性。</p><h2 id="维护成本较高"><a href="#维护成本较高" class="headerlink" title="维护成本较高"></a>维护成本较高</h2><p>由于反射的代码比较难读懂和理解，因此维护成本也相对较高。如果使用反射编写的代码出现了问题，需要花费更多的时间和精力进行调试和修复。</p><h1 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h1><p>Activator.CreateInstance();<br>Activator.CreateInstanceFrom();<br>AppDomain.CreateDomain().CreateInstance();</p>]]></content>
     
     
       
@@ -339,240 +558,6 @@
     <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
     
     <category term="binlog" scheme="https://chengshen.me/tags/binlog/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL 事务</title>
-    <link href="https://chengshen.me/database/MySQL-transaction"/>
-    <id>https://chengshen.me/database/MySQL-transaction</id>
-    <published>2023-02-16T08:34:07.000Z</published>
-    <updated>2023-02-16T11:26:27.668Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ACID"><a href="#ACID" class="headerlink" title="ACID"></a>ACID</h1><ol><li>原子性：事务中包含的各操作要么都做，要么都不做。数据库通过 undo log 和 redo log 实现原子性：事务提交，redo log 写入到数据库，事务回滚，undo log 恢复到先前状态。</li><li>一致性：从一个一致性状态变到另一个一致性状态。</li><li>隔离性：一个事务的执行不受其它事务干扰。</li><li>持久性：一个事务一旦提交，它对数据库中的数据的改变就应该是永久性的。</li></ol><h1 id="redo-log-amp-binlog"><a href="#redo-log-amp-binlog" class="headerlink" title="redo log &amp; binlog"></a>redo log &amp; binlog</h1><p>redo log 属于 innoDB 层面，binlog 属于 MySQL Server 层面；<br>redo log 是物理日志，记录该数据页更新的内容；binlog 是逻辑日志，记录的是更新语句的原始逻辑；<br>redo log 是循环写，日志空间大小固定；binlog 是追加写，写到一定大小会写下一个文件，不覆盖；<br>redo log 作为异常宕机、介质故障后的数据恢复使用；binlog 主从架构恢复数据；</p><h1 id="Innodb-事务过程"><a href="#Innodb-事务过程" class="headerlink" title="Innodb 事务过程"></a>Innodb 事务过程</h1><ol><li>innodb 收到 update 语句后，根据条件去找到数据所在页，将该页缓存到 buffer pool；</li><li>执行 update，修改 buffer pool 中数据，也就是内存中数据；</li><li>生成 undo log，用于事务回滚；</li><li>生成 redo log，存入 log buffer；</li><li>如果事务提交，则将 redo log 持久化，后续会有其他机制将 buffer pool 中修改的数据持久化到磁盘；</li><li>如果事务回滚，利用 undo log 日志进行回滚；</li></ol><h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>假设有 X、Y 两个数据，值分别为 1，2：</p><ol><li>事务开始</li><li>记录 X&#x3D;1 到 undo log</li><li>修改 X&#x3D;3</li><li>记录 X&#x3D;3 到 redo log</li><li>记录 Y&#x3D;2 到 undo log</li><li>修改 Y&#x3D;4</li><li>记录 Y&#x3D;4 到 redo log</li><li>将 redo log 写入磁盘</li><li>事务提交</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;ACID&quot;&gt;&lt;a href=&quot;#ACID&quot; class=&quot;headerlink&quot; title=&quot;ACID&quot;&gt;&lt;/a&gt;ACID&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;原子性：事务中包含的各操作要么都做，要么都不做。数据库通过 undo log 和 redo log 实现原子性：</summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="Transaction" scheme="https://chengshen.me/tags/Transaction/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL 索引</title>
-    <link href="https://chengshen.me/database/MySQL-Index_"/>
-    <id>https://chengshen.me/database/MySQL-Index_</id>
-    <published>2023-02-16T08:28:02.000Z</published>
-    <updated>2023-02-16T12:53:19.909Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="B-树-amp-B-树"><a href="#B-树-amp-B-树" class="headerlink" title="B 树 &amp; B+树"></a>B 树 &amp; B+树</h1><p>B 树：平衡的多叉查找树，每个节点都包含数据，在任意节点匹配上就返回数据，找不到就返回空指针。</p><p>B+树：</p><ol><li>关键字全部存储在叶子节点上，且叶子节点本身根据关键字自小而大顺序连接。</li><li>非叶子节点可以看成索引部分，节点中仅含有其子树（根节点）中的最大（或最小）关键字。</li><li>有 n 棵子树的节点含有 n 个关键字（也有认为是 n-1 个关键字）。<br>B+树的查找过程，在非叶子节点上的关键字等于给定值，并不终止，而是继续沿着指针直到叶子节点位置。因此在 B+树，不管查找成功与否，每次查找都是走了一条从根到叶子节点的路径。</li></ol><h1 id="B-树效率"><a href="#B-树效率" class="headerlink" title="B+树效率"></a>B+树效率</h1><p>InnoDB 引擎存储数据的时候以页为单位，一页就是一节点。<br>每个节点的默认大小是 16KB，一个指针的大小是 6 个字节，主键占用 8 个字节，<br>一个节点大概有 (16<em>1024)&#x2F;(6+8)&#x3D;1170 个指针，<br>当表中一条记录 1KB，单个叶子节点可以存储 16 条数据，<br>即树高度为 2 时能关联 1170</em>16&#x3D;18720 条数据，当高度为 3，能关联 1170<em>1170</em>16&#x3D;21902400 条数据。</p><h1 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h1><p>索引是有结构的数据，这些数据结构以某种方式引用（指向）数据，MySQL 的索引使用 B+树的数据结构。</p><h1 id="主键索引"><a href="#主键索引" class="headerlink" title="主键索引"></a>主键索引</h1><p>InnoDB 叶子节点存行数据；MyISAM 叶子节点是数据的地址指针。</p><h1 id="普通索引"><a href="#普通索引" class="headerlink" title="普通索引"></a>普通索引</h1><p>InnoDB 叶子节点存主键值；MyISAM 叶子节点是数据的地址指针。普通索引查询到叶子节点主键值，用主键去主键索引查数据，这就是回表查询。</p><h1 id="聚集索引"><a href="#聚集索引" class="headerlink" title="聚集索引"></a>聚集索引</h1><p>索引顺序和数据的顺序一致，如果索引相邻，对应数据也相邻存放。InnoDB 主键索引就是聚集索引，聚集索引将数据与索引放一起，索引结构的叶子结点保存了行数据，聚集索引有且仅有一个。</p><ol><li>有主键，主键索引就是聚集索引；</li><li>无主键，第一个唯一索引（UNIQUE）为聚集索引；</li><li>无主键、唯一键，InnoDB 会生成一个隐式主键（rowid）作为聚集索引列。</li></ol><p>索引查询过程：</p><ul><li>where id &#x3D; 14：主键索引树中找到对应叶子节点，获得行数据；</li><li>where Name &#x3D; ‘xx’：<ul><li>辅助索引树中检索 Name，到达其叶子节点获取对应的主键。</li><li>再用主键在主键索引树找到对应叶子节点，获得行数据。</li></ul></li></ul><h1 id="非聚集索引"><a href="#非聚集索引" class="headerlink" title="非聚集索引"></a>非聚集索引</h1><p>索引逻辑顺序和磁盘中数据的物理顺序不一致。</p><h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h1><p>查数据时，select 的列刚好是复合索引中涉及的字段，这样能直接返回数据，避免回表，extra 中 Using Index 说明使用了覆盖索引。</p><h1 id="最左匹配原则"><a href="#最左匹配原则" class="headerlink" title="最左匹配原则"></a>最左匹配原则</h1><p>覆盖索引要求查询字段的顺序与复合索引从左到右的顺序一致才行。</p><h1 id="索引条件下推"><a href="#索引条件下推" class="headerlink" title="索引条件下推"></a>索引条件下推</h1><p>当存在索引列条件判断时，将条件判断从 MySQL 服务器向下传递给存储引擎，减少 IO 次数，extra 中 Using index condition 说明使用了索引条件下推。</p><h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><p>普通索引</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 将 user 表 user_name 列设为索引</span></span><br><span class="line"><span class="keyword">create</span> index idx_user_name <span class="keyword">on</span> <span class="keyword">user</span>(user_name);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建email列的索引，索引可以截取length长度，只使用这一列的前几个字符</span></span><br><span class="line"><span class="keyword">create</span> index idx_email <span class="keyword">on</span> <span class="keyword">user</span>(email(<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 该表方式创建索引</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> <span class="keyword">user</span> <span class="keyword">add</span> index idx_user_name(user_name);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 建表时创建索引</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span> (</span><br><span class="line">    id <span class="type">int</span>,</span><br><span class="line">    user_name <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">    gender <span class="type">varchar</span>(<span class="number">1</span>),</span><br><span class="line">    index idx_user_name (name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除索引</span></span><br><span class="line"><span class="keyword">drop</span> index idx_user_name <span class="keyword">on</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure><p>唯一索引</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">unique</span> index idx_user_name <span class="keyword">on</span> <span class="keyword">user</span>(user_name);</span><br></pre></td></tr></table></figure><p>复合索引</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index idx_user_composite_index <span class="keyword">on</span> <span class="keyword">user</span>(user_name, email(<span class="number">7</span>));</span><br></pre></td></tr></table></figure><h1 id="索引失效"><a href="#索引失效" class="headerlink" title="索引失效"></a>索引失效</h1><ol><li>用 OR 查询；</li><li>违背最左匹配原则；</li><li>like 以 % 开头；</li><li>发生类型转换；</li><li>where 中索引列有运算；</li><li>where 中索引列使用了函数；</li><li>如果 MySQL 觉得全表扫描更快时（数据少）;</li></ol><h1 id="OR"><a href="#OR" class="headerlink" title="OR"></a>OR</h1><ol><li>如果条件中有 OR，只要其中一个条件没有索引，其他字段有索引也不会使用。</li><li>如果条件中的字段都有索引，但是 OR 多个字段都需要全表扫描，因此还是会 走全表扫描 或者 全索引扫描；也就是说如果其他字段不符最左前缀原则，但是都是覆盖索引的值，因此走一次全索引扫描</li></ol><h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><ol><li>where c1&#x3D;1 OR c2&#x3D;2 改成 where c1&#x3D;1 UNION ALL where c2&#x3D;2</li><li>where id&#x3D;1 OR id&#x3D;2 改成 where id in (1,2)</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;B-树-amp-B-树&quot;&gt;&lt;a href=&quot;#B-树-amp-B-树&quot; class=&quot;headerlink&quot; title=&quot;B 树 &amp;amp; B+树&quot;&gt;&lt;/a&gt;B 树 &amp;amp; B+树&lt;/h1&gt;&lt;p&gt;B 树：平衡的多叉查找树，每个节点都包含数据，在任意节点匹配</summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="Database Index" scheme="https://chengshen.me/tags/Database-Index/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL 数据库引擎</title>
-    <link href="https://chengshen.me/database/MySQL-database-engine"/>
-    <id>https://chengshen.me/database/MySQL-database-engine</id>
-    <published>2023-02-16T08:25:21.000Z</published>
-    <updated>2023-02-16T11:26:27.666Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><ul><li>MyISAM</li><li>InnoDB</li><li>Memory</li><li>Archive</li><li>Federated</li></ul><p>查使用的引擎类型</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;default_storage_engine&#x27;</span>;</span><br></pre></td></tr></table></figure><h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><p>MySQL 默认使用 innodb。<br>innodb：支持<code>事务</code>，支持<code>外键</code>，<code>聚集索引</code>，锁最小<code>行锁</code>；<br>myisam：不支持事务，不支持外键，非聚集索引，锁最小表锁；<br>myisam 使用的场景：个人博客等文本内容为主的系统；</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;分类&quot;&gt;&lt;a href=&quot;#分类&quot; class=&quot;headerlink&quot; title=&quot;分类&quot;&gt;&lt;/a&gt;分类&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;MyISAM&lt;/li&gt;
-&lt;li&gt;InnoDB&lt;/li&gt;
-&lt;li&gt;Memory&lt;/li&gt;
-&lt;li&gt;Archive&lt;/li&gt;
-&lt;li</summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="Database Engine" scheme="https://chengshen.me/tags/Database-Engine/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EntityFramework ADO.NET</title>
-    <link href="https://chengshen.me/csharp/EntityFramework-ado-net-basic-concepts"/>
-    <id>https://chengshen.me/csharp/EntityFramework-ado-net-basic-concepts</id>
-    <published>2023-02-16T08:12:29.000Z</published>
-    <updated>2023-02-16T11:26:27.662Z</updated>
-    
-    <content type="html"><![CDATA[<p>用于进行数据库访问的技术。</p><p>五个对象：</p><ul><li>Connection</li><li>Command</li><li>DataAdapter</li><li>DataSet</li><li>DataReader</li></ul><h1 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Data.SqlClient;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">string</span> connectionString = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增删改</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">update</span>(<span class="params"><span class="built_in">string</span> sql</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">using</span> SqlConnection connection = <span class="keyword">new</span> SqlConnection(connectionString);</span><br><span class="line">  connection.Open();</span><br><span class="line">  <span class="keyword">using</span> SqlCommand cmd = <span class="keyword">new</span> SqlCommand(sql, connection);</span><br><span class="line">  <span class="comment">// ExecuteNonQuery 用于执行增删改语句</span></span><br><span class="line">  <span class="built_in">int</span> result = cmd.ExecuteNonQuery();</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询单条数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">int</span> <span class="title">query</span>(<span class="params"><span class="built_in">string</span> sql</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">using</span> SqlConnection connection = <span class="keyword">new</span> SqlConnection(connectionString);</span><br><span class="line">  connection.Open();</span><br><span class="line">  SqlCommand cmd = <span class="keyword">new</span> SqlCommand(sql, connection);</span><br><span class="line">  <span class="comment">// ExecuteScalar 用于查询返回结果中的首行首列数据</span></span><br><span class="line">  <span class="built_in">int</span> result = cmd.ExecuteScalar();</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">query</span>(<span class="params"><span class="built_in">string</span> sql</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">using</span> SqlConnection connection = <span class="keyword">new</span> SqlConnection(connectionString);</span><br><span class="line">  connection.Open();</span><br><span class="line">  SqlCommand cmd = <span class="keyword">new</span> SqlCommand(sql, connection);</span><br><span class="line">  <span class="comment">// ExecuteReader 读取的数据是行流，会跟数据库保存连接去读取数据，适合数据量小的情况</span></span><br><span class="line">  <span class="keyword">using</span> SqlDataReader dataReader = cmd.ExecuteReader();</span><br><span class="line">  <span class="keyword">while</span> (dataReader.Read())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 一次while循环读一行数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获得第0列数据</span></span><br><span class="line">    <span class="keyword">var</span> col0 = dataReader.GetString(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 获得第1列数据</span></span><br><span class="line">    <span class="keyword">var</span> col1 = Convert.ToInt32(dataReader[<span class="string">&quot;name&quot;</span>]);</span><br><span class="line">    <span class="comment">// 获得第2列数据</span></span><br><span class="line">    <span class="keyword">var</span> col2 = dataReader.GetString(<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DataTable <span class="title">query</span>(<span class="params"><span class="built_in">string</span> sql</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">using</span> SqlConnection connection = <span class="keyword">new</span> SqlConnection(connectionString);</span><br><span class="line">  SqlDataAdapter adapter = <span class="keyword">new</span> SqlDataAdapter(sql, connection);</span><br><span class="line">  <span class="comment">// DataSet 中含可以有多个 DataTable</span></span><br><span class="line">  <span class="comment">// DataSet dataSet = new DataSet();</span></span><br><span class="line">  DataTable dtable = <span class="keyword">new</span> DataTable();</span><br><span class="line">  adapter.Fill(dtable);</span><br><span class="line">  <span class="keyword">return</span> dtable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="参数化查询防-SQL-注入"><a href="#参数化查询防-SQL-注入" class="headerlink" title="参数化查询防 SQL 注入"></a>参数化查询防 SQL 注入</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> SqlConnection connection = <span class="keyword">new</span> SqlConnection(connectionString);</span><br><span class="line">connection.Open();</span><br><span class="line"><span class="comment">// @符号是必须的</span></span><br><span class="line"><span class="built_in">string</span> querySql = <span class="string">&quot;select * from students where name=@name and age=@age and class=@class;&quot;</span>;</span><br><span class="line">SqlCommand command = <span class="keyword">new</span> SqlCommand(querySql, connection);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单条参数处理</span></span><br><span class="line">SqlParameter sqlParameter1 = <span class="keyword">new</span> ();</span><br><span class="line">sqlParameter.ParameterName = <span class="string">&quot;name&quot;</span>;</span><br><span class="line">sqlParameter.Size = <span class="number">64</span>;</span><br><span class="line">sqlParameter.SqlDbType = SqlDbType.VarChar;</span><br><span class="line">sqlParameter.Value = <span class="string">&quot;李明&quot;</span>;</span><br><span class="line">command.Parameters.Add(sqlParameter1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量参数处理</span></span><br><span class="line">SqlParameter[] parameters =</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">new</span> SqlParameter(<span class="string">&quot;age&quot;</span>, SqlDbType.Int),</span><br><span class="line">  <span class="keyword">new</span> SqlParameter(<span class="string">&quot;class&quot;</span>, SqlDbType.VarChar),</span><br><span class="line">&#125;</span><br><span class="line">parameters[<span class="number">0</span>].Value = <span class="number">18</span>;</span><br><span class="line">parameters[<span class="number">1</span>].Value = <span class="string">&quot;精英班&quot;</span>;</span><br><span class="line">command.Parameters.AddRange(parameters);</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> result = Convert.ToInt32(command.ExecuteScalar());</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;用于进行数据库访问的技术。&lt;/p&gt;
-&lt;p&gt;五个对象：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Connection&lt;/li&gt;
-&lt;li&gt;Command&lt;/li&gt;
-&lt;li&gt;DataAdapter&lt;/li&gt;
-&lt;li&gt;DataSet&lt;/li&gt;
-&lt;li&gt;DataReader&lt;/li&gt;
-&lt;/ul&gt;
-</summary>
-      
-    
-    
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/categories/EntityFramework/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
-    
-    <category term="ADO.NET" scheme="https://chengshen.me/tags/ADO-NET/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EntityFramework 拦截器</title>
-    <link href="https://chengshen.me/csharp/EntityFramework-interceptor"/>
-    <id>https://chengshen.me/csharp/EntityFramework-interceptor</id>
-    <published>2023-02-16T08:03:41.000Z</published>
-    <updated>2023-02-16T11:26:27.663Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>改 SQL，缓存结果，审计日志，自动事务提交等。</p><h1 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h1><ol><li>IDbCommandInterceptor：创建、执行、失败、释放</li><li>IDbConnectionInterceptor：打开和关闭连接、连接失败</li><li>IDbTransactionInterceptor：创建事务、使用事务、提交事务、回滚事务、创建和使用保存点、事务失败</li><li>ISaveChangesInterceptor：提交变更</li></ol><p>基类 DbCommandInterceptor、 DbConnectionInterceptor、DbTransactionInterceptor、SaveChangesInterceptor 包含对应接口中每个方法的无操作实现，以避免实现不需要的方法。</p><h1 id="DbCommandInterceptor"><a href="#DbCommandInterceptor" class="headerlink" title="DbCommandInterceptor"></a>DbCommandInterceptor</h1><p>在 SQL 发送到数据库之前，对 SQL 进行修改，通常结合 EF Core 查询标记来标记每个需要修改的查询。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blogs1 = context.Blogs.TagWith(<span class="string">&quot;Use hint: robust plan&quot;</span>).ToList();</span><br></pre></td></tr></table></figure><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TaggedQueryCommandInterceptor</span> : <span class="title">DbCommandInterceptor</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">override</span> ValueTask&lt;InterceptionResult&lt;DbDataReader&gt;&gt; ReaderExecutingAsync(DbCommand command, CommandEventData eventData, InterceptionResult&lt;DbDataReader&gt; result, CancellationToken cancellationToken = <span class="literal">default</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    ManipulateCommand(command);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ValueTask&lt;InterceptionResult&lt;DbDataReader&gt;&gt;(result);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ManipulateCommand</span>(<span class="params">DbCommand command</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (command.CommandText.StartsWith(<span class="string">&quot;-- Use hint: robust plan&quot;</span>, StringComparison.Ordinal))</span><br><span class="line">    &#123;</span><br><span class="line">      command.CommandText += <span class="string">&quot; OPTION (ROBUST PLAN)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>结果</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Use hint: robust plan</span></span><br><span class="line"><span class="keyword">SELECT</span> [b].[Id], [b].[Name] <span class="keyword">FROM</span> [Blogs] <span class="keyword">AS</span> [b] OPTION (ROBUST PLAN)</span><br></pre></td></tr></table></figure><h1 id="SaveChangesInterceptor"><a href="#SaveChangesInterceptor" class="headerlink" title="SaveChangesInterceptor"></a>SaveChangesInterceptor</h1><ol><li>用于审计</li></ol><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">async</span> ValueTask&lt;InterceptionResult&lt;<span class="built_in">int</span>&gt;&gt; SavingChangesAsync(DbContextEventData eventData, InterceptionResult&lt;<span class="built_in">int</span>&gt; result, CancellationToken cancellationToken = <span class="literal">default</span>)</span><br><span class="line">&#123;</span><br><span class="line">  _audit = CreateAudit(eventData.Context);</span><br><span class="line">  <span class="keyword">using</span> <span class="keyword">var</span> auditContext = <span class="keyword">new</span> AuditContext(_connectionString);</span><br><span class="line">  auditContext.Add(_audit);</span><br><span class="line">  <span class="keyword">await</span> auditContext.SaveChangesAsync();</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> InterceptionResult&lt;<span class="built_in">int</span>&gt; <span class="title">SavingChanges</span>(<span class="params">DbContextEventData eventData, InterceptionResult&lt;<span class="built_in">int</span>&gt; result</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  _audit = CreateAudit(eventData.Context);</span><br><span class="line">  <span class="keyword">using</span> <span class="keyword">var</span> auditContext = <span class="keyword">new</span> AuditContext(_connectionString);</span><br><span class="line">  auditContext.Add(_audit);</span><br><span class="line">  auditContext.SaveChanges();</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>同时重写同步和异步方法可确保在无论是否调用 SaveChanges 或 SaveChangesAsync 的情况下进行审计。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> SaveChangesAudit <span class="title">CreateAudit</span>(<span class="params">DbContext context</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  context.ChangeTracker.DetectChanges();</span><br><span class="line">  <span class="keyword">var</span> audit = <span class="keyword">new</span> SaveChangesAudit &#123; AuditId = Guid.NewGuid(), StartTime = DateTime.UtcNow &#125;;</span><br><span class="line">  <span class="keyword">foreach</span> (<span class="keyword">var</span> entry <span class="keyword">in</span> context.ChangeTracker.Entries())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">var</span> auditMessage = entry.State <span class="keyword">switch</span></span><br><span class="line">    &#123;</span><br><span class="line">        EntityState.Deleted =&gt; CreateDeletedMessage(entry),</span><br><span class="line">        EntityState.Modified =&gt; CreateModifiedMessage(entry),</span><br><span class="line">        EntityState.Added =&gt; CreateAddedMessage(entry),</span><br><span class="line">        _ =&gt; <span class="literal">null</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (auditMessage != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        audit.Entities.Add(<span class="keyword">new</span> EntityAudit &#123; State = entry.State, AuditMessage = auditMessage &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> audit;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="built_in">string</span> <span class="title">CreateAddedMessage</span>(<span class="params">EntityEntry entry</span>)</span></span><br><span class="line">      =&gt; entry.Properties.Aggregate(</span><br><span class="line">          <span class="string">$&quot;Inserting <span class="subst">&#123;entry.Metadata.DisplayName()&#125;</span> with &quot;</span>,</span><br><span class="line">          (auditString, property) =&gt; auditString + <span class="string">$&quot;<span class="subst">&#123;property.Metadata.Name&#125;</span>: &#x27;<span class="subst">&#123;property.CurrentValue&#125;</span>&#x27; &quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="built_in">string</span> <span class="title">CreateModifiedMessage</span>(<span class="params">EntityEntry entry</span>)</span></span><br><span class="line">      =&gt; entry.Properties.Where(property =&gt; property.IsModified || property.Metadata.IsPrimaryKey()).Aggregate(</span><br><span class="line">          <span class="string">$&quot;Updating <span class="subst">&#123;entry.Metadata.DisplayName()&#125;</span> with &quot;</span>,</span><br><span class="line">          (auditString, property) =&gt; auditString + <span class="string">$&quot;<span class="subst">&#123;property.Metadata.Name&#125;</span>: &#x27;<span class="subst">&#123;property.CurrentValue&#125;</span>&#x27; &quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="built_in">string</span> <span class="title">CreateDeletedMessage</span>(<span class="params">EntityEntry entry</span>)</span></span><br><span class="line">      =&gt; entry.Properties.Where(property =&gt; property.Metadata.IsPrimaryKey()).Aggregate(</span><br><span class="line">          <span class="string">$&quot;Deleting <span class="subst">&#123;entry.Metadata.DisplayName()&#125;</span> with &quot;</span>,</span><br><span class="line">          (auditString, property) =&gt; auditString + <span class="string">$&quot;<span class="subst">&#123;property.Metadata.Name&#125;</span>: &#x27;<span class="subst">&#123;property.CurrentValue&#125;</span>&#x27; &quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="2"><li>自动设置实体值，如 CreatedBy，CreatedDT 等</li></ol><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MySaveChangesInterceptor</span> : <span class="title">SaveChangesInterceptor</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">readonly</span> IAppUser _appUser;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MySaveChangesInterceptor</span> (<span class="params">IAppUser appUser</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    _appUser = appUser;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">async</span> ValueTask&lt;InterceptionResult&lt;<span class="built_in">int</span>&gt;&gt; SavingChangesAsync(DbContextEventData eventData, InterceptionResult&lt;<span class="built_in">int</span>&gt; result, CancellationToken cancellationToken = <span class="literal">default</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> entry <span class="keyword">in</span> eventData.Context.ChangeTracker.Entries())</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">switch</span> (entry.State)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">case</span> EntityState.Added:</span><br><span class="line">          InterceptAddedOperation(entry);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> EntityState.Modified:</span><br><span class="line">          InterceptModifiedOperation(entry);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> EntityState.Deleted:</span><br><span class="line">          InterceptDeletedOperation(entry);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> 拦截添加操作</span></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">InterceptAddedOperation</span>(<span class="params">EntityEntry entry</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.Entity <span class="keyword">is</span> IAuditedCreationEntity)</span><br><span class="line">    &#123;</span><br><span class="line">      (entry.Entity <span class="keyword">as</span> IAuditedCreationEntity).CreatedBy = _appUser?.UserId ?? <span class="built_in">string</span>.Empty;</span><br><span class="line">      (entry.Entity <span class="keyword">as</span> IAuditedCreationEntity).CreatedDT = DateTime.Now;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> 拦截修改操作</span></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">InterceptModifiedOperation</span>(<span class="params">EntityEntry entry</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (entry.Entity <span class="keyword">is</span> IAuditedUpdateEntity)</span><br><span class="line">    &#123;</span><br><span class="line">      (entry.Entity <span class="keyword">as</span> IAuditedUpdateEntity).ModifiedBy = _appUser?.UserId ?? <span class="built_in">string</span>.Empty;</span><br><span class="line">      (entry.Entity <span class="keyword">as</span> IAuditedUpdateEntity).ModifiedDT = DateTime.Now;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> 拦截删除操作</span></span><br><span class="line">  <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">InterceptDeletedOperation</span>(<span class="params">EntityEntry entry</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h1><p>配置 DbContext 实例，在 DbContext.OnConfiguring 中完成注册。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ExampleContext</span> : <span class="title">BlogsContext</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnConfiguring</span>(<span class="params">DbContextOptionsBuilder optionsBuilder</span>)</span></span><br><span class="line">    =&gt; optionsBuilder.AddInterceptors(<span class="keyword">new</span> TaggedQueryCommandInterceptor());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h1&gt;&lt;p&gt;改 SQL，缓存结果，审计日志，自动事务提交等。&lt;/p&gt;
-&lt;h1 id=&quot;类型&quot;&gt;&lt;a href=&quot;#类型&quot; class=&quot;headerli</summary>
-      
-    
-    
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/categories/EntityFramework/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
-    
-    <category term="Interceptor" scheme="https://chengshen.me/tags/Interceptor/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EntityFramework 原生 SQL</title>
-    <link href="https://chengshen.me/csharp/EntityFramework-raw-sql"/>
-    <id>https://chengshen.me/csharp/EntityFramework-raw-sql</id>
-    <published>2023-02-16T07:55:13.000Z</published>
-    <updated>2023-02-16T11:26:27.664Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="FromSql"><a href="#FromSql" class="headerlink" title="FromSql"></a>FromSql</h1><p>FromSql 只能直接在 DbSet 上使用。 不能在任意 LINQ 查询的基础上组合使用它。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blogs = context.Blogs.FromSql(<span class="string">$&quot;SELECT * FROM dbo.Blogs&quot;</span>).ToList();</span><br></pre></td></tr></table></figure><p>FromSql 和 FromSqlInterpolated 方法可以防止 SQL 注入，FromSqlRaw 方法可能易受 SQL 注入攻击。</p><h2 id="动态-SQL-和参数"><a href="#动态-SQL-和参数" class="headerlink" title="动态 SQL 和参数"></a>动态 SQL 和参数</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user = <span class="string">&quot;johndoe&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> sqlString = <span class="string">$&quot;SELECT * FROM dbo.Blogs WHERE Name = <span class="subst">&#123;user&#125;</span>&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> blogs = context.Blogs.FromSql(sqlString).ToList();</span><br></pre></td></tr></table></figure><h1 id="SqlQuery"><a href="#SqlQuery" class="headerlink" title="SqlQuery"></a>SqlQuery</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ids = context.Database.SqlQuery&lt;<span class="built_in">int</span>&gt;(<span class="string">$&quot;SELECT [BlogId] FROM [Blogs]&quot;</span>).ToList();</span><br></pre></td></tr></table></figure><h1 id="Non-Query-SQL"><a href="#Non-Query-SQL" class="headerlink" title="Non-Query SQL"></a>Non-Query SQL</h1><p>非查询 SQL 通常指用于修改数据库中的数据或调用不返回任何结果集的存储过程。</p><h2 id="ExecuteSql"><a href="#ExecuteSql" class="headerlink" title="ExecuteSql"></a>ExecuteSql</h2><p>EF Core 7.0 之前批量变更，比在查询所有匹配行后使用 SaveChanges 来修改它们要高效得多。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> rowsModified = context.Database.ExecuteSql(<span class="string">$&quot;UPDATE [Blogs] SET [Url] = NULL&quot;</span>);</span><br></pre></td></tr></table></figure><h2 id="ExecuteDeleteAsync"><a href="#ExecuteDeleteAsync" class="headerlink" title="ExecuteDeleteAsync"></a>ExecuteDeleteAsync</h2><p>EF Core 7.0 新特性，借助 LINQ 更方便高效。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> context.Tags.Where(t =&gt; t.Text.Contains(<span class="string">&quot;.NET&quot;</span>)).ExecuteDeleteAsync();</span><br></pre></td></tr></table></figure><h2 id="ExecuteUpdateAsync"><a href="#ExecuteUpdateAsync" class="headerlink" title="ExecuteUpdateAsync"></a>ExecuteUpdateAsync</h2><p>EF Core 7.0 新特性，借助 LINQ 更方便高效。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> context.Blogs.ExecuteUpdateAsync(s =&gt;</span><br><span class="line">    s.SetProperty(b =&gt; b.Name, b =&gt; <span class="string">$&quot;<span class="subst">&#123;b.Name&#125;</span>_new&quot;</span>))</span><br><span class="line">    s.SetProperty(b =&gt; b.Author, b =&gt; <span class="string">$&quot;<span class="subst">&#123;b.Author&#125;</span>_new&quot;</span>));</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;FromSql&quot;&gt;&lt;a href=&quot;#FromSql&quot; class=&quot;headerlink&quot; title=&quot;FromSql&quot;&gt;&lt;/a&gt;FromSql&lt;/h1&gt;&lt;p&gt;FromSql 只能直接在 DbSet 上使用。 不能在任意 LINQ 查询的基础上组合使用它。&lt;/</summary>
-      
-    
-    
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/categories/EntityFramework/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
-    
-    <category term="SQL" scheme="https://chengshen.me/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EntityFramework 流式配置接口</title>
-    <link href="https://chengshen.me/csharp/EntityFramework-fluent-api"/>
-    <id>https://chengshen.me/csharp/EntityFramework-fluent-api</id>
-    <published>2023-02-16T07:51:25.000Z</published>
-    <updated>2023-02-16T11:26:27.663Z</updated>
-    
-    <content type="html"><![CDATA[<p>fluent api 使得 ef 能<code>链式</code>配置。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SchoolDBContext</span>: <span class="title">DbContext</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">DbSet</span>&lt;<span class="title">Student</span>&gt; Students</span> &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">DbSet</span>&lt;<span class="title">Course</span>&gt; Courses</span> &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">DbSet</span>&lt;<span class="title">StudentCourse</span>&gt; StudentCourses</span> &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">DbSet</span>&lt;<span class="title">StudentAddress</span>&gt; StudentAddress</span> &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnConfiguring</span>(<span class="params">DbContextOptionsBuilder builder</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnModelCreating</span>(<span class="params">ModelBuilder builder</span>)</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 字段</span></span><br><span class="line">    builder.Entity&lt;Student&gt;().Property(s =&gt; s.Id).HasColumnName(<span class="string">&quot;Id&quot;</span>).HasDefaultValue(<span class="number">0</span>).IsRequired();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 索引</span></span><br><span class="line">    builder.Entity&lt;Student&gt;().HasIndex(x =&gt; x.Name);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始数据（data-seeding）</span></span><br><span class="line">    builder.Entity&lt;Student&gt;().HasData(<span class="keyword">new</span> Student</span><br><span class="line">    &#123;</span><br><span class="line">      Id = <span class="string">&quot;0&quot;</span>,</span><br><span class="line">        Name = <span class="string">&quot;小明&quot;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Student n : 1 Grade</span></span><br><span class="line">    builder.Entity&lt;Student&gt;().HasOne&lt;Grade&gt;(s =&gt; s.Grade).WithMany(g =&gt; g.Students).HasForeignKey(s =&gt; s.GradeId);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Student 1 : 1 StudentAddress</span></span><br><span class="line">    builder.Entity&lt;Student&gt;().HasOne&lt;StudentAddress&gt;(s =&gt; s.Address).WithOne(ad =&gt; ad.Student).HasForeignKey&lt;StudentAddress&gt;(ad =&gt; ad.StudentId);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// n : n</span></span><br><span class="line">    <span class="comment">// Student 1 : n StudentCourse</span></span><br><span class="line">    builder.Entity&lt;StudentCourse&gt;().HasOne&lt;Student&gt;(sc =&gt; sc.Student).WithMany(s =&gt; s.StudentCourses).HasForeignKey(sc =&gt; sc.StudentId);</span><br><span class="line">    <span class="comment">// Course 1 : n StudentCourse</span></span><br><span class="line">    builder.Entity&lt;StudentCourse&gt;().HasOne&lt;Course&gt;(sc =&gt; sc.Course).WithMany(s =&gt; s.StudentCourses).HasForeignKey(sc =&gt; sc.CourseId);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;fluent api 使得 ef 能&lt;code&gt;链式&lt;/code&gt;配置。&lt;/p&gt;
-&lt;figure class=&quot;highlight c#&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;</summary>
-      
-    
-    
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/categories/EntityFramework/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
-    
-    <category term="Fluent API" scheme="https://chengshen.me/tags/Fluent-API/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EntityFramework 复杂查询</title>
-    <link href="https://chengshen.me/csharp/EntityFramework-complex-query"/>
-    <id>https://chengshen.me/csharp/EntityFramework-complex-query</id>
-    <published>2023-02-16T07:48:44.000Z</published>
-    <updated>2023-02-16T11:26:27.662Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="LINQ-Join"><a href="#LINQ-Join" class="headerlink" title="LINQ Join"></a>LINQ Join</h1><p>LINQ Join 对应关系数据库中的 INNER JOIN。</p><h1 id="LEFT-JOIN"><a href="#LEFT-JOIN" class="headerlink" title="LEFT JOIN"></a>LEFT JOIN</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> c <span class="keyword">in</span> table0</span><br><span class="line"><span class="keyword">join</span> o <span class="keyword">in</span> table1 <span class="keyword">on</span> c.sno <span class="keyword">equals</span> o.sno <span class="keyword">into</span> ps</span><br><span class="line"><span class="keyword">from</span> o <span class="keyword">in</span> ps.DefaultIfEmpty()</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">new</span> &#123; c.name, o.number&#125;</span><br></pre></td></tr></table></figure><p>生成的 SQL：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [t0].[name], [t1].[number] <span class="keyword">AS</span> [number] <span class="keyword">FROM</span> [table0] <span class="keyword">AS</span> [t0]</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> [table1] <span class="keyword">AS</span> [t1]</span><br><span class="line"><span class="keyword">ON</span> ([t0].[sno]) <span class="operator">=</span> [t1].[sno]</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;LINQ-Join&quot;&gt;&lt;a href=&quot;#LINQ-Join&quot; class=&quot;headerlink&quot; title=&quot;LINQ Join&quot;&gt;&lt;/a&gt;LINQ Join&lt;/h1&gt;&lt;p&gt;LINQ Join 对应关系数据库中的 INNER JOIN。&lt;/p&gt;
-&lt;h1 id</summary>
-      
-    
-    
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/categories/EntityFramework/"/>
-    
-    
-    <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
-    
-    <category term="EntityFramework" scheme="https://chengshen.me/tags/EntityFramework/"/>
     
   </entry>
   

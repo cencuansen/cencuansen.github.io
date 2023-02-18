@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        CLR 反射
+        Redis 缓存
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;11:27:59 -->
+            <!-- &nbsp;&nbsp;15:38:04 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/CLR/">CLR</a>
+          <a href="/categories/Redis/">Redis</a>
           
         </span>
         
@@ -243,11 +243,9 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CLR/"># CLR</a>
+            <a href="/tags/Redis/"># Redis</a>
             
-            <a href="/tags/CSharp/"># CSharp</a>
-            
-            <a href="/tags/Reflection/"># Reflection</a>
+            <a href="/tags/Cache/"># Cache</a>
             
             
           </span>
@@ -261,19 +259,38 @@
     </header>
 
     <div class="post-content">
-      <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对象的属性或字段，以及访问程序集中的元数据等。</p>
-<h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><ul>
-<li>对象关系映射(ORM)</li>
-<li>面向切面编程(AOP)</li>
-<li>代码生成</li>
-<li>动态代理</li>
-<li>插件系统：编辑器插件、浏览器插件</li>
+      <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>缓存穿透，缓存击穿，缓存雪崩</p>
+<ul>
+<li>缓存穿透(多次)：频繁查询数据库中不存在的数据。利用此进行攻击，可能压垮数据库；</li>
+<li>缓存击穿(一次)：缓存过期时大量并发请求；</li>
+<li>缓存雪崩：缓存服务重启或大量缓存集中失效，给后端系统(如 DB)带来很大压力；</li>
 </ul>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><h2 id="性能较差"><a href="#性能较差" class="headerlink" title="性能较差"></a>性能较差</h2><p>使用反射进行对象创建、属性赋值、方法调用等操作需要更多的时间和资源，因为这些操作需要在运行时动态计算和解析。相比于直接编写代码实现这些操作，使用反射会增加很多开销。</p>
-<h2 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h2><p>反射可以绕过编译时的类型检查和访问权限检查，因此可能会带来安全性问题。如果恶意用户使用反射来访问不应该被访问的代码或数据，就可能会导致严重的安全漏洞。</p>
-<h2 id="可读性较差"><a href="#可读性较差" class="headerlink" title="可读性较差"></a>可读性较差</h2><p>反射的代码通常比较难读懂，因为它涉及到很多动态计算和解析，可能会包含大量的复杂逻辑。相比于直接编写代码实现相同的功能，使用反射会增加代码的复杂度，降低代码的可读性。</p>
-<h2 id="维护成本较高"><a href="#维护成本较高" class="headerlink" title="维护成本较高"></a>维护成本较高</h2><p>由于反射的代码比较难读懂和理解，因此维护成本也相对较高。如果使用反射编写的代码出现了问题，需要花费更多的时间和精力进行调试和修复。</p>
-<h1 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h1><p>Activator.CreateInstance();<br>Activator.CreateInstanceFrom();<br>AppDomain.CreateDomain().CreateInstance();</p>
+<h1 id="应对"><a href="#应对" class="headerlink" title="应对"></a>应对</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><ul>
+<li>缓存空数据；</li>
+<li>布隆过滤器，过滤不存在的数据请求；</li>
+</ul>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><ul>
+<li>互斥锁(redis.setnx)，拿锁后查数据库，再缓存；</li>
+<li>热门数据不过期；</li>
+</ul>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><ul>
+<li>对数据设置不同的过期时间；</li>
+<li>互斥锁；</li>
+</ul>
+<h1 id="过期策略-过期时"><a href="#过期策略-过期时" class="headerlink" title="过期策略(过期时)"></a>过期策略(过期时)</h1><ul>
+<li>定期删除，每个 100ms 随机抽取一些设置了过期时间的 key，如果过期就删除。</li>
+<li>惰性删除，用的时候检查是否过期，如果过期就删除。</li>
+</ul>
+<h1 id="淘汰机制-内存满时"><a href="#淘汰机制-内存满时" class="headerlink" title="淘汰机制(内存满时)"></a>淘汰机制(内存满时)</h1><ul>
+<li>noeviction：不淘汰数据，默认。内存使用达到阀值后，引起申请内存的命令都会报错。</li>
+<li>volatile-ttl：淘汰将要过期的数据。</li>
+<li>volatile-lru：淘汰最近最少使用（过期数据）。</li>
+<li>volatile-lfu：淘汰低使用频率（过期数据）</li>
+<li>volatile-random：随机淘汰（过期数据）。</li>
+<li>allkeys-lru：淘汰最近最少使用（全部数据）。</li>
+<li>allkeys-random：随机淘汰（全部数据）。</li>
+<li>allkey-lfu：淘汰低使用频率（全部数据）。</li>
+</ul>
 
     </div>
 
@@ -281,10 +298,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/NETCore-api-optimization">NETCore 接口优化</a>
+      <a class="prev" rel="prev" href="/database/Redis-thread-model">Redis 线程模型</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-app-domain">CLR AppDomain</a>
+      <a class="next" rel="next" href="/database/Redis-usecases">Redis 使用场景</a>
       
     </section>
   </article>

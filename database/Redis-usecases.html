@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        CLR 反射
+        Redis 使用场景
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;11:27:59 -->
+            <!-- &nbsp;&nbsp;15:34:46 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/CLR/">CLR</a>
+          <a href="/categories/Redis/">Redis</a>
           
         </span>
         
@@ -243,11 +243,7 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CLR/"># CLR</a>
-            
-            <a href="/tags/CSharp/"># CSharp</a>
-            
-            <a href="/tags/Reflection/"># Reflection</a>
+            <a href="/tags/Redis/"># Redis</a>
             
             
           </span>
@@ -261,19 +257,19 @@
     </header>
 
     <div class="post-content">
-      <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>在运行时获取程序集元数据的能力。它使得程序能够在运行时读取自身的类型信息并执行与该类型相关的操作，例如动态创建类型、调用对象上的方法、读写对象的属性或字段，以及访问程序集中的元数据等。</p>
-<h1 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h1><ul>
-<li>对象关系映射(ORM)</li>
-<li>面向切面编程(AOP)</li>
-<li>代码生成</li>
-<li>动态代理</li>
-<li>插件系统：编辑器插件、浏览器插件</li>
-</ul>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><h2 id="性能较差"><a href="#性能较差" class="headerlink" title="性能较差"></a>性能较差</h2><p>使用反射进行对象创建、属性赋值、方法调用等操作需要更多的时间和资源，因为这些操作需要在运行时动态计算和解析。相比于直接编写代码实现这些操作，使用反射会增加很多开销。</p>
-<h2 id="安全性问题"><a href="#安全性问题" class="headerlink" title="安全性问题"></a>安全性问题</h2><p>反射可以绕过编译时的类型检查和访问权限检查，因此可能会带来安全性问题。如果恶意用户使用反射来访问不应该被访问的代码或数据，就可能会导致严重的安全漏洞。</p>
-<h2 id="可读性较差"><a href="#可读性较差" class="headerlink" title="可读性较差"></a>可读性较差</h2><p>反射的代码通常比较难读懂，因为它涉及到很多动态计算和解析，可能会包含大量的复杂逻辑。相比于直接编写代码实现相同的功能，使用反射会增加代码的复杂度，降低代码的可读性。</p>
-<h2 id="维护成本较高"><a href="#维护成本较高" class="headerlink" title="维护成本较高"></a>维护成本较高</h2><p>由于反射的代码比较难读懂和理解，因此维护成本也相对较高。如果使用反射编写的代码出现了问题，需要花费更多的时间和精力进行调试和修复。</p>
-<h1 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h1><p>Activator.CreateInstance();<br>Activator.CreateInstanceFrom();<br>AppDomain.CreateDomain().CreateInstance();</p>
+      <h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h1 id="分布式数据共享"><a href="#分布式数据共享" class="headerlink" title="分布式数据共享"></a>分布式数据共享</h1><p>分布式 Session</p>
+<h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><p>借助 string 的 set。</p>
+<p>set 有如下参数：<br>EX：设置键的过期时间（单位为秒）；<br>PX：设置键的过期时间（单位为毫秒）；<br>NX：只在键不存在时，才对键进行设置操作，set key value NX 和 SETNX key value 等价；<br>XX：只在键已经存在时，才对键进行设置操作；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> lock_key lock_value NX EX 1</span><br></pre></td></tr></table></figure>
+
+<p>结果：<br>如果返回 false，说明 key 的添加不成功，也就是当前有人在占用这把锁；<br>如果返回 true，则说明得了锁，便可以继续进行操作；<br>并且在操作后通过 del 命令释放掉锁，而且设置了过期时间，该锁也会在 1 秒后自动释放。</p>
+<h1 id="全局-ID"><a href="#全局-ID" class="headerlink" title="全局 ID"></a>全局 ID</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrby userid <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h1><p>int 类型，incr 方法。</p>
+<h1 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h1><p>int 类型，incr 方法，以访问者的 ip 和其他信息作为 key，访问一次增加一次计数，超过次数则返回 false。</p>
+<h1 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h1><p>Redis 中 list 的数据结构实现是双向链表，所以可以非常便捷的应用于消息队列，lpush 将消息放入 list，消费者便可以通过 rpop 取出该消息。</p>
+<h1 id="抽奖"><a href="#抽奖" class="headerlink" title="抽奖"></a>抽奖</h1><p>利用 set 结构的无序性，通过 spop 随机获得值。</p>
+<h1 id="排行榜"><a href="#排行榜" class="headerlink" title="排行榜"></a>排行榜</h1><p>利用 sorted set</p>
 
     </div>
 
@@ -281,10 +277,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/NETCore-api-optimization">NETCore 接口优化</a>
+      <a class="prev" rel="prev" href="/database/Redis-cache">Redis 缓存</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-app-domain">CLR AppDomain</a>
+      <a class="next" rel="next" href="/database/Redis-data-types">Redis 数据类型</a>
       
     </section>
   </article>
