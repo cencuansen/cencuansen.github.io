@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://chengshen.me//csharp/CLR-thread-synchronization.html</loc>
+    <lastmod>2023-02-18</lastmod>
+  </url>
+  <url>
     <loc>https://chengshen.me//database/Redis-bloon-filter.html</loc>
     <lastmod>2023-02-18</lastmod>
   </url>
@@ -121,11 +125,11 @@
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/NETCore-app-start-flow.html</loc>
+    <loc>https://chengshen.me//csharp/NETCore-design-patten-in-NET.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/NETCore-design-patten-in-NET.html</loc>
+    <loc>https://chengshen.me//csharp/NETCore-app-start-flow.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
@@ -161,11 +165,11 @@
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//web/javascript/JavaScript-function.html</loc>
+    <loc>https://chengshen.me//web/javascript/JavaScript-inherit.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//web/javascript/JavaScript-inherit.html</loc>
+    <loc>https://chengshen.me//web/javascript/JavaScript-function.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
@@ -189,11 +193,11 @@
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//web/javascript/ECMAScript-features.html</loc>
+    <loc>https://chengshen.me//web/javascript/JavaScript-apply-bind-call.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//web/javascript/JavaScript-apply-bind-call.html</loc>
+    <loc>https://chengshen.me//web/javascript/ECMAScript-features.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
@@ -238,10 +242,6 @@
   </url>
   <url>
     <loc>https://chengshen.me//csharp/CSharp-linq.html</loc>
-    <lastmod>2023-02-15</lastmod>
-  </url>
-  <url>
-    <loc>https://chengshen.me//csharp/CSharp-thread-synchronization.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
