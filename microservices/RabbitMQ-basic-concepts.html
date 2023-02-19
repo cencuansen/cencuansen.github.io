@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="SanHuo">
+
+
+
+<meta name="description" content="All About C# and JavaScript">
+
+
+<meta name="keywords" content="JavaScript,csharp,c#,.NET,.NET Core,MySQL">
+
+
+<title>
+  SanHuo&#39;s Blog
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codeOps.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codeOps.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SanHuo's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot`
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        RabbitMQ 基础
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;21:37:33 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/RabbitMQ/">RabbitMQ</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/RabbitMQ/"># RabbitMQ</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h1><p>点对点模式：一个消息被一个消费者消费；<br>发布订阅模式：一个消息被多个消费者消费。</p>
+<h1 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h1><p>交换机负责消息转发，不具备存储消息的能力，没有匹配的队列时，消息会丢失。<br>扇形交换机：Fanout ，广播，将消息发给所有绑定到交换机的队列；<br>直连交换机：Direct，定向，消息的 routing key 和 队列 binding key 对应投递；<br>主题交换机：Topic，通配符，将消息交给符合指定 routing pattern 的队列；</p>
+<h1 id="消息流程"><a href="#消息流程" class="headerlink" title="消息流程"></a>消息流程</h1><p>生产者向交换机发送一条消息，交换机通过 routing key 和队列绑定规则(binding key)，将消息分发到队列。<br><img src="/images/rabbit-mq.webp" alt="mq"></p>
+<h1 id="消费模式"><a href="#消费模式" class="headerlink" title="消费模式"></a>消费模式</h1><ol>
+<li>推：消费者用 channel.basicConsume 订阅队列，RabbitMQ 会推送消息给消费者；</li>
+<li>拉：消费者用 channel.basicGet 主动从指定队列拉取消息；</li>
+</ol>
+<h1 id="消息队列用途"><a href="#消息队列用途" class="headerlink" title="消息队列用途"></a>消息队列用途</h1><p>解耦：功能模块之间通过消息进行关系解耦；<br>削峰填谷：保护系统不因短期大流量冲击而服务崩溃；<br>冗余数据：防止系统在保存数据时崩溃导致数据丢失；<br>顺序消费：能保持消息被顺序消费；</p>
+<h1 id="死信交换机"><a href="#死信交换机" class="headerlink" title="死信交换机"></a>死信交换机</h1><p>死信（Dead Letter）产生原因可能是：</p>
+<ol>
+<li>消费者拒收了，basic.reject、basic.nack、requeue&#x3D;false</li>
+<li>消息超时过期了，ttl</li>
+<li>消息数量超出队列长度了</li>
+</ol>
+<h2 id="配置死信交换机"><a href="#配置死信交换机" class="headerlink" title="配置死信交换机"></a>配置死信交换机</h2><p>策略(Policy)和队列参数(Optional Queue Arguments)两种方式。</p>
+<h2 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl set_policy DLX <span class="string">&quot;.*&quot;</span> <span class="string">&#x27;&#123;&quot;dead-letter-exchange&quot;:&quot;my-dlx&quot;&#125;&#x27;</span> --apply-to queues</span><br></pre></td></tr></table></figure>
+
+<p>这里将名为 my-dlx 的死信交换机应用到全部队列。</p>
+<h2 id="队列参数"><a href="#队列参数" class="headerlink" title="队列参数"></a>队列参数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; queueArgs = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, Object&gt;();</span><br><span class="line">channel.exchangeDeclare(<span class="string">&quot;myExchange&quot;</span>, <span class="string">&quot;direct&quot;</span>);</span><br><span class="line">queueArgs.put(<span class="string">&quot;x-dead-letter-exchange&quot;</span>, <span class="string">&quot;myExchange&quot;</span>);</span><br><span class="line">channel.queueDeclare(<span class="string">&quot;myQueue&quot;</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, queueArgs);</span><br></pre></td></tr></table></figure>
+
+<h2 id="死信路由"><a href="#死信路由" class="headerlink" title="死信路由"></a>死信路由</h2><ol>
+<li>队列参数中定义 x-dead-letter-routing-key；</li>
+<li>否则使用消息上的 routing key 去找死信交换机；</li>
+</ol>
+<h2 id="死循环"><a href="#死循环" class="headerlink" title="死循环"></a>死循环</h2><p>死信路由出现死循环，死信就会被丢弃。如：死信没定义 routing key 并投递到默认交换机。</p>
+<h1 id="消息不丢失"><a href="#消息不丢失" class="headerlink" title="消息不丢失"></a>消息不丢失</h1><ol>
+<li>消息生产阶段：从消息被生产出来，然后提交给 MQ 的过程中，只要能正常收到 MQ Broker 的 ack 确认响应，就表示发送成功，所以只要处理好返回值和异常，这个阶段是不会出现消息丢失的。</li>
+<li>消息存储阶段：这个阶段一般会直接交给 MQ 消息中间件来保证，但是你要了解它的原理，比如 Broker 会做副本，保证一条消息至少同步两个节点再返回 ack。</li>
+<li>消息消费阶段：消费端从 Broker 上拉取消息，只要消费端在收到消息后，不立即发送消费确认给 Broker，而是等到执行完业务逻辑后，再发送消费确认，也能保证消息的不丢失。</li>
+<li>进阶：给每个发出的消息都指定一个全局唯一 ID，或者附加一个连续递增的版本号，然后在消费端做对应的版本校验。利用拦截器机制。在生产端发送消息之前，通过拦截器将消息版本号注入消息。</li>
+</ol>
+<h1 id="消息重复消费"><a href="#消息重复消费" class="headerlink" title="消息重复消费"></a>消息重复消费</h1><p>建立消息消费日志表。查询消费日志后再去消费，再更新消费日志</p>
+<h1 id="消息堆积"><a href="#消息堆积" class="headerlink" title="消息堆积"></a>消息堆积</h1><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><ul>
+<li>消费者数量不足；</li>
+<li>消费者处理速度慢；</li>
+<li>消息生产速度过快；</li>
+<li>队列没有被正确地消费；</li>
+<li>消费者拒绝消费(basic.reject、basic.nack)：<ul>
+<li>basic.reject 拒绝单个消息，requeue&#x3D;true，重新排队，堆积</li>
+<li>basic.nack 一次性拒绝多个消息，requeue&#x3D;true，重新排队，堆积</li>
+</ul>
+</li>
+</ul>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><ul>
+<li>增加消费者数量，加快消息的消费速度；</li>
+<li>优化消费者的处理逻辑，提高消费速度；</li>
+<li>增加队列的大小，缓解消息积累的问题；</li>
+<li>限制消息的生产速度，防止消息过快地进入队列；</li>
+<li>检查消费者是否正常工作，以及是否正确地处理了消息；</li>
+<li>配置消息过期时间，及时清理过期消息；</li>
+</ul>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" rel="prev" href="/microservices/RabbitMQ-practical-operation">RabbitMQ 实操</a>
+      
+      
+      <a class="next" rel="next" href="/microservices/Docker-dockerfile">Docker dockerfile</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+  <div class="copyright">
+    <span><a href="javascript:void(0)">SanHuo</a> & <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | <a href="/sitemap.xml">Sitemap</a></span>
+  </div>
+</footer>
+  </div>
+</body>
+
+</html>

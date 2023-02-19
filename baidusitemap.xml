@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://chengshen.me//microservices/RabbitMQ-practical-operation.html</loc>
+    <lastmod>2023-02-19</lastmod>
+  </url>
+  <url>
+    <loc>https://chengshen.me//microservices/RabbitMQ-basic-concepts.html</loc>
+    <lastmod>2023-02-19</lastmod>
+  </url>
+  <url>
     <loc>https://chengshen.me//microservices/Docker-dockerfile.html</loc>
     <lastmod>2023-02-19</lastmod>
   </url>
@@ -117,11 +125,11 @@
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/NETCore-oauth-and-oidc.html</loc>
+    <loc>https://chengshen.me//csharp/NETCore-request-flow.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/NETCore-request-flow.html</loc>
+    <loc>https://chengshen.me//csharp/NETCore-oauth-and-oidc.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
@@ -129,11 +137,11 @@
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/EntityFramework-raw-sql.html</loc>
+    <loc>https://chengshen.me//csharp/NETCore-IOC.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/NETCore-IOC.html</loc>
+    <loc>https://chengshen.me//csharp/EntityFramework-raw-sql.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
@@ -149,11 +157,11 @@
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/EntityFramework-fluent-api.html</loc>
+    <loc>https://chengshen.me//csharp/EntityFramework-interceptor.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/EntityFramework-interceptor.html</loc>
+    <loc>https://chengshen.me//csharp/EntityFramework-fluent-api.html</loc>
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
@@ -169,11 +177,11 @@
     <lastmod>2023-02-16</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//web/javascript/JavaScript-module.html</loc>
+    <loc>https://chengshen.me//web/javascript/JavaScript-this.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//web/javascript/JavaScript-this.html</loc>
+    <loc>https://chengshen.me//web/javascript/JavaScript-module.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
@@ -245,11 +253,11 @@
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/CSharp-dotnet-and-csharp.html</loc>
+    <loc>https://chengshen.me//csharp/CSharp-dispose.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
-    <loc>https://chengshen.me//csharp/CSharp-dispose.html</loc>
+    <loc>https://chengshen.me//csharp/CSharp-dotnet-and-csharp.html</loc>
     <lastmod>2023-02-15</lastmod>
   </url>
   <url>
