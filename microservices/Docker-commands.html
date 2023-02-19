@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        CSS 伪类和伪元素
+        Docker 常用指令
       </h1>
       
       <div class="post-meta">
@@ -223,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;17:35:15 -->
+            <!-- &nbsp;&nbsp;18:17:38 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/CSS/">CSS</a>
+          <a href="/categories/Docker/">Docker</a>
           
         </span>
         
@@ -243,7 +243,7 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CSS/"># CSS</a>
+            <a href="/tags/Docker/"># Docker</a>
             
             
           </span>
@@ -257,10 +257,158 @@
     </header>
 
     <div class="post-content">
-      <h1 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h1><p>功能和 class 有些类似，但它是基于文档之外的抽象，所以叫伪类。</p>
-<p>:link、:visited、:hover、:active、:focus、:right、:left、:first、:lang、:first-child</p>
-<h1 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h1><p>伪元素是 DOM 树没有定义的虚拟元素。</p>
-<p>::before、::after、::selection</p>
+      <h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><h2 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h2><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker image ls</td>
+<td>查看所有镜像</td>
+</tr>
+<tr>
+<td>docker images</td>
+<td>查看所有镜像</td>
+</tr>
+<tr>
+<td>docker images</td>
+<td>查看所有镜像</td>
+</tr>
+<tr>
+<td>docker pull</td>
+<td>下载镜像</td>
+</tr>
+<tr>
+<td>docker rmi</td>
+<td>删除镜像</td>
+</tr>
+<tr>
+<td>docker build</td>
+<td>使用 Dockerfile，生成镜像</td>
+</tr>
+</tbody></table>
+<h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker create</td>
+<td>将镜像创建为容器</td>
+</tr>
+<tr>
+<td>docker ps</td>
+<td>查看所有容器，ps &#x3D; process status</td>
+</tr>
+<tr>
+<td>docker start</td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td>docker stop</td>
+<td>停止容器</td>
+</tr>
+<tr>
+<td>docker logs</td>
+<td>查看容器运行日志</td>
+</tr>
+<tr>
+<td>docker run</td>
+<td>创建并运行一个容器 docker create + docker start</td>
+</tr>
+<tr>
+<td>docker cp</td>
+<td>把本地文件复制到容器，或相反方向也行</td>
+</tr>
+<tr>
+<td>docker diff</td>
+<td>查看容器文件的变化</td>
+</tr>
+<tr>
+<td>docker exec</td>
+<td>在容器中运行命令</td>
+</tr>
+<tr>
+<td>docker commit</td>
+<td>将修改的容器创建为镜像</td>
+</tr>
+<tr>
+<td>docker tag</td>
+<td>为镜像分配一个标记</td>
+</tr>
+<tr>
+<td>docker login</td>
+<td>镜像中登录</td>
+</tr>
+<tr>
+<td>docker logout</td>
+<td>镜像中注销</td>
+</tr>
+<tr>
+<td>docker push</td>
+<td>将镜像发布到仓库</td>
+</tr>
+<tr>
+<td>docker inspect</td>
+<td>查看容器详细配置</td>
+</tr>
+</tbody></table>
+<h2 id="详细指令"><a href="#详细指令" class="headerlink" title="详细指令"></a>详细指令</h2><table>
+<thead>
+<tr>
+<th align="left">指令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">docker images -q</td>
+<td>返回全部镜像的 id 集合，-q &#x3D; –quiet</td>
+</tr>
+<tr>
+<td align="left">docker rmi -f $(docker images -q)</td>
+<td>删除全部镜像</td>
+</tr>
+<tr>
+<td align="left">docker create -p 3000:80 –name myApp linux:latest</td>
+<td>用 linux 创建容器；外 3000 内 80；名为 myApp</td>
+</tr>
+<tr>
+<td align="left">docker ps -a</td>
+<td>查看所有容器(已启动 + 未启动)</td>
+</tr>
+<tr>
+<td align="left">docker start myApp</td>
+<td>启动 myApp 容器</td>
+</tr>
+<tr>
+<td align="left">docker start $(docker ps -aq)</td>
+<td>启动所有容器</td>
+</tr>
+<tr>
+<td align="left">docker stop myApp</td>
+<td>停止 myApp 容器</td>
+</tr>
+<tr>
+<td align="left">docker logs myApp</td>
+<td>打印日志</td>
+</tr>
+<tr>
+<td align="left">docker logs -f myApp</td>
+<td>实时打印日志</td>
+</tr>
+<tr>
+<td align="left">docker exec -it myApp &#x2F;bin&#x2F;bash</td>
+<td>进入容器，开启交互式终端，用 bash</td>
+</tr>
+<tr>
+<td align="left">docker commit myApp newName:tagName</td>
+<td>将 myApp 容器保存为镜像</td>
+</tr>
+</tbody></table>
 
     </div>
 
@@ -268,10 +416,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/css/CSS-transform-transition-animation">CSS transform、transition、animation</a>
+      <a class="prev" rel="prev" href="/microservices/Docker-dockerfile">Docker dockerfile</a>
       
       
-      <a class="next" rel="next" href="/css/CSS-select-children-between-2nd-and-last">CSS 选择第二个以及后续元素</a>
+      <a class="next" rel="next" href="/microservices/Docker-images">Docker 镜像和容器</a>
       
     </section>
   </article>

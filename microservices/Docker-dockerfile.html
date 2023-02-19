@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta name="author" content="SanHuo">
+
+
+
+<meta name="description" content="All About C# and JavaScript">
+
+
+<meta name="keywords" content="JavaScript,csharp,c#,.NET,.NET Core,MySQL">
+
+
+<title>
+  SanHuo&#39;s Blog
+</title>
+
+
+
+<link rel="icon" href="/image/avatar-main.jpeg">
+
+
+
+
+<!-- stylesheets list from _config.yml -->
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/codeOps.css">
+
+
+
+
+<!-- scripts list from _config.yml -->
+
+<script src="/js/script.js"></script>
+
+<script src="/js/tocbot.min.js"></script>
+
+<script src="/js/clipboard.js"></script>
+
+<script src="/js/codeOps.js"></script>
+
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="SanHuo's Blog" type="application/atom+xml">
+</head>
+
+<body>
+  <script>
+    // this function is used to check current theme before page loaded.
+    (() => {
+      const currentTheme = window.localStorage && window.localStorage.getItem('theme') || 'dark';
+      const isDark = currentTheme === 'dark';
+      const pagebody = document.getElementsByTagName('body')[0]
+      const mobileToggleTheme = document.getElementById("mobile-toggle-theme");
+      if (isDark) {
+        pagebody.classList.add('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "🌙");
+      } else {
+        pagebody.classList.remove('dark-theme');
+        // mobile
+        mobileToggleTheme && (document.getElementById("mobile-toggle-theme").innerText = "☀️");
+      }
+    })();
+  </script>
+
+  <div class="wrapper">
+    <header>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header header-logo"><a href="/">
+          首页
+        </a></div>
+      <div class="menu navbar-right">
+        
+        <a class="menu-item" href="/categories">
+          分类
+        </a>
+        
+        <a class="menu-item" href="/tags">
+          标签
+        </a>
+        
+        <input id="switch_default" type="checkbox" checked class="switch_default">
+        <label for="switch_default" class="toggleBtn"></label>
+      </div>
+    </div>
+  </nav>
+
+  
+  <nav class="navbar-mobile" id="nav-mobile">
+    <div class="container">
+      <div class="navbar-header">
+        <div>
+          <a href="/">首页</a>
+          <a id="mobile-toggle-theme">☀️</a>
+        </div>
+        <div class="menu-toggle" onclick="mobileBtn()">&#9776; 菜单</div>
+      </div>
+      <div class="menu" id="mobile-menu">
+        
+        <a class="menu-item" href="/categories">分类</a>
+        
+        <a class="menu-item" href="/tags">标签</a>
+        
+      </div>
+    </div>
+  </nav>
+
+</header>
+<script>
+  var mobileBtn = function f() {
+    var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+    var mobileMenu = document.getElementById("mobile-menu");
+    if (toggleMenu.classList.contains("active")) {
+      toggleMenu.classList.remove("active")
+      mobileMenu.classList.remove("active")
+    } else {
+      toggleMenu.classList.add("active")
+      mobileMenu.classList.add("active")
+    }
+  }
+</script>
+    <div class="main">
+      
+<div class="container">
+  
+  
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot`
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
+
+  
+  <article class="post-wrap">
+    <header class="post-header">
+      <h1 class="post-title">
+        Docker dockerfile
+      </h1>
+      
+      <div class="post-meta">
+        
+
+        
+        <span class="post-time">
+          日期：<a href="#">
+            2023年 02月
+            <!-- &nbsp;&nbsp;18:32:48 -->
+          </a>
+        </span>
+        
+        
+        <span class="post-category">
+          &nbsp;&nbsp;
+          分类：
+          <a href="/categories/Docker/">Docker</a>
+          
+        </span>
+        
+      </div>
+      
+      <section class="post-tags">
+        <div style="text-align: left;">
+          <span>标签：</span>
+          <span class="tag" style>
+            
+            
+            <a href="/tags/Docker/"># Docker</a>
+            
+            
+          </span>
+        </div>
+        <div style="text-align: right; min-width: 50px;">
+          <a href="javascript:window.history.back();"> ← 返回</a>
+          <!-- <span>&nbsp;|&nbsp;</span>
+          <a href="/">返回主页</a> -->
+        </div>
+      </section>
+    </header>
+
+    <div class="post-content">
+      <h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install emacs</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install apache2</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;/bin/bash&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>FROM debian</code>：将 debian 镜像作为基础镜像<br><code>RUN apt-get install emacs</code>：安装 emacs<br><code>RUN apt-get install apache2</code>：安装 apache2<br><code>CMD [&quot;/bin/bash&quot;]</code>：执行 bash</p>
+<h1 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h1><p>FROM 用来初始化新的生成阶段，并为后续指令提供基本映像。<br>多个 FROM 代表<code>多阶段</code>构建。<br>Dockerfile 一般以 FROM 开头，ARG 是唯一能在 FROM 之前的指令。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ARG</span>  CODE_VERSION=latest</span><br><span class="line"><span class="keyword">FROM</span> base:$&#123;CODE_VERSION&#125;</span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash">  /code/run-app</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h1><ol>
+<li>shell 模式：RUN <command></li>
+<li>exec 模式：RUN [“executable”, “param1”, “param2”]</li>
+</ol>
+<p>RUN 会创建新的层（Layer），在新的层上执行命令，并提交（commit）执行结果。<br>shell 模式会调用 shell，exec 模式不会调用 shell。<br>exec 模式默认不会进行字符串替换（指的是变量替换），但可以通过显式调用 shell 的形式处理：</p>
+<p>exec 模式调用 shell，$HOME 为变量：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> [ <span class="string">&quot;sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;echo <span class="variable">$HOME</span>&quot;</span> ]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h1><ol>
+<li>exec 模式，首选：CMD [“executable”,”param1”,”param2”]</li>
+<li>为 ENTRYPOINT 提供默认参数形式：CMD [“param1”,”param2”]</li>
+<li>shell 模式：CMD command param1 param2</li>
+</ol>
+<p>一个 Dockerfile 中只能有一个 CMD，如果有多个，也只有最后一个有效。<br>CMD 主要用途是给执行容器默认行为，如：指定默认执行文件。<br>如果 CMD 用的第 2 中模式（为 ENTRYPOINT 提供默认参数形式），那么 ENTRYPOINT 指令也应该用字符串数组的形式，CMD 的值就会是 ENTRYPOINT 默认参数。<br>不要将 RUN 与 CMD 混淆。RUN 实际上运行一个命令并提交结果；CMD 在构建时不执行任何操作，而是为镜像提前设置执行指令。</p>
+<h1 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h1><p>声明哪些端口是将要开放的，docker run 时 使用 -P（P 是大写的）进行随机端口关联映射。或者使用<br>docker run -p 外部端口:容器端口 镜像名。所以 Dockerfile 中使用 EXPOSE 用处不大。</p>
+<h1 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h1><p>设置环境变量，会被持久化进容器。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENV</span> MY_NAME=<span class="string">&quot;John Doe&quot;</span>  MY_DOG=<span class="string">&quot;Rex The Dog&quot;</span></span><br><span class="line"><span class="keyword">ENV</span> MY_VAR my-value</span><br></pre></td></tr></table></figure>
+
+<p>如果不希望 ENV 环境变量持久化进容器，可以使用行内变量：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get install -y ...</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 DEBIAN_FRONTEND&#x3D;noninteractive 就是行内变量。<br>或者 ARG 指令也能实现不持久化变量到容器。</p>
+<h1 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ADD</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [--checksum=&lt;checksum&gt;] &lt;src&gt;... &lt;dest&gt;</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>–chown 只支持 Linux 容器。<br>ADD 作用是：从 src 复制文件到镜像中 dest 路径，会创建新的层。<br>src 可以是：本地文件、目录、url 形式的远程文件。<br>如果 src 是本地的压缩文件（.tar.xz），ADD 会自动解压到镜像中。<br>多 src 的，路径被解析为相对路径（相对于 build 路径）。<br>src 可以包含通配符：* 多字符，? 单字符。</p>
+<h1 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>COPY 功能和 ADD 类似，同样会创建新的层。<br>src 可以是：本地文件、目录。<br>ADD 和 COPY 两者，更推荐使用 COPY。</p>
+<h1 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h1><p>Dockerfile 中 WORKDIR 指令为后续的 RUN、CMD、ENTRYPOINT、COPY、ADD 等指令设置工作目录。<br>多 WORKDIR 指令，如果提供了相对路径，则后出现的 WORKDIR 是基于先前出现的 WORKDIR 的路径的。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /a</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> b</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> c</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">pwd</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h1><ol>
+<li>exec 模式：ENTRYPOINT [“executable”, “param1”, “param2”]</li>
+<li>shell 模式：ENTRYPOINT command param1 param2</li>
+</ol>
+<p>docker run [image] [arguments] 的 arguments 部分会追加到 exec 模式的 ENTRYPOINT 指令数组的后面，并且会替换 CMD 指令中所有元素。如果想替换 ENTRYPOINT，使用 docker run –entrypoint。<br>shell 模式的 ENTRYPOINT 会阻止<br>Dockerfile 中只有最后一个 ENTRYPOINT 是有效指令。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>假设一个简单的场景：公司的服务器需要定期清理旧的日志文件。</p>
+<figure class="highlight bash"><figcaption><span>clean_log 文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;即将删除 <span class="variable">$1</span> 天前的日志文件&quot;</span></span><br><span class="line">find /log_dir -ctime <span class="string">&quot;<span class="variable">$1</span>&quot;</span> -name <span class="string">&#x27;*log&#x27;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dockerfile"><figcaption><span>dockerfile 文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">14.04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 clean_log 脚本添加到镜像中</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> clean_log /usr/bin/clean_log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 clean_log 可执行</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x /usr/bin/clean_log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将此镜像的入口点定义为 clean_log 脚本</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/usr/bin/clean_log&quot;</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为 ENTRYPOINT 提供默认参数，7天</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;7&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><figcaption><span>构建镜像</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t log-cleaner .</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><figcaption><span>运行镜像</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v /var/log/myapplogs:/log_dir log-cleaner 365</span><br></pre></td></tr></table></figure>
+
+<p>上述命令将 &#x2F;var&#x2F;log&#x2F;myapplogs 目录挂载到容器内部的脚本指定的目录，并且 365 这个值会替换掉 CMD 的 7。</p>
+<h1 id="RUN、CMD-和-ENTRYPOINT"><a href="#RUN、CMD-和-ENTRYPOINT" class="headerlink" title="RUN、CMD 和 ENTRYPOINT"></a>RUN、CMD 和 ENTRYPOINT</h1><p>Dockerfile 中 RUN、CMD 和 ENTRYPOINT 都能够用于执行命令，下面是三者的主要用途：<br><code>RUN</code>：命令执行命令并创建新的镜像层，通常用于安装软件包；<br><code>CMD</code>：命令设置容器启动后默认执行的命令及其参数，但 CMD 设置的命令能够被 docker run 命令后面的命令行参数替换。一个 Dockerfile 至多只能有一个 CMD，如果有多个，只有最后一个生效。如果我们在 docker run 时指定了命令或者有 ENTRYPOINT，那么 CMD 就会被覆盖；<br><code>ENTRYPOINT</code>：配置容器启动时的执行命令，不会被忽略，一定会被执行，即使 docker run 时指定了其他命令。如果存在多个 ENTRYPOINT 命令，则只会执行最后一个 ENTRYPOINT 命令。</p>
+<h2 id="RUN-1"><a href="#RUN-1" class="headerlink" title="RUN"></a>RUN</h2><figure class="highlight dockerfile"><figcaption><span>错误写法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -y gcc libc6-dev make</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> wget -O redis.tar.gz <span class="string">&quot;http://download.redis.io/releases/redis-3.2.5.tar.gz&quot;</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /usr/src/redis</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> make -C /usr/src/redis</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> make -C /usr/src/redis install</span></span><br></pre></td></tr></table></figure>
+
+<p>该写法会创建 7 层镜像，这是完全没有意义的，而且很多运行时不需要的东西，都被装进了镜像里，比如编译环境、更新的软件包等等。结果就是产生非常臃肿、非常多层的镜像，不仅仅增加了构建部署的时间，也很容易出错。</p>
+<figure class="highlight dockerfile"><figcaption><span>合理写法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> buildDeps=<span class="string">&#x27;gcc libc6-dev make&#x27;</span> \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get update \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get install -y <span class="variable">$buildDeps</span> \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; wget -O redis.tar.gz <span class="string">&quot;http://download.redis.io/releases/redis-3.2.5.tar.gz&quot;</span> \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">mkdir</span> -p /usr/src/redis \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1 \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; make -C /usr/src/redis \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; make -C /usr/src/redis install \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/* \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> redis.tar.gz \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> -r /usr/src/redis \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get purge -y --auto-remove <span class="variable">$buildDeps</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="CMD-1"><a href="#CMD-1" class="headerlink" title="CMD"></a>CMD</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get install -y curl \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [ <span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-s&quot;</span>, <span class="string">&quot;http://ip.cn&quot;</span> ]</span></span><br></pre></td></tr></table></figure>
+
+<p>该镜像作用是查机器的 IP。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t myip</span><br><span class="line">docker run myip</span><br></pre></td></tr></table></figure>
+
+<p>如果想替换 Dockerfile 中 CMD 中参数，执行一下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run myip curl -s http://ip.cn -i</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>RUN、ADD、COPY 这三个指令都会创建新的层。</p>
+
+    </div>
+
+    
+
+    <section class="post-nav">
+      
+      <a class="prev" href="javascript:void(0)">无</a>
+      
+      
+      <a class="next" rel="next" href="/microservices/Docker-commands">Docker 常用指令</a>
+      
+    </section>
+  </article>
+</div>
+    </div>
+    <footer id="footer" class="footer">
+  <div class="copyright">
+    <span><a href="javascript:void(0)">SanHuo</a> & <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> | <a href="/sitemap.xml">Sitemap</a></span>
+  </div>
+</footer>
+  </div>
+</body>
+
+</html>

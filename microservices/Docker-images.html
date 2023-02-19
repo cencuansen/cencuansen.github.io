@@ -139,12 +139,81 @@
 <div class="container">
   
   
+  <div class="post-toc">
+  <div class="tocbot-list"></div>
+  <div class="tocbot-list-menu">
+    <!-- <a class="tocbot-toc-expand" onclick="expand_toc()">+ 展开</a> -->
+    <a onclick="go_top()">↑ 顶部</a>
+    <a onclick="go_bottom()">↓ 底部</a>
+  </div>
+</div>
+
+<script>
+  // tocbot: https://github.com/tscanlin/tocbot`
+  var tocbot_timer;
+  var DEPTH_MAX = 6; // 为 6 时展开所有
+  var tocbot_default_config = {
+    // Where to render the table of contents.
+    tocSelector: '.tocbot-list',
+    // // Where to grab the headings to build the table of contents.
+    contentSelector: '.post-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    // 0: collapse them all; 6: expand all
+    collapseDepth: 6,
+    orderedList: false,
+    scrollSmooth: true,
+    isCollapsedClass: 'is-collapsed',
+    onClick: () => {} // extend_click,
+  };
+
+  function extend_click() {
+    clearTimeout(tocbot_timer);
+    tocbot_timer = setTimeout(function() {
+      tocbot.refresh(obj_merge(tocbot_default_config, {
+        hasInnerContainers: false
+      }));
+    }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+  }
+
+  document.ready(function() {
+    tocbot.init(obj_merge(tocbot_default_config));
+  });
+
+  function expand_toc() {
+    var expandButton = document.querySelector('.tocbot-toc-expand');
+    var expanded = expandButton.getAttribute('data-expanded');
+    expanded ? expandButton.removeAttribute('data-expanded') : expandButton.setAttribute('data-expanded', true);
+    // tocbot.refresh(obj_merge(tocbot_default_config, {
+    //   collapseDepth: expanded ? 0 : DEPTH_MAX
+    // }));
+    expandButton.innerText = expanded ? '+ 展开' : '× 关闭';
+  }
+
+  function go_top() {
+    window.scrollTo(0, 0);
+  }
+
+  function go_bottom() {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  function obj_merge(target, source) {
+    for (var item in source) {
+      if (source.hasOwnProperty(item)) {
+        target[item] = source[item];
+      }
+    }
+    return target;
+  }
+</script>
+  
 
   
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        Web 浏览器中网络请求过程
+        Docker 镜像和容器
       </h1>
       
       <div class="post-meta">
@@ -154,7 +223,7 @@
         <span class="post-time">
           日期：<a href="#">
             2023年 02月
-            <!-- &nbsp;&nbsp;22:21:06 -->
+            <!-- &nbsp;&nbsp;18:07:48 -->
           </a>
         </span>
         
@@ -162,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/Web/">Web</a>
+          <a href="/categories/Docker/">Docker</a>
           
         </span>
         
@@ -174,9 +243,7 @@
           <span class="tag" style>
             
             
-            <a href="/tags/Web/"># Web</a>
-            
-            <a href="/tags/Request/"># Request</a>
+            <a href="/tags/Docker/"># Docker</a>
             
             
           </span>
@@ -190,14 +257,9 @@
     </header>
 
     <div class="post-content">
-      <ol>
-<li>地址解析，提取出协议、域名、端口等信息等</li>
-<li>通过 DNS 获取到 IP 地址</li>
-<li>进行 TCP 连接(三次握手)<br>a. 第一次握手：建立连接时，客户端发送 syn(建立联机)包到服务器，并进入 syn_send 状态，等待服务器确认；<br>b. 第二次握手：服务器收到 syn 包，确认包信息，同时自己也发送一个 syn + ack(确认)包并进入 syn_recv 状态;<br>c. 第三次握手：客户端收到 syn+ack 包，向服务器发送 ack 包，发送完后，客户端和服务器都进入 established 状态，完成三次握手；</li>
-<li>HTTP 请求</li>
-<li>服务器响应请求</li>
-<li>DOM 解析和渲染</li>
-</ol>
+      <h1 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h1><p>镜像是一种轻量级、可执行的独立软件包，用来打包软件运行环境和基于运行环境开发的软件，它包含运行某个软件所需的所有内容，包括代码、运行时库、环境变量和配置文件。<br>镜像由文件系统叠加而成，最底端是一个引导文件系统(bootfs)。</p>
+<h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>当一个容器启动后，镜像会被移到内存中，而引导文件系统则会被卸载。<br>一个镜像可以放到另一个镜像的顶部，位于下面为父镜像，最底部的为基础镜像。</p>
+<p><img src="/images/%E9%95%9C%E5%83%8F1.png" alt="镜像结构"><br><img src="/images/%E9%95%9C%E5%83%8F3.png" alt="镜像结构"></p>
 
     </div>
 
@@ -205,10 +267,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/web/html/HTML-src-and-href">HTML src 和 href</a>
+      <a class="prev" rel="prev" href="/microservices/Docker-commands">Docker 常用指令</a>
       
       
-      <a class="next" rel="next" href="/web/Web-dom-parsing-and-rendering">Web DOM 的解析和渲染</a>
+      <a class="next" rel="next" href="/database/Redis-bloon-filter">Redis 布隆过滤器</a>
       
     </section>
   </article>

@@ -6,7 +6,7 @@
   <link href="https://chengshen.me/atom.xml" rel="self"/>
   
   <link href="https://chengshen.me/"/>
-  <updated>2023-02-18T07:56:43.407Z</updated>
+  <updated>2023-02-19T11:06:49.143Z</updated>
   <id>https://chengshen.me/</id>
   
   <author>
@@ -15,6 +15,78 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker dockerfile</title>
+    <link href="https://chengshen.me/microservices/Docker-dockerfile"/>
+    <id>https://chengshen.me/microservices/Docker-dockerfile</id>
+    <published>2023-02-19T10:32:48.000Z</published>
+    <updated>2023-02-19T11:06:49.143Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install emacs</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install apache2</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;/bin/bash&quot;</span>]</span></span><br></pre></td></tr></table></figure><p><code>FROM debian</code>：将 debian 镜像作为基础镜像<br><code>RUN apt-get install emacs</code>：安装 emacs<br><code>RUN apt-get install apache2</code>：安装 apache2<br><code>CMD [&quot;/bin/bash&quot;]</code>：执行 bash</p><h1 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h1><p>FROM 用来初始化新的生成阶段，并为后续指令提供基本映像。<br>多个 FROM 代表<code>多阶段</code>构建。<br>Dockerfile 一般以 FROM 开头，ARG 是唯一能在 FROM 之前的指令。</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ARG</span>  CODE_VERSION=latest</span><br><span class="line"><span class="keyword">FROM</span> base:$&#123;CODE_VERSION&#125;</span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash">  /code/run-app</span></span><br></pre></td></tr></table></figure><h1 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h1><ol><li>shell 模式：RUN <command></li><li>exec 模式：RUN [“executable”, “param1”, “param2”]</li></ol><p>RUN 会创建新的层（Layer），在新的层上执行命令，并提交（commit）执行结果。<br>shell 模式会调用 shell，exec 模式不会调用 shell。<br>exec 模式默认不会进行字符串替换（指的是变量替换），但可以通过显式调用 shell 的形式处理：</p><p>exec 模式调用 shell，$HOME 为变量：</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> [ <span class="string">&quot;sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;echo <span class="variable">$HOME</span>&quot;</span> ]</span></span><br></pre></td></tr></table></figure><h1 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h1><ol><li>exec 模式，首选：CMD [“executable”,”param1”,”param2”]</li><li>为 ENTRYPOINT 提供默认参数形式：CMD [“param1”,”param2”]</li><li>shell 模式：CMD command param1 param2</li></ol><p>一个 Dockerfile 中只能有一个 CMD，如果有多个，也只有最后一个有效。<br>CMD 主要用途是给执行容器默认行为，如：指定默认执行文件。<br>如果 CMD 用的第 2 中模式（为 ENTRYPOINT 提供默认参数形式），那么 ENTRYPOINT 指令也应该用字符串数组的形式，CMD 的值就会是 ENTRYPOINT 默认参数。<br>不要将 RUN 与 CMD 混淆。RUN 实际上运行一个命令并提交结果；CMD 在构建时不执行任何操作，而是为镜像提前设置执行指令。</p><h1 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h1><p>声明哪些端口是将要开放的，docker run 时 使用 -P（P 是大写的）进行随机端口关联映射。或者使用<br>docker run -p 外部端口:容器端口 镜像名。所以 Dockerfile 中使用 EXPOSE 用处不大。</p><h1 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h1><p>设置环境变量，会被持久化进容器。</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENV</span> MY_NAME=<span class="string">&quot;John Doe&quot;</span>  MY_DOG=<span class="string">&quot;Rex The Dog&quot;</span></span><br><span class="line"><span class="keyword">ENV</span> MY_VAR my-value</span><br></pre></td></tr></table></figure><p>如果不希望 ENV 环境变量持久化进容器，可以使用行内变量：</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> DEBIAN_FRONTEND=noninteractive apt-get update &amp;&amp; apt-get install -y ...</span></span><br></pre></td></tr></table></figure><p>这里的 DEBIAN_FRONTEND&#x3D;noninteractive 就是行内变量。<br>或者 ARG 指令也能实现不持久化变量到容器。</p><h1 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ADD</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [--checksum=&lt;checksum&gt;] &lt;src&gt;... &lt;dest&gt;</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span></span><br></pre></td></tr></table></figure><p>–chown 只支持 Linux 容器。<br>ADD 作用是：从 src 复制文件到镜像中 dest 路径，会创建新的层。<br>src 可以是：本地文件、目录、url 形式的远程文件。<br>如果 src 是本地的压缩文件（.tar.xz），ADD 会自动解压到镜像中。<br>多 src 的，路径被解析为相对路径（相对于 build 路径）。<br>src 可以包含通配符：* 多字符，? 单字符。</p><h1 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h1><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> [--<span class="built_in">chown</span>=&lt;user&gt;:&lt;group&gt;] [<span class="string">&quot;&lt;src&gt;&quot;</span>,... <span class="string">&quot;&lt;dest&gt;&quot;</span>]</span></span><br></pre></td></tr></table></figure><p>COPY 功能和 ADD 类似，同样会创建新的层。<br>src 可以是：本地文件、目录。<br>ADD 和 COPY 两者，更推荐使用 COPY。</p><h1 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h1><p>Dockerfile 中 WORKDIR 指令为后续的 RUN、CMD、ENTRYPOINT、COPY、ADD 等指令设置工作目录。<br>多 WORKDIR 指令，如果提供了相对路径，则后出现的 WORKDIR 是基于先前出现的 WORKDIR 的路径的。</p><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /a</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> b</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> c</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">pwd</span></span></span><br></pre></td></tr></table></figure><h1 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h1><ol><li>exec 模式：ENTRYPOINT [“executable”, “param1”, “param2”]</li><li>shell 模式：ENTRYPOINT command param1 param2</li></ol><p>docker run [image] [arguments] 的 arguments 部分会追加到 exec 模式的 ENTRYPOINT 指令数组的后面，并且会替换 CMD 指令中所有元素。如果想替换 ENTRYPOINT，使用 docker run –entrypoint。<br>shell 模式的 ENTRYPOINT 会阻止<br>Dockerfile 中只有最后一个 ENTRYPOINT 是有效指令。</p><h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>假设一个简单的场景：公司的服务器需要定期清理旧的日志文件。</p><figure class="highlight bash"><figcaption><span>clean_log 文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;即将删除 <span class="variable">$1</span> 天前的日志文件&quot;</span></span><br><span class="line">find /log_dir -ctime <span class="string">&quot;<span class="variable">$1</span>&quot;</span> -name <span class="string">&#x27;*log&#x27;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \;</span><br></pre></td></tr></table></figure><figure class="highlight dockerfile"><figcaption><span>dockerfile 文件</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">14.04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 clean_log 脚本添加到镜像中</span></span><br><span class="line"><span class="keyword">ADD</span><span class="language-bash"> clean_log /usr/bin/clean_log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 clean_log 可执行</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">chmod</span> +x /usr/bin/clean_log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将此镜像的入口点定义为 clean_log 脚本</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;/usr/bin/clean_log&quot;</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为 ENTRYPOINT 提供默认参数，7天</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;7&quot;</span>]</span></span><br></pre></td></tr></table></figure><figure class="highlight bash"><figcaption><span>构建镜像</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t log-cleaner .</span><br></pre></td></tr></table></figure><figure class="highlight bash"><figcaption><span>运行镜像</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -v /var/log/myapplogs:/log_dir log-cleaner 365</span><br></pre></td></tr></table></figure><p>上述命令将 &#x2F;var&#x2F;log&#x2F;myapplogs 目录挂载到容器内部的脚本指定的目录，并且 365 这个值会替换掉 CMD 的 7。</p><h1 id="RUN、CMD-和-ENTRYPOINT"><a href="#RUN、CMD-和-ENTRYPOINT" class="headerlink" title="RUN、CMD 和 ENTRYPOINT"></a>RUN、CMD 和 ENTRYPOINT</h1><p>Dockerfile 中 RUN、CMD 和 ENTRYPOINT 都能够用于执行命令，下面是三者的主要用途：<br><code>RUN</code>：命令执行命令并创建新的镜像层，通常用于安装软件包；<br><code>CMD</code>：命令设置容器启动后默认执行的命令及其参数，但 CMD 设置的命令能够被 docker run 命令后面的命令行参数替换。一个 Dockerfile 至多只能有一个 CMD，如果有多个，只有最后一个生效。如果我们在 docker run 时指定了命令或者有 ENTRYPOINT，那么 CMD 就会被覆盖；<br><code>ENTRYPOINT</code>：配置容器启动时的执行命令，不会被忽略，一定会被执行，即使 docker run 时指定了其他命令。如果存在多个 ENTRYPOINT 命令，则只会执行最后一个 ENTRYPOINT 命令。</p><h2 id="RUN-1"><a href="#RUN-1" class="headerlink" title="RUN"></a>RUN</h2><figure class="highlight dockerfile"><figcaption><span>错误写法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get install -y gcc libc6-dev make</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> wget -O redis.tar.gz <span class="string">&quot;http://download.redis.io/releases/redis-3.2.5.tar.gz&quot;</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /usr/src/redis</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> make -C /usr/src/redis</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> make -C /usr/src/redis install</span></span><br></pre></td></tr></table></figure><p>该写法会创建 7 层镜像，这是完全没有意义的，而且很多运行时不需要的东西，都被装进了镜像里，比如编译环境、更新的软件包等等。结果就是产生非常臃肿、非常多层的镜像，不仅仅增加了构建部署的时间，也很容易出错。</p><figure class="highlight dockerfile"><figcaption><span>合理写法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> buildDeps=<span class="string">&#x27;gcc libc6-dev make&#x27;</span> \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get update \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get install -y <span class="variable">$buildDeps</span> \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; wget -O redis.tar.gz <span class="string">&quot;http://download.redis.io/releases/redis-3.2.5.tar.gz&quot;</span> \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">mkdir</span> -p /usr/src/redis \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1 \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; make -C /usr/src/redis \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; make -C /usr/src/redis install \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/* \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> redis.tar.gz \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> -r /usr/src/redis \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get purge -y --auto-remove <span class="variable">$buildDeps</span></span></span><br></pre></td></tr></table></figure><h2 id="CMD-1"><a href="#CMD-1" class="headerlink" title="CMD"></a>CMD</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">16.04</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apt-get update \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; apt-get install -y curl \</span></span><br><span class="line"><span class="language-bash">  &amp;&amp; <span class="built_in">rm</span> -rf /var/lib/apt/lists/*</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [ <span class="string">&quot;curl&quot;</span>, <span class="string">&quot;-s&quot;</span>, <span class="string">&quot;http://ip.cn&quot;</span> ]</span></span><br></pre></td></tr></table></figure><p>该镜像作用是查机器的 IP。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker build -t myip</span><br><span class="line">docker run myip</span><br></pre></td></tr></table></figure><p>如果想替换 Dockerfile 中 CMD 中参数，执行一下命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run myip curl -s http://ip.cn -i</span><br></pre></td></tr></table></figure><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>RUN、ADD、COPY 这三个指令都会创建新的层。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;示例&quot;&gt;&lt;a href=&quot;#示例&quot; class=&quot;headerlink&quot; title=&quot;示例&quot;&gt;&lt;/a&gt;示例&lt;/h1&gt;&lt;figure class=&quot;highlight dockerfile&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="Docker" scheme="https://chengshen.me/categories/Docker/"/>
+    
+    
+    <category term="Docker" scheme="https://chengshen.me/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker 常用指令</title>
+    <link href="https://chengshen.me/microservices/Docker-commands"/>
+    <id>https://chengshen.me/microservices/Docker-commands</id>
+    <published>2023-02-19T10:17:38.000Z</published>
+    <updated>2023-02-19T10:31:51.995Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><h2 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h2><table><thead><tr><th>指令</th><th>含义</th></tr></thead><tbody><tr><td>docker image ls</td><td>查看所有镜像</td></tr><tr><td>docker images</td><td>查看所有镜像</td></tr><tr><td>docker images</td><td>查看所有镜像</td></tr><tr><td>docker pull</td><td>下载镜像</td></tr><tr><td>docker rmi</td><td>删除镜像</td></tr><tr><td>docker build</td><td>使用 Dockerfile，生成镜像</td></tr></tbody></table><h2 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h2><table><thead><tr><th>指令</th><th>含义</th></tr></thead><tbody><tr><td>docker create</td><td>将镜像创建为容器</td></tr><tr><td>docker ps</td><td>查看所有容器，ps &#x3D; process status</td></tr><tr><td>docker start</td><td>启动容器</td></tr><tr><td>docker stop</td><td>停止容器</td></tr><tr><td>docker logs</td><td>查看容器运行日志</td></tr><tr><td>docker run</td><td>创建并运行一个容器 docker create + docker start</td></tr><tr><td>docker cp</td><td>把本地文件复制到容器，或相反方向也行</td></tr><tr><td>docker diff</td><td>查看容器文件的变化</td></tr><tr><td>docker exec</td><td>在容器中运行命令</td></tr><tr><td>docker commit</td><td>将修改的容器创建为镜像</td></tr><tr><td>docker tag</td><td>为镜像分配一个标记</td></tr><tr><td>docker login</td><td>镜像中登录</td></tr><tr><td>docker logout</td><td>镜像中注销</td></tr><tr><td>docker push</td><td>将镜像发布到仓库</td></tr><tr><td>docker inspect</td><td>查看容器详细配置</td></tr></tbody></table><h2 id="详细指令"><a href="#详细指令" class="headerlink" title="详细指令"></a>详细指令</h2><table><thead><tr><th align="left">指令</th><th>含义</th></tr></thead><tbody><tr><td align="left">docker images -q</td><td>返回全部镜像的 id 集合，-q &#x3D; –quiet</td></tr><tr><td align="left">docker rmi -f $(docker images -q)</td><td>删除全部镜像</td></tr><tr><td align="left">docker create -p 3000:80 –name myApp linux:latest</td><td>用 linux 创建容器；外 3000 内 80；名为 myApp</td></tr><tr><td align="left">docker ps -a</td><td>查看所有容器(已启动 + 未启动)</td></tr><tr><td align="left">docker start myApp</td><td>启动 myApp 容器</td></tr><tr><td align="left">docker start $(docker ps -aq)</td><td>启动所有容器</td></tr><tr><td align="left">docker stop myApp</td><td>停止 myApp 容器</td></tr><tr><td align="left">docker logs myApp</td><td>打印日志</td></tr><tr><td align="left">docker logs -f myApp</td><td>实时打印日志</td></tr><tr><td align="left">docker exec -it myApp &#x2F;bin&#x2F;bash</td><td>进入容器，开启交互式终端，用 bash</td></tr><tr><td align="left">docker commit myApp newName:tagName</td><td>将 myApp 容器保存为镜像</td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;指令&quot;&gt;&lt;a href=&quot;#指令&quot; class=&quot;headerlink&quot; title=&quot;指令&quot;&gt;&lt;/a&gt;指令&lt;/h1&gt;&lt;h2 id=&quot;镜像操作&quot;&gt;&lt;a href=&quot;#镜像操作&quot; class=&quot;headerlink&quot; title=&quot;镜像操作&quot;&gt;&lt;/a&gt;镜像操作&lt;/h</summary>
+      
+    
+    
+    
+    <category term="Docker" scheme="https://chengshen.me/categories/Docker/"/>
+    
+    
+    <category term="Docker" scheme="https://chengshen.me/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker 镜像和容器</title>
+    <link href="https://chengshen.me/microservices/Docker-images"/>
+    <id>https://chengshen.me/microservices/Docker-images</id>
+    <published>2023-02-19T10:07:48.000Z</published>
+    <updated>2023-02-19T10:16:40.289Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h1><p>镜像是一种轻量级、可执行的独立软件包，用来打包软件运行环境和基于运行环境开发的软件，它包含运行某个软件所需的所有内容，包括代码、运行时库、环境变量和配置文件。<br>镜像由文件系统叠加而成，最底端是一个引导文件系统(bootfs)。</p><h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p>当一个容器启动后，镜像会被移到内存中，而引导文件系统则会被卸载。<br>一个镜像可以放到另一个镜像的顶部，位于下面为父镜像，最底部的为基础镜像。</p><p><img src="/images/%E9%95%9C%E5%83%8F1.png" alt="镜像结构"><br><img src="/images/%E9%95%9C%E5%83%8F3.png" alt="镜像结构"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;镜像&quot;&gt;&lt;a href=&quot;#镜像&quot; class=&quot;headerlink&quot; title=&quot;镜像&quot;&gt;&lt;/a&gt;镜像&lt;/h1&gt;&lt;p&gt;镜像是一种轻量级、可执行的独立软件包，用来打包软件运行环境和基于运行环境开发的软件，它包含运行某个软件所需的所有内容，包括代码、运行时库、环</summary>
+      
+    
+    
+    
+    <category term="Docker" scheme="https://chengshen.me/categories/Docker/"/>
+    
+    
+    <category term="Docker" scheme="https://chengshen.me/tags/Docker/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis 布隆过滤器</title>
@@ -478,86 +550,6 @@
     <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
     
     <category term="Procedure" scheme="https://chengshen.me/tags/Procedure/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL 执行计划</title>
-    <link href="https://chengshen.me/database/MySQL-explain"/>
-    <id>https://chengshen.me/database/MySQL-explain</id>
-    <published>2023-02-16T08:45:55.000Z</published>
-    <updated>2023-02-16T11:26:27.667Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>explain &lt;sql 语句&gt;，模拟 MySQL 优化器执行 SQL，用来分析 SELECT 语句执行效率。</p><h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id | select_type | table | partitions | type | possible_keys | key | key_len | ref | rows | filtered | extra</span><br></pre></td></tr></table></figure><h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul><li><p>id：从大到小顺序执行，相等值的从上到下顺序执行，null 值的最后执行。</p></li><li><p>select_type：</p><ul><li>simple：表示不需要 union 操作或者不包含子查询的简单 select 查询。有连接查询时，外层的查询为 simple，且只有一个。</li><li>primary：一个需要 union 操作或者含有子查询的 select，位于最外层的单位查询的 select_type 即为 primary。且只有一个。</li><li>union：union 连接的两个 select 查询，第一个查询是 dervied 派生表，除了第一个表外，第二个以后的表 select_type 都是 union。</li><li>dependent union：与 union 一样，出现在 union 或 union all 语句中，但是这个查询要受到外部查询的影响。</li><li>union result：包含 union 的结果集，在 union 和 union all 语句中，因为它不需要参与查询，所以 id 字段为 null。</li><li>subquery：除了 from 字句中包含的子查询外，其他地方出现的子查询都可能是 subquery。</li><li>dependent subquery：与 dependent union 类似，表示这个 subquery 的查询要受到外部表查询的影响。</li><li>derived：from 字句中出现的子查询，也叫做派生表，其他数据库中可能叫做内联视图或嵌套 select。</li></ul></li><li><p>type：null &gt; system &gt; const &gt; eq_ref &gt; ref &gt; ref_or_null &gt; index_merge &gt; range &gt; index &gt; all，一般来说，得保证查询至少达到 range 级别，最好能达到 ref。</p><ul><li>null MySQL 在优化阶段分解查询语句，在执行阶段不再需要访问表或索引</li></ul><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="built_in">min</span>(id) <span class="keyword">from</span> <span class="operator">&lt;</span><span class="keyword">table</span> name<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure><ul><li>system 表中只有一行记录（等于系统表），const 类型的特例。</li><li>const 通过索引一次命中，匹配一行数据，常见于主键索引或唯一索引。比如：where id&#x3D;1</li><li>eq_ref 唯一索引扫描，对于每个索引键，表中只有一条记录匹配，常见于主键索引或唯一索引。</li><li>ref 非唯一索引扫描，返回匹配的所有结果。</li><li>range 检索给定范围的行。</li><li>index 遍历索引树。</li><li>all 全表扫描。</li></ul></li><li><p>extra：using filesort，using index，using temporary，using where</p><ul><li>using filesort，mysql 对结果集合进行外部排序，说明没有通过索引顺序达到排序效果，需要优化。</li><li>using index，覆盖索引，说明索引树中就能找到所需要的数据，避免了回表，性能不错。</li><li>using temporary，使用了临时表，一般出现于排序，分组，多表 join 的情况下，需要优化。</li><li>using where，使用了 where 过滤，性能较高。</li></ul></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;使用&quot;&gt;&lt;a href=&quot;#使用&quot; class=&quot;headerlink&quot; title=&quot;使用&quot;&gt;&lt;/a&gt;使用&lt;/h1&gt;&lt;p&gt;explain &amp;lt;sql 语句&amp;gt;，模拟 MySQL 优化器执行 SQL，用来分析 SELECT 语句执行效率。&lt;/p&gt;
-&lt;h1 </summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="Explain" scheme="https://chengshen.me/tags/Explain/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL 隔离级别</title>
-    <link href="https://chengshen.me/database/MySQL-isolation-level"/>
-    <id>https://chengshen.me/database/MySQL-isolation-level</id>
-    <published>2023-02-16T08:40:42.000Z</published>
-    <updated>2023-02-16T11:26:27.667Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><p>读未提交、读已提交、可重复读、串行化。</p><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ol><li>脏读：A 事务读取到 B 事务正在修改还未提交的数据。</li><li>不可重复读：A 事务查询两次数据结果不一致，是因为 B 事务在 A 第一次查询后对数据做了修改。</li><li>幻读：A 事务条件匹配到若干行，B 事务进行了插入或删除，事务 A 再查询的结果与上次不一致。</li></ol><table><thead><tr><th align="right"></th><th align="center">脏读</th><th align="center">不可重复读</th><th align="center">幻读</th></tr></thead><tbody><tr><td align="right">读未提交</td><td align="center">存在</td><td align="center">存在</td><td align="center">存在</td></tr><tr><td align="right">读已提交</td><td align="center">无</td><td align="center">存在</td><td align="center">存在</td></tr><tr><td align="right">可重复读</td><td align="center">无</td><td align="center">无</td><td align="center">存在</td></tr><tr><td align="right">串行化</td><td align="center">无</td><td align="center">无</td><td align="center">无</td></tr></tbody></table>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;隔离级别&quot;&gt;&lt;a href=&quot;#隔离级别&quot; class=&quot;headerlink&quot; title=&quot;隔离级别&quot;&gt;&lt;/a&gt;隔离级别&lt;/h1&gt;&lt;p&gt;读未提交、读已提交、可重复读、串行化。&lt;/p&gt;
-&lt;h1 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;heade</summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="Isolation Level" scheme="https://chengshen.me/tags/Isolation-Level/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL binlog</title>
-    <link href="https://chengshen.me/database/MySQL-binlog"/>
-    <id>https://chengshen.me/database/MySQL-binlog</id>
-    <published>2023-02-16T08:36:09.000Z</published>
-    <updated>2023-02-16T11:26:27.666Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>binlog 是 MySQLSever 层维护的一种二进制日志，与 InnoDB 引擎中的 redo log&#x2F;undo log 是完全不同的日志；<br>其主要是用来记录对 MySQL 数据更新或潜在发生更新的 SQL 语句，并以事件的形式保存在磁盘中；</p><h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><ol><li>MySQL 主从复制：MySQL Replication 在 Master 端开启 binlog，Master 把它的二进制日志传递给 Slaves 来达到 Master-Slave 数据一致的目的；</li><li>数据恢复：通过使用 mysqlbinlog 工具来使恢复数据；</li></ol><h1 id="配置和查看"><a href="#配置和查看" class="headerlink" title="配置和查看"></a>配置和查看</h1><p>查询</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%log_bin%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看 binlog 文件列表</span></span><br><span class="line"><span class="keyword">show</span> <span class="type">binary</span> logs;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看 binlog 的状态</span></span><br><span class="line"><span class="keyword">show</span> master status;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 清空 binlog 日志文件</span></span><br><span class="line">reset master</span><br></pre></td></tr></table></figure><p>my.cnf 配置</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># 开启二进制日志，设置 binlog 文件路径</span><br><span class="line">log-bin=mysql-bin</span><br><span class="line"></span><br><span class="line"># 设置server-id</span><br><span class="line">server-id=1</span><br><span class="line"></span><br><span class="line"># 1073741824 Bytes == 1 GB</span><br><span class="line">max_binlog_size=1073741824</span><br></pre></td></tr></table></figure><p>当 binlog 日志写满，或者数据库重启才会产生新文件，也可人为切换生成新文件：flush logs；<br>一个事务不能跨两个文件，因此也可能在 binlog 文件未满的情况下刷新文件；</p><h1 id="日志文件格式"><a href="#日志文件格式" class="headerlink" title="日志文件格式"></a>日志文件格式</h1><p>三种格式：ROW，STATEMENT，MIXED。</p><p>修改格式方式</p><ol><li>修改 my.cnf 配置文件；</li><li>set global binlog_format &#x3D; ‘ROW&#x2F;STATEMENT&#x2F;MIXED’；</li></ol><p>查看 binglog 格式：show variables like ‘binlog_format’;</p><h2 id="ROW"><a href="#ROW" class="headerlink" title="ROW"></a>ROW</h2><p>记录的是行数据变化<code>细节</code>，<code>多</code>。<br>保存记录被修改细节，不记录 sql 语句上下文相关信息。5.1.5 版本的 MySQL 才开始支持。<br>优点： 能非常清晰的记录下每行数据的修改细节，不需要记录上下文相关信息，因此不会发生某些特定情况下的 procedure、function、trigger 的调用触发无法被正确复制的问题，任何情况都可以被复制，且能加快从库重放日志的效率，保证从库数据的一致性；<br>缺点：由于所有的执行的语句在日志中都将以每行记录的修改细节来记录，因此，可能会产生大量的日志内容，干扰内容也较多。比如一条 update 语句，如修改多条记录，则 binlog 中每一条修改都会有记录，这样造成 binlog 日志量会很大，特别是当执行 alter table 之类的语句的时候，由于表结构修改，每条记录都发生改变，那么该表每一条记录都会记录到日志中，实际等于重建了表。</p><h2 id="STATEMENT"><a href="#STATEMENT" class="headerlink" title="STATEMENT"></a>STATEMENT</h2><p>记录的是会改变数据的 sql 语句，<code>少</code>。<br>修改数据的 sql 都会记录在 binlog 中。<br>优点：不需要记录每一行的变化，减少了 binlog 日志量，节约了 IO，提高了性能。<br>缺点：由于记录的只是执行语句，为了这些语句能在 slave 上正确运行，因此还必须记录每条语句在执行的时候的一些相关信息，以保证所有语句能在 slave 得到和在 master 端执行的时候相同的结果。另外 mysql 的复制，像一些特定函数的功能，slave 与 master 要保持一致会有很多相关问题。</p><h2 id="MIXED"><a href="#MIXED" class="headerlink" title="MIXED"></a>MIXED</h2><p>ROW 和 STATEMENT 的结合。</p><h1 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h1><p>复制是 MySQL 最重要的功能之一，MySQL 集群的高可用、负载均衡和读写分离都是基于复制来实现，<br>MySQL 5.6 开始，复制有两种实现方式：binlog、GTID（全局事务标示符）。</p><h1 id="主从"><a href="#主从" class="headerlink" title="主从"></a>主从</h1><h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>binlog 主从、GTID 主从</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;binlog 是 MySQLSever 层维护的一种二进制日志，与 InnoDB 引擎中的 redo log&amp;#x2F;undo log 是</summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="binlog" scheme="https://chengshen.me/tags/binlog/"/>
     
   </entry>
   
