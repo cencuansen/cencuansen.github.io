@@ -6,7 +6,7 @@
   <link href="https://chengshen.me/atom.xml" rel="self"/>
   
   <link href="https://chengshen.me/"/>
-  <updated>2023-02-19T14:07:26.694Z</updated>
+  <updated>2023-02-25T06:58:00.941Z</updated>
   <id>https://chengshen.me/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git 常用指令</title>
+    <link href="https://chengshen.me/others/Git-basic-concepts"/>
+    <id>https://chengshen.me/others/Git-basic-concepts</id>
+    <published>2023-02-25T06:45:34.000Z</published>
+    <updated>2023-02-25T06:58:00.941Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 设置代理</span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line">// 取消代理</span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br></pre></td></tr></table></figure><h1 id="切分支"><a href="#切分支" class="headerlink" title="切分支"></a>切分支</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev:origin/dev</span><br></pre></td></tr></table></figure><h1 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry pick"></a>cherry pick</h1><p>已知当前分支为 master。<br>dev 分支的 commit 记录如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">commit 023sb6f299849a1fec3bbe72baaf315482522cb6</span><br><span class="line">Author: sunguowei &lt;me@xx.com&gt;</span><br><span class="line">Date:   Thu Nov 9 11:01:13 2017 +0800</span><br><span class="line">修复bug 3</span><br><span class="line">Change-Id: I30850819d3dcfb8814b5d67124133215a4469374</span><br><span class="line"></span><br><span class="line">commit 5d2c18fsf4b85b4564991963d7c3c3917e951364</span><br><span class="line">Author: sunguowei &lt;me@xx.com&gt;</span><br><span class="line">Date:   Wed Nov 8 16:33:58 2017 +0800</span><br><span class="line">修复bug 2</span><br><span class="line">Change-Id: I0c94d305a35ef8372afc127b2eab13f4ebb70386</span><br><span class="line"></span><br><span class="line">commit ba51861402b0a18663f2c9ee28ed054b0879b225</span><br><span class="line">Author: shenjiaqi &lt;other@xx.com&gt;</span><br><span class="line">Date:   Sun Nov 5 18:50:28 2017 +0800</span><br><span class="line">修复bug 1</span><br><span class="line">Change-Id: I32a8e29523f709eed59f6044c7a06311e953727e</span><br></pre></td></tr></table></figure><p>将 dev 分支 ba518 到 023sb 之间的 commits 复制到 master 分支，<code>..</code>代表范围，而且是(左不包含，右包含]。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick ba518..023sb</span><br></pre></td></tr></table></figure><h1 id="stash"><a href="#stash" class="headerlink" title="stash"></a>stash</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure><h1 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h1><p>已知存在 master 和 feature 两个分支。<br><img src="/images/git-rebase-1.png" alt="分支"><br>当前分支为 feature，同步 master 到 feature 。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase master feature</span><br></pre></td></tr></table></figure><p><img src="/images/git-rebase-1.png" alt="变基"><br><code>feature</code>：待变基分支、当前分支<br><code>master</code>：基分支、目标分支<br><code>变基</code>，可以直接理解为改变基底，这里就是改变 feature 的基底，从 B 变成 M。<br>改变后：master 分支为 ABM，feature 分支为 ABMC’D’。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;代理&quot;&gt;&lt;a href=&quot;#代理&quot; class=&quot;headerlink&quot; title=&quot;代理&quot;&gt;&lt;/a&gt;代理&lt;/h1&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c</summary>
+      
+    
+    
+    
+    <category term="Git" scheme="https://chengshen.me/categories/Git/"/>
+    
+    
+    <category term="Git" scheme="https://chengshen.me/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>RabbitMQ 实操</title>
@@ -517,35 +541,6 @@
     <category term="CSharp" scheme="https://chengshen.me/tags/CSharp/"/>
     
     <category term="Finalize" scheme="https://chengshen.me/tags/Finalize/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL 慢查询排查</title>
-    <link href="https://chengshen.me/database/MySQL-slow-query-troubleshooting"/>
-    <id>https://chengshen.me/database/MySQL-slow-query-troubleshooting</id>
-    <published>2023-02-16T09:04:39.000Z</published>
-    <updated>2023-02-16T11:26:27.668Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="排查思路"><a href="#排查思路" class="headerlink" title="排查思路"></a>排查思路</h1><ol><li>查看“慢查询日志”找慢 SQL</li><li>explain“执行计划”查询</li><li>profile 执行耗时分析</li><li>Optimizer Trace</li></ol><h1 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h1><p>该功能默认是关闭的。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查看慢查询日志功能是否开启，默认 OFF</span></span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;slow_query_log%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询超时多久的查询才被记录日志</span></span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;long_query_time&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看日志输出模式 FILE、TABLE</span></span><br><span class="line"><span class="keyword">show</span> variables <span class="keyword">LIKE</span> <span class="string">&#x27;%log_output%&#x27;</span>;</span><br></pre></td></tr></table></figure><p>用配置开启慢查询日志，持久性。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"></span><br><span class="line"># 开启慢查询日志</span><br><span class="line">slow_query_log = ON</span><br><span class="line"></span><br><span class="line"># 慢查询日志文件位置</span><br><span class="line">slow_query_log_file = dir\filename</span><br><span class="line"></span><br><span class="line"># 大于 3 秒就记录日志</span><br><span class="line">long_query_time = 3</span><br><span class="line"></span><br><span class="line"># 将未使用索引的查询记录日志</span><br><span class="line">log_queries_not_using_indexes = ON</span><br></pre></td></tr></table></figure><p>用命令开启慢查询日志，临时性</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET GLOBAL slow_query_log=ON;</span><br><span class="line">SET GLOBAL long_query_time=3;</span><br><span class="line">SET GLOBAL slow_query_log_file=<span class="built_in">dir</span>\filename;</span><br></pre></td></tr></table></figure><p>查看记录的慢查询日志</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> mysql.slow_log;</span><br></pre></td></tr></table></figure><h1 id="执行计划"><a href="#执行计划" class="headerlink" title="执行计划"></a>执行计划</h1><p>执行计划是模拟执行 SQL 查询，来查看执行策略。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;stu&#x27;</span> <span class="keyword">where</span> gender<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure><h1 id="执行耗时分析"><a href="#执行耗时分析" class="headerlink" title="执行耗时分析"></a>执行耗时分析</h1><p>profile 根据最近执行的 SQL，显示执行耗时情况。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;stu&#x27;</span> <span class="keyword">where</span> gender<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">show</span> profiles;</span><br></pre></td></tr></table></figure><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;stu&#x27;</span> <span class="keyword">where</span> gender<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">show</span> profiles;</span><br></pre></td></tr></table></figure><h1 id="Optimizer-Trace"><a href="#Optimizer-Trace" class="headerlink" title="Optimizer Trace"></a>Optimizer Trace</h1><p>optimizer trace 跟踪 SQL 语句解析优化执行过程。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> optimizer_trace<span class="operator">=</span><span class="string">&#x27;enabled=on&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;stu&#x27;</span> <span class="keyword">where</span> gender<span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> information_schema.optimizer_trace;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;排查思路&quot;&gt;&lt;a href=&quot;#排查思路&quot; class=&quot;headerlink&quot; title=&quot;排查思路&quot;&gt;&lt;/a&gt;排查思路&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;查看“慢查询日志”找慢 SQL&lt;/li&gt;
-&lt;li&gt;explain“执行计划”查询&lt;/li&gt;
-&lt;li&gt;profil</summary>
-      
-    
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/categories/MySQL/"/>
-    
-    
-    <category term="MySQL" scheme="https://chengshen.me/tags/MySQL/"/>
-    
-    <category term="Slow Query" scheme="https://chengshen.me/tags/Slow-Query/"/>
     
   </entry>
   
