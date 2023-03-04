@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        CLR 数据类型
+        Design Patten 概念
       </h1>
       
       <div class="post-meta">
@@ -222,8 +222,8 @@
         
         <span class="post-time">
           日期：<a href="#">
-            2023年 02月
-            <!-- &nbsp;&nbsp;10:52:08 -->
+            2023年 03月
+            <!-- &nbsp;&nbsp;22:18:58 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/CLR/">CLR</a>
+          <a href="/categories/Design-Patten/">Design Patten</a>
           
         </span>
         
@@ -243,11 +243,7 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CLR/"># CLR</a>
-            
-            <a href="/tags/CSharp/"># CSharp</a>
-            
-            <a href="/tags/Data-Types/"># Data Types</a>
+            <a href="/tags/Design-Patten/"># Design Patten</a>
             
             
           </span>
@@ -261,15 +257,100 @@
     </header>
 
     <div class="post-content">
-      <h1 id="C-基元类型"><a href="#C-基元类型" class="headerlink" title="C# 基元类型"></a>C# 基元类型</h1><p>指的是<code>不使用类</code>而直接定义的内置数据类型，由 C# 语言规范定义，属于语言层面，具有特定的语义和行为。</p>
-<p>整数类型：sbyte、byte、short、ushort、int、uint、long 和 ulong<br>浮点类型：float 和 double<br>十进制类型：decimal<br>布尔类型：bool<br>字符类型：char<br>指针类型：指向其他类型的指针类型<br>空类型：void</p>
-<h1 id="C-复杂类型"><a href="#C-复杂类型" class="headerlink" title="C# 复杂类型"></a>C# 复杂类型</h1><p>结构体、枚举和类，是由基元类型组成的。</p>
-<h1 id="CLR-内置类型"><a href="#CLR-内置类型" class="headerlink" title="CLR 内置类型"></a>CLR 内置类型</h1><p>内置类型就是 .NET Framework System 命名空间中写好的类型。</p>
-<h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>bool、byte、char、decimal、double、enum、float、int、long、sbyte、short、struct、uint、ulong、ushort。</p>
-<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p>object、string、dynamic。</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>值类型是直接存储在<code>栈</code>中的，引用类型则是存储在<code>堆</code>中，而栈中存储的仅是指向堆中对象的引用。<br>值类型的内存管理由 CLR 自动处理，不需要手动释放，而引用类型则需要手动释放。</p>
-<h2 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h2><p>类、结构体、接口、委托。<br>自定义类型也称为“用户定义类型”或 “托管类型”。</p>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：对比 object 和 dynamic<br>dynamic：派生自 object，在运行时动态解释，具有更多的<code>灵活性</code>和<code>动态性</code>，在运行时，编译器会根据实际类型执行<code>动态绑定</code>操作。<br>object：是静态类型。</p>
+      <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>创建型、结构型、行为型。<br>创建型：关注对象的创建，花式实例化对象。<br>结构型：关注类与类之间的关系，组合优于继承。<br>行为型：关注对象和行为的关系（类和方法间关系），方法到底放哪。</p>
+<table>
+<thead>
+<tr>
+<th>创建型</th>
+<th>结构型</th>
+<th>行为型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单例模式</td>
+<td>适配器模式</td>
+<td>策略模式</td>
+</tr>
+<tr>
+<td>工厂模式</td>
+<td>装饰器模式</td>
+<td>模板方法模式</td>
+</tr>
+<tr>
+<td>工厂方法模式</td>
+<td>代理模式</td>
+<td>观察者模式</td>
+</tr>
+<tr>
+<td>原型模式</td>
+<td>外观模式</td>
+<td>迭代子模式</td>
+</tr>
+<tr>
+<td>建造者模式</td>
+<td>桥接模式</td>
+<td>责任链模式</td>
+</tr>
+<tr>
+<td></td>
+<td>组合模式</td>
+<td>命令模式</td>
+</tr>
+<tr>
+<td></td>
+<td>享元模式</td>
+<td>备忘录模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>状态模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>访问者模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>中介者模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>解释器模式</td>
+</tr>
+</tbody></table>
+<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><p>用来创建对象。<br>应用场景：IOC 容器就是一个常见的工厂，负责产生实例对象。</p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><p>类只被实例化一次。<br>应用场景：数据库连接池、缓存、日志记录器等。</p>
+<ol>
+<li>懒汉</li>
+<li>饿汉</li>
+<li>双检锁</li>
+<li>lazy(.NET)</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LazySingleton</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> Lazy&lt;LazySingleton&gt; _instance = <span class="keyword">new</span> Lazy&lt;LazySingleton&gt;(() =&gt; <span class="keyword">new</span> LazySingleton());</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> LazySingleton Instance =&gt; _instance.Value;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">LazySingleton</span>()</span> &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><p>抹平类之间的兼容性问题，核心思想就是封装。<br>应用场景：</p>
+<ol>
+<li>电源适配器：转化电流电压等，使电器能正常充电；</li>
+<li>EF 对不同数据库的同时支持；</li>
+</ol>
+<h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>封装原对象，外部使用代理对象。代理模式只应该添加通用逻辑，不添加业务逻辑。<br>应用场景：</p>
+<ol>
+<li>VPN、代理商</li>
+<li>在代理对象中进行日志、异常、缓存、权限等处理。</li>
+<li>使用动态代理模式来实现 AOP。</li>
+</ol>
+<h1 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h1><p>目标对象在流程上被每个部分依次处理。<br>应用场景：</p>
+<ol>
+<li>DOM 上的事件冒泡、事件捕获；</li>
+<li>审批流；</li>
+<li>WebAPI 中的请求管道；</li>
+</ol>
+<h1 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h1><p>资源复用共享形式。Java、C# 等，用于减少创建对象的数量，减少内存占用。<br>应用场景：C# 或 Java 对字符串对象的创建，类似于享元模式。</p>
+<h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p>在父子模式下，对通用功能、数据进行复用。<br>应用场景：JavaScript 中原型中存放通用字段或方法。</p>
 
     </div>
 
@@ -277,10 +358,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/CLR-app-domain">CLR AppDomain</a>
+      <a class="prev" rel="prev" href="/design-patten/Design-Patten-SOLID">Design Patten SOLID</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-string">CLR 字符串</a>
+      <a class="next" rel="next" href="/csgo/CSGO-solo-practice-config">CSGO 单机练习配置</a>
       
     </section>
   </article>

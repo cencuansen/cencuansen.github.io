@@ -213,7 +213,7 @@
   <article class="post-wrap">
     <header class="post-header">
       <h1 class="post-title">
-        CLR 数据类型
+        Linux WSL
       </h1>
       
       <div class="post-meta">
@@ -222,8 +222,8 @@
         
         <span class="post-time">
           日期：<a href="#">
-            2023年 02月
-            <!-- &nbsp;&nbsp;10:52:08 -->
+            2023年 03月
+            <!-- &nbsp;&nbsp;22:32:46 -->
           </a>
         </span>
         
@@ -231,7 +231,7 @@
         <span class="post-category">
           &nbsp;&nbsp;
           分类：
-          <a href="/categories/CLR/">CLR</a>
+          <a href="/categories/Linux/">Linux</a>
           
         </span>
         
@@ -243,11 +243,9 @@
           <span class="tag" style>
             
             
-            <a href="/tags/CLR/"># CLR</a>
+            <a href="/tags/Linux/"># Linux</a>
             
-            <a href="/tags/CSharp/"># CSharp</a>
-            
-            <a href="/tags/Data-Types/"># Data Types</a>
+            <a href="/tags/WSL/"># WSL</a>
             
             
           </span>
@@ -261,15 +259,29 @@
     </header>
 
     <div class="post-content">
-      <h1 id="C-基元类型"><a href="#C-基元类型" class="headerlink" title="C# 基元类型"></a>C# 基元类型</h1><p>指的是<code>不使用类</code>而直接定义的内置数据类型，由 C# 语言规范定义，属于语言层面，具有特定的语义和行为。</p>
-<p>整数类型：sbyte、byte、short、ushort、int、uint、long 和 ulong<br>浮点类型：float 和 double<br>十进制类型：decimal<br>布尔类型：bool<br>字符类型：char<br>指针类型：指向其他类型的指针类型<br>空类型：void</p>
-<h1 id="C-复杂类型"><a href="#C-复杂类型" class="headerlink" title="C# 复杂类型"></a>C# 复杂类型</h1><p>结构体、枚举和类，是由基元类型组成的。</p>
-<h1 id="CLR-内置类型"><a href="#CLR-内置类型" class="headerlink" title="CLR 内置类型"></a>CLR 内置类型</h1><p>内置类型就是 .NET Framework System 命名空间中写好的类型。</p>
-<h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>bool、byte、char、decimal、double、enum、float、int、long、sbyte、short、struct、uint、ulong、ushort。</p>
-<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><p>object、string、dynamic。</p>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>值类型是直接存储在<code>栈</code>中的，引用类型则是存储在<code>堆</code>中，而栈中存储的仅是指向堆中对象的引用。<br>值类型的内存管理由 CLR 自动处理，不需要手动释放，而引用类型则需要手动释放。</p>
-<h2 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h2><p>类、结构体、接口、委托。<br>自定义类型也称为“用户定义类型”或 “托管类型”。</p>
-<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>问：对比 object 和 dynamic<br>dynamic：派生自 object，在运行时动态解释，具有更多的<code>灵活性</code>和<code>动态性</code>，在运行时，编译器会根据实际类型执行<code>动态绑定</code>操作。<br>object：是静态类型。</p>
+      <p>WSL：windows 下的 linux 子系统</p>
+<h1 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h1><p>打开管理员模式 cmd，输入如下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --install</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --set-default-version 2</span><br></pre></td></tr></table></figure>
+
+<p>重启电脑</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下载 <a target="_blank" rel="noopener" href="https://github.com/wsldl-pg/centwsl/releases/tag/7.0.1907.3">centos 7</a>，然后双击运行安装。</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>列出全部系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -l -v</span><br></pre></td></tr></table></figure>
+
+<p>将 CentOS7 设为默认</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --set-default CentOS7</span><br></pre></td></tr></table></figure>
+
+<h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>关闭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --shutdown</span><br></pre></td></tr></table></figure>
+
+<p>注销</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Ubuntu-22.04</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -277,10 +289,10 @@
 
     <section class="post-nav">
       
-      <a class="prev" rel="prev" href="/csharp/CLR-app-domain">CLR AppDomain</a>
+      <a class="prev" rel="prev" href="/linux/Linux-commands">Linux 命令集合</a>
       
       
-      <a class="next" rel="next" href="/csharp/CLR-string">CLR 字符串</a>
+      <a class="next" rel="next" href="/design-patten/Design-Patten-SOLID">Design Patten SOLID</a>
       
     </section>
   </article>
