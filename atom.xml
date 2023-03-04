@@ -286,9 +286,9 @@
     <category term="Redis" scheme="https://chengshen.me/categories/Redis/"/>
     
     
-    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
-    
     <category term="Transaction" scheme="https://chengshen.me/tags/Transaction/"/>
+    
+    <category term="Redis" scheme="https://chengshen.me/tags/Redis/"/>
     
   </entry>
   
