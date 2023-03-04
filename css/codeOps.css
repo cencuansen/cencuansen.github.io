@@ -1,8 +1,10 @@
 .code-ops {
   z-index: 1;
   width: 100%;
+  color: #000;
   display: flex;
-  margin-bottom: -10px;
+  position: relative;
+  margin-bottom: -43px;
   flex-direction: row-reverse;
 }
 .code-op {
@@ -27,4 +29,7 @@ figure.highlight.code-fold br:nth-of-type(n+2) {
   top: -9999px;
   left: -9999px;
   position: absolute;
+}
+.highlight + .code-ops {
+  margin-top: 1em;
 }
