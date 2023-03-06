@@ -1,7 +1,6 @@
 .code-ops {
   z-index: 1;
   width: 100%;
-  color: #000;
   display: flex;
   position: relative;
   margin-bottom: -43px;
@@ -34,4 +33,7 @@ figure.highlight.code-fold br:nth-of-type(n+2) {
 }
 .highlight + .code-ops {
   margin-top: 1em;
+}
+.dark-theme .code-ops {
+  color: $dark-font-color;
 }

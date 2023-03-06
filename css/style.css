@@ -158,11 +158,7 @@ html::-webkit-scrollbar {
 }
 html::-webkit-scrollbar-thumb {
   height: 40px;
-  background-color: #eee;
   border-radius: 16px;
-}
-html::-webkit-scrollbar-thumb:hover {
-  background-color: #ddd;
 }
 body {
   font-size: 11pt;
@@ -210,6 +206,10 @@ a:hover {
   color: #fff;
   text-decoration: none;
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.highlight.dark-theme {
+  background-color: inherit;
+  color: inherit;
 }
 .wrapper {
   display: flex;
@@ -838,7 +838,6 @@ header label {
 }
 .post-content figure.highlight::-webkit-scrollbar-thumb {
   width: 6px;
-  background-color: #eee;
   border-radius: 2px;
 }
 .post-content figure.highlight table {
@@ -852,9 +851,6 @@ header label {
   border: 0;
   width: 100%;
   border-collapse: collapse;
-}
-.post-content figure.highlight .code pre {
-  margin: 0 10px;
 }
 .post-content figure.highlight .gutter {
   width: 10px;
@@ -1010,7 +1006,6 @@ header label {
 }
 .post-content figure.highlight::-webkit-scrollbar-thumb {
   width: 6px;
-  background-color: #eee;
   border-radius: 2px;
 }
 .post-content figure.highlight figcaption {
@@ -1033,12 +1028,8 @@ header label {
   width: 100%;
   border-collapse: collapse;
 }
-.post-content figure.highlight .code pre {
-  margin: 0 10px;
-}
 .post-content figure.highlight .gutter {
   width: 10px;
-  color: #d0d0d0;
 }
 .post-content figure.highlight .gutter pre {
   margin: 0;
@@ -1111,7 +1102,6 @@ header label {
 }
 .post-toc .tocbot-list::-webkit-scrollbar-thumb {
   width: 6px;
-  background-color: #eee;
   border-radius: 2px;
 }
 .post-toc .tocbot-list ul {
@@ -1296,7 +1286,6 @@ header label {
   position: relative;
 }
 .post-content figure.highlight {
-  margin: 0.5rem 0;
   background: #f7f7f7;
   color: #4d4d4c;
   font-size: 12px;
@@ -1313,15 +1302,11 @@ header label {
   margin: 0;
 }
 .post-content code {
-  padding: 2px 4px;
-  background: #f7f7f7;
   font-family: Menlo, Monaco, Consolas, Courier New, monospace;
   font-size: 12px;
 }
 .post-content pre {
-  padding: 10px;
   overflow: auto;
-  background: #f7f7f7;
   font-family: Menlo, Monaco, Consolas, Courier New, monospace;
 }
 .post-content pre code {
@@ -1392,4 +1377,11 @@ header label {
 .post-content pre .keyword,
 .post-content pre .javascript .function {
   color: #8959a8;
+}
+.dark-theme figure.highlight {
+  background: #202020;
+  color: #a9a9b3;
+}
+.dark-theme figure.highlight pre {
+  background: #202020;
 }
